@@ -19,14 +19,15 @@ class _JudgeProcessPageState extends State<JudgeProcessPage> {
     );
   }
   Widget _dummyCard(){
+    //本命のwidgetが実装されるまでの措置
     return Card(child: Padding(
-      padding: EdgeInsets.all(100.0),
+      padding: const EdgeInsets.all(100.0),
       child: Center(child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text("Q1"),
+          const Text("Q1"),
           Image.network("https://github.com/618knot/circle_judge/blob/main/images/panel001.png?raw=true"),
-          Text("HelloWorldですか？")
+          const Text("HelloWorldですか？")
         ],
       )),
     ));
@@ -34,12 +35,12 @@ class _JudgeProcessPageState extends State<JudgeProcessPage> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: AppBar(title: Text("診断中")),
+      appBar: AppBar(title: const Text("診断中")),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Expanded(child: _dummyCard()),
+          Expanded(child: _dummyCard()),//本命のwidgetが実装されるまでの措置
           buttonsMenu(),
         ],
       ),
