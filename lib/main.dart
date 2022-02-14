@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
+import 'package:hello_world/judgeProcessPage.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ExampleHomePage(),
+      home: JudgeProcessPage(),//ExampleHomePage(),
     );
   }
 }
@@ -73,7 +76,7 @@ class _ExampleHomePageState extends State<ExampleHomePage>
             },*/
             swipeCompleteCallback:
                 (CardSwipeOrientation orientation, int index) {
-              /// Get orientation & index of swiped card!
+
             },
           ),
         ),
