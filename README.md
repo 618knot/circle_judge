@@ -45,6 +45,7 @@ $ git branch
 `git commit`  
 `:任意のprefix: XXXを実装した`  
 [prefix のつけ方参考 gif](https://media.goodpatch.com/cms/2016/06/emojiprefix.gif)  
+[prefix一覧](https://gist.github.com/Jung0/56d527ed5d2c783661f7d56c46332308)  
 `git push origin fix_0_XXXXXX` or `git push origin HEAD`  
 (HEAD で今いるブランチの origin に向けて puhs します.間違いが起こりやすいので、**現在位置が自分の作業中のブランチであることを必ず確認してから使いましょう**)
 
@@ -81,38 +82,8 @@ $ git branch
 
 ### マージ/レビュアーについて
 
-マージ担当者は各チームで担当者を決める
-
-### prefix
-
-# ==================== Emojis ====================
-
-# 🎉 :tada: 初めてのコミット（Initial Commit）
-
-# 🔖 :bookmark: バージョンタグ（Version Tag）
-
-# ✨ :sparkles: 新機能（New Feature）
-
-# 🐛 :bug: バグ修正（Bugfix）
-
-# ♻️ :recycle: リファクタリング(Refactoring)
-
-# 📚 :books: ドキュメント（Documentation）
-
-# 🎨 :art: デザイン UI/UX(Accessibility)
-
-# 🐎 :horse: パフォーマンス（Performance）
-
-# 🔧 :wrench: ツール（Tooling）
-
-# 🚨 :rotating_light: テスト（Tests）
-
-# 💩 :hankey: 非推奨追加（Deprecation）
-
-# 🗑️ :wastebasket: 削除（Removal）
-
-# 🚧 :construction: WIP(Work In Progress)
-
+マージ担当者は各チームで担当者を決める  
+  
 # hello_world
 
 A new Flutter project.
