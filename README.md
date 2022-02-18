@@ -9,7 +9,7 @@
 3. マージ後の動作確認はdevelopに移動して行う  
   
 ### 作業手順
-`git clone https://github.com/ItisNoMatter/melodious_pazzle.git`  
+`git clone https://github.com/618knot/circle_judge.git`  
   
 クローンしたリポジトリに移動し、  
 `git Bush Here`  
@@ -18,7 +18,6 @@ or
 ![2021-08-18](https://user-images.githubusercontent.com/60646787/129768468-68da948c-b6e7-408b-a289-13c0ed41f86c.png)  
 (※Windows)  
   
-※コミットとプッシュはUnityプロジェクトを閉じた状態でする必要があります.  
 `git branch`  
 で自分が今いるブランチを確認する.   
 `git checkout -b fix_0_XXXXXX`  
@@ -33,11 +32,11 @@ $ git branch
   main  
 ```  
 )  
-作業が終わったら**Unityプロジェクトを一度閉じてから**、コミットしてプッシュしましょう.  
+作業が終わったらいったんコミットしてプッシュしましょう.  
 以下のコマンドを順次実行する  
   
 `git pull`  
-`git add .` or `git add hogehoge`  
+`git add .` or `git add hogehoge`  hogehogeにはaddしたいファイルのパスが入ります  
 `git commit -m "XXXの機能を実装した"`  
 `git push origin fix_0_XXXXXX` or `git push origin HEAD`  
 (HEADで今いるブランチのoriginに向けてpuhsします.間違いが起こりやすいので、**現在位置が自分の作業中のブランチであることを必ず確認してから使いましょう**)  
@@ -47,7 +46,7 @@ $ git branch
 1. New Pull requestからプルリクエストを新規に作成.  
 2. 矢印を生やしている方の`compare:`を選択し、自分の作業したブランチ(`fix_0_XXXXXX`)を指定.  
 ![2021-08-18 (3)](https://user-images.githubusercontent.com/60646787/129771016-2acf68e7-7d7e-4923-b2f8-fbdefc3ed17f.png)  
-3. Write欄に`fix #0`と書く.`0`には紐づけたいissue番号が入る. ([参考](https://docs.github.com/ja/issues/tracking-your-work-with-issues/creating-issues/linking-a-pull-request-to-an-issue))  
+3. Write欄に`fixed #0`と書く.`0`には紐づけたいissue番号が入る. ([参考](https://docs.github.com/ja/issues/tracking-your-work-with-issues/creating-issues/linking-a-pull-request-to-an-issue))  
   - プルリクがマージされると、ここでリンクさせたissueもクローズされます  
 4. `Reviewers`に任意のレビュアーを指定(なるべく全員を指定する)  
 5. 上記の設定でプルリクを作成  
@@ -60,8 +59,14 @@ $ git branch
 3. 最後に`approve`した人がマージしましょう. ここでconflictを起こしていたら、無理にマージせずメンバーに相談しましょう.  
   - コードレビューのコメントに対しては修正後にその旨を返信し、レビュアーは問題が解決したらコメントをcloseする.  
 4. マージができたら用が済んだissueをcloseし、`git checkout main`→`git pull origin main`で手元のmainブランチを最新の状態にするのを忘れずに.  
-
-
+  
+### Issueについて
+1. Issueはラベルが設定できます.UI/APIなどあるので必要に応じて設定しましょう.  
+2. asignerに作業をする人を設定しましょう.設定することで、誰が何をしているのかをわかりやすくすることがねらいです.  
+  
+### マージ/レビュアーについて  
+マージ担当者は各チームで担当者を決める  
+  
 # hello_world
 
 A new Flutter project.
