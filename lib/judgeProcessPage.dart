@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/questiondata.dart';
 import 'package:hello_world/tinderCards.dart';
+import 'package:hello_world/model/api.dart';
+import 'dart:async';
 
 class JudgeProcessPage extends StatefulWidget {
+
+  judgeProcessPage(){
+    //initState();
+  }
   @override
   _JudgeProcessPageState createState() => _JudgeProcessPageState();
 }
@@ -16,7 +23,9 @@ class _JudgeProcessPageState extends State<JudgeProcessPage> {
           FloatingActionButton(onPressed: () {},
             child: const Icon(Icons.thumb_down_alt_outlined),
             backgroundColor: Colors.deepOrange,),
-          FloatingActionButton(onPressed: () {},
+          FloatingActionButton(onPressed: () {setState(() {
+            initState();
+          });},
             child: const Icon(Icons.thumb_up_alt_outlined),
             backgroundColor: Colors.lightGreen,),
         ],

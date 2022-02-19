@@ -3,14 +3,14 @@ import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:hello_world/questiondata.dart';
 
 class TinderCards extends StatelessWidget {
-  TinderCards(){
+  /*TinderCards(){
     //api.dartとの連携部分。呼ぶだけにして処理そのものはQuestionDataに移植するかも
     print("データセット");
     QuestionData().set(0,Question(0,"問題文のテストだよ","https://github.com/618knot/circle_judge/blob/main/images/panel001.png?raw=true"));
     QuestionData().set(1,Question(1,"第二問はすこーし長い文章のテストだよ","https://github.com/618knot/circle_judge/blob/main/images/panel002.png?raw=true"));
     QuestionData().set(2,Question(2,"最終問題","https://github.com/618knot/circle_judge/blob/main/images/panel003.png?raw=true"));
     QuestionData().set(3,Question(3,"質問おわり","https://github.com/618knot/circle_judge/blob/main/images/panel000.png?raw=true"));
-  }
+  }*/
   @override
   Widget build(BuildContext context) {
     CardController controller;

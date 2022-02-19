@@ -5,6 +5,7 @@ class Question{
   int question_number;
   String question_sentence;
   String question_image;
+  String? Answer;
   Question(this.question_number,this.question_sentence,this.question_image){}
 }
 
@@ -33,5 +34,21 @@ class QuestionData{
     Question question=QuestionData().get(num);
     //String tmp=Q.question_sentence;
     return question.question_image;
+  }
+  //answer 1:Yes 0:Even -1:No
+  SetAnswer(int answer,int num){
+    Question question=QuestionData().get(num);
+    if(answer==1){
+      question.Answer="Yes";
+    }
+    else if(answer==-1){
+      question.Answer="No";
+    }
+    else if(answer==0){
+      question.Answer="Even";
+    }
+    else{
+      print("回答が不正です");
+    }
   }
 }
