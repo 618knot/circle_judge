@@ -1,27 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
+import 'package:hello_world/questiondata.dart';
 
 class TinderCards extends StatelessWidget {
-  List<String> welcomeImages = [
-    "https://github.com/618knot/circle_judge/blob/main/images/panel001.png?raw=true",
-    "https://github.com/618knot/circle_judge/blob/main/images/panel002.png?raw=true",
-    "https://github.com/618knot/circle_judge/blob/main/images/panel003.png?raw=true",
-    "https://github.com/618knot/circle_judge/blob/main/images/panel000.png?raw=true",
-    /*"assets/sample1.png",
-    "assets/sample2.png",
-    "assets/sample3.png",
-    "assets/sample1.png",
-    "assets/sample2.png",
-    "assets/sample3.png",
-    */
-  ];
-  List<String> QuestionSentence = [
-    "あなたは〇〇ですか？",
-    "あなたは△△ですか？",
-    "あなたは××ですか？",
-    "質問は以上です"
-  ];
-
+  TinderCards(){
+    //api.dartとの連携部分。呼ぶだけにして処理そのものはQuestionDataに移植するかも
+    print("データセット");
+    QuestionData().set(0,Question(0,"問題文のテストだよ","https://github.com/618knot/circle_judge/blob/main/images/panel001.png?raw=true"));
+    QuestionData().set(1,Question(1,"第二問はすこーし長い文章のテストだよ","https://github.com/618knot/circle_judge/blob/main/images/panel002.png?raw=true"));
+    QuestionData().set(2,Question(2,"最終問題","https://github.com/618knot/circle_judge/blob/main/images/panel003.png?raw=true"));
+    QuestionData().set(3,Question(3,"質問おわり","https://github.com/618knot/circle_judge/blob/main/images/panel000.png?raw=true"));
+  }
   @override
   Widget build(BuildContext context) {
     CardController controller;
@@ -34,7 +23,7 @@ class TinderCards extends StatelessWidget {
         swipeUp: true,
         swipeDown: true,
         orientation: AmassOrientation.BOTTOM,
-        totalNum: welcomeImages.length,
+        totalNum:QuestionData().getlength(),
         stackNum: 3,
         swipeEdge: 4.0,
         maxWidth: MediaQuery
@@ -56,46 +45,18 @@ class TinderCards extends StatelessWidget {
         cardBuilder: (context, index) =>
             Column(
               children:[
-
-
-                //Text(QuestionSentence[index],style: TextStyle(fontSize: 35),),
-                //Image.network(welcomeImages[index]),
                 Card(
-                //  constraints: BoxConstraints.expand(),
                   color:Colors.grey,
                     child:
                           Column(
                             children: [
-                              Text(QuestionSentence[index],
+                              Text(QuestionData().GetQuestion(index),
                                 style: TextStyle(fontSize: 35),),
-                              Image.network(
-                                welcomeImages[index], fit:BoxFit.contain/*: 240, */,height: 230,),
+                              Image.network(QuestionData().GetImage(index),fit:BoxFit.contain/*: 240, */,height: 230,),
                             ],)
                 )
-                /*Padding(
-                padding: EdgeInsets.all(30),
-                //Container(child: )
-                child:*/
-                //color: Colors.blue,
-
-
-                //Card(child : Image.asset('${welcomeImages[index]}')
-
               ],
-
-            )
-        /* Card(
-                child: Container(decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: NetworkImage(welcomeImages[index]))
-                  //Image.network(welcomeImages[index],)
-
-                ),
-                  child: Text(QuestionSentence[index]),
-                )
-
-              //title: Text('${fromProvinces[index]}'),
-            )*/,
+            ),
         cardController: controller = CardController(),
         /*swipeUpdateCallback:
                 (DragUpdateDetails details, Alignment align) {
