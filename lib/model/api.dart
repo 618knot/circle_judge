@@ -7,42 +7,7 @@ import 'package:hello_world/questiondata.dart';
 Map data = new Map();
 List userData = [];
 String startData = "0";
-// TODO:最終的にはWidget部分はこのクラスに書かず切り出したい
-/*
-void main() {
-  runApp(MaterialApp(
-    home: ApiConnection(),
-  ));
-}
-
-class ApiConnection extends StatefulWidget {
-  @override
-  _ApiConnectionState createState() => _ApiConnectionState();
-}
-
-class _ApiConnectionState extends State<ApiConnection> {
-
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: ListView.builder(
-          itemCount: userData == null ? 0 : userData.length,
-          // itemCount: startData == null ? 0 : startData.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Card(
-              child: Row(
-                children: <Widget>[
-                      Text("${userData[index]["first_name"]} ${userData[index]["last_name"]}"),
-                  // Text("${startData}"),
-                ],
-              ),
-            );
-          },
-        )
-    );
-  }
-*/
+final controller = StreamController<bool>.broadcast();
   // ゲームスタート時に必要なゲームIDを受け取る
   // Future postStart() async {
   //   var url = Uri.parse('https://circle-judge-backend.herokuapp.com/start');
@@ -52,6 +17,9 @@ class _ApiConnectionState extends State<ApiConnection> {
   //     startData = data["message"];
   //   });
   // }
+StreamController<bool> getController (){
+  return controller;
+}
 
   // モックAPI
   Future getQuestion() async {
@@ -69,7 +37,7 @@ class _ApiConnectionState extends State<ApiConnection> {
       print(sentence+image);
     }
     //Map->Listに必要な情報だけ格納
-
+    controller.sink.add(true);
   }
 
   // Future postQuestion() async {
@@ -101,7 +69,7 @@ class _ApiConnectionState extends State<ApiConnection> {
   // }
 
   //@override
-  void initState() async{
+  void API_Init() async{
     //super.initState();
     await getQuestion();
     // postStart();

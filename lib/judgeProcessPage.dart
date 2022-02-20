@@ -7,8 +7,9 @@ import 'dart:async';
 class JudgeProcessPage extends StatefulWidget {
 
   judgeProcessPage(){
-    //initState();
+    //getController().stream.listen((event) {print("イベント");});
   }
+
   @override
   _JudgeProcessPageState createState() => _JudgeProcessPageState();
 }
@@ -23,9 +24,9 @@ class _JudgeProcessPageState extends State<JudgeProcessPage> {
           FloatingActionButton(onPressed: () {},
             child: const Icon(Icons.thumb_down_alt_outlined),
             backgroundColor: Colors.deepOrange,),
-          FloatingActionButton(onPressed: () {setState(() {
-            initState();
-          });},
+          FloatingActionButton(onPressed: () {
+            API_Init();
+          },
             child: const Icon(Icons.thumb_up_alt_outlined),
             backgroundColor: Colors.lightGreen,),
         ],
@@ -47,6 +48,11 @@ class _JudgeProcessPageState extends State<JudgeProcessPage> {
         ],
       )),
     ));
+  }
+
+  @override
+  void initState(){
+    getController().stream.listen((event) {setState(() {});});
   }
 
   @override
