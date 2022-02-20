@@ -17,10 +17,10 @@ final controller = StreamController<bool>.broadcast();
   //     startData = data["message"];
   //   });
   // }
+
 StreamController<bool> getController (){
   return controller;
 }
-
   // モックAPI
   Future getQuestion() async {
     var url = Uri.parse('https://reqres.in/api/users?page=1');
@@ -40,38 +40,21 @@ StreamController<bool> getController (){
     controller.sink.add(true);
   }
 
-  // Future postQuestion() async {
-  //   var url = Uri.parse('https://circle-judge-backend.herokuapp.com/question');
-  //   http.Response response = await http.get(url);
-  //   data = json.decode(response.body);
-  //   setState(() {
-  //     questionData = data["data"];
-  //   });
-  // }
-
-  // Future postAnswer() async {
-  //   var url = Uri.parse('https://circle-judge-backend.herokuapp.com/question/answer');
-  //   http.Response response = await http.get(url);
-  //   data = json.decode(response.body);
-  //   setState(() {
-  //     answerData = data["message"];
-  //   });
-  // }
-
-  // Future postResult() async {
-  //   var url = Uri.parse('https://circle-judge-backend.herokuapp.com/result');
-  //   http.Response response = await http.get(url);
-  //   data = json.decode(response.body);
-  //   setState(() {
-  //     questionHistoryData = data["question_history"];
-  //     rankingData = data["ranking"];
-  //   });
-  // }
+Future setQuestion() async {
+  var url = Uri.parse('https://circlejudgebackend.herokuapp.com/question/answer');
+  Map<String, String> headers = {'content-type': 'application/json'};
+  String body = json.encode ({"game_id":"8141080a-792a-4b17-ace3-5b5b7927277f", "question_id":1,"result":true});
+  http.Response response = await http.post(url, headers: headers, body:body);
+  data = json.decode(response.body);
+  String messageData = data["data"];
+  print(messageData);
+}
 
   //@override
   void API_Init() async{
     //super.initState();
     await getQuestion();
+    await setQuestion();
     // postStart();
     // postQuestion();
     // postAnswer();
