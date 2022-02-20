@@ -43,6 +43,8 @@ class TinderCards extends StatelessWidget {
             .size
             .width * 0.8,
         cardBuilder: (context, index) =>
+        //StreamBuilder<bool>(
+          //stream:controller.st
             Column(
               children:[
                 Card(
@@ -57,21 +59,8 @@ class TinderCards extends StatelessWidget {
                 )
               ],
             ),
-        cardController: controller = CardController(),
-        /*swipeUpdateCallback:
-                (DragUpdateDetails details, Alignment align) {
-              /// Get swiping card's alignment
-              if (align.x < 0) {
-                //Card is LEFT swiping
-              } else if (align.x > 0) {
-                //Card is RIGHT swiping
-              }
-            },*/
-        swipeCompleteCallback:
-            (CardSwipeOrientation orientation, int index) {
-          /// Get orientation & index of swiped card!
-        },
-      ),
+        ),
+      //),
     );
   }
 }
