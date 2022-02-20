@@ -44,33 +44,64 @@ class ResultPage extends StatelessWidget {
                   ],
                 ),
               ),
-              
-              
-              
               ],
-              
               ),
-            
             ),
             
             Card(
               color: Colors.yellow,
-              child: Text(
-                'aaaaaa',
-                style: TextStyle(
-                  fontSize: 50,
-                ),
-              ),
+              child: Column(
+                children: [
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Text(
+                          'ooサークル',
+                          style: TextStyle(
+                          fontSize: 50,
+                          ),
+                          ),
+                  ),
+
+                   Container(
+                      child: Text(
+                        'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+                        style: TextStyle(
+                        fontSize: 30,
+                        ),
+                      ),
+                      color: Colors.lightBlue,
+                    )
+                    
+                ],
+              )
             ),
 
             Card(
               color: Colors.yellow,
-              child: Text(
-                'aaaaaa',
-                style: TextStyle(
-                  fontSize: 50,
-                ),
-              ),
+              child: Column(
+                children: [
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Text(
+                          'oxサークル',
+                          style: TextStyle(
+                          fontSize: 50,
+                          ),
+                          ),
+                  ),
+
+                   Container(
+                      child: Text(
+                        'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+                        style: TextStyle(
+                        fontSize: 30,
+                        ),
+                      ),
+                      color: Colors.lightBlue,
+                    )
+                    
+                ],
+              )
             ),
           ],
         ),
