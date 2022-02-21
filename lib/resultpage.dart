@@ -10,18 +10,27 @@ class ResultPage extends StatelessWidget {
       child: Center(
         child: Column(
           children: [
-            const Text(
-              '診断結果',
-              style: TextStyle(
-                fontSize: 35,
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 10),
+              color: Colors.grey,
+              child: Column(
+                children: [
+              const Text(
+                '診断結果',
+                style: TextStyle(
+                  fontSize: 35,
+                ),
+              ),
+              const Text(
+                'あなたにおすすめのサークルは....',
+                style: TextStyle(
+                  fontSize: 25,
+                ),
+              ),
+                ],
               ),
             ),
-            const Text(
-              'あなたにおすすめのサークルは....',
-              style: TextStyle(
-                fontSize: 25,
-              ),
-            ),
+            
             Card(
               color: Colors.yellow,
               child: Column(
@@ -112,6 +121,7 @@ class ResultPage extends StatelessWidget {
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
+                margin: const EdgeInsets.only(top: 60),
                 color: Colors.orange,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
