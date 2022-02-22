@@ -5,43 +5,58 @@ class ResultPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<double> matchingRate = [0.8, 0.5, 0.3];
+
     return Scaffold(
         body: SafeArea(
       child: Center(
         child: Column(
           children: [
             Container(
-              margin: EdgeInsets.symmetric(vertical: 10),
+              margin: const EdgeInsets.symmetric(vertical: 10),
               color: Colors.grey,
               child: Column(
                 children: [
-              const Text(
-                '診断結果',
-                style: TextStyle(
-                  fontSize: 35,
-                ),
-              ),
-              const Text(
-                'あなたにおすすめのサークルは....',
-                style: TextStyle(
-                  fontSize: 25,
-                ),
-              ),
+                  const Text(
+                    '診断結果',
+                    style: TextStyle(
+                      fontSize: 35,
+                    ),
+                  ),
+                  const Text(
+                    'あなたにおすすめのサークルは....',
+                    style: TextStyle(
+                      fontSize: 25,
+                    ),
+                  ),
                 ],
               ),
             ),
-            
             Card(
               color: Colors.yellow,
               child: Column(
                 children: [
-                  const Align(
-                    alignment: Alignment.topCenter,
-                    child: Text(
-                      'xoサークル',
-                      style: TextStyle(
-                        fontSize: 30,
-                      ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Stack(
+                      children: [
+                        Container(
+                          color: Colors.teal,
+                          height: 43,
+                          width: MediaQuery.of(context).size.width *
+                              matchingRate[0],
+                        ), //メーター
+
+                        Container(
+                          margin: const EdgeInsets.only(left: 10),
+                          child: const Text(
+                            'xoサークル',
+                            style: TextStyle(
+                              fontSize: 30,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   Container(
@@ -72,13 +87,27 @@ class ResultPage extends StatelessWidget {
                 color: Colors.yellow,
                 child: Column(
                   children: [
-                    const Align(
-                      alignment: Alignment.topCenter,
-                      child: Text(
-                        'ooサークル',
-                        style: TextStyle(
-                          fontSize: 30,
-                        ),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Stack(
+                        children: [
+                          Container(
+                            color: Colors.teal,
+                            height: 43,
+                            width: MediaQuery.of(context).size.width *
+                                matchingRate[1],
+                          ), //メーター
+
+                          Container(
+                            margin: const EdgeInsets.only(left: 10),
+                            child: const Text(
+                              'ooサークル',
+                              style: TextStyle(
+                                fontSize: 30,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     Container(
@@ -96,13 +125,27 @@ class ResultPage extends StatelessWidget {
                 color: Colors.yellow,
                 child: Column(
                   children: [
-                    const Align(
-                      alignment: Alignment.topCenter,
-                      child: Text(
-                        'oxサークル',
-                        style: TextStyle(
-                          fontSize: 30,
-                        ),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Stack(
+                        children: [
+                          Container(
+                            color: Colors.teal,
+                            height: 43,
+                            width: MediaQuery.of(context).size.width *
+                                matchingRate[2],
+                          ), //メーター
+
+                          Container(
+                            margin: const EdgeInsets.only(left: 10),
+                            child: const Text(
+                              'oxサークル',
+                              style: TextStyle(
+                                fontSize: 30,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     Container(
@@ -115,9 +158,7 @@ class ResultPage extends StatelessWidget {
                       color: Colors.lightBlue,
                     )
                   ],
-                )
-                ),
-                
+                )),
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
@@ -130,10 +171,11 @@ class ResultPage extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                         shape: const CircleBorder(),
                       ),
-                      onPressed: (){},
+                      onPressed: () {},
                       child: const Icon(Icons.share),
-                      ),
-                    ElevatedButton(onPressed: () {}, child: const Text('タイトルへ')),
+                    ),
+                    ElevatedButton(
+                        onPressed: () {}, child: const Text('タイトルへ')),
                   ],
                 ),
               ),
