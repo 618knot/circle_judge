@@ -17,8 +17,10 @@ StreamController<bool> getController() {
 // スタート時にPOSTでゲームIDを取得する
 void getGameId() async {
   var url = Uri.parse('https://circlejudgebackend.herokuapp.com/start');
-  final response =
-      await http.post(url, headers: {'Content-Type': 'application/json'});
+  final response = await http.post(url, headers: {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*'
+  });
   data = json.decode(response.body);
   String gameId = data["game_id"];
   print("gameId:");
@@ -52,8 +54,8 @@ Future setQuestion() async {
   Map<String, String> headers = {'content-type': 'application/json'};
   // TODO:ここでgame_idとquestion_idとresultはquestiondataのAnswerを参照したい
   String body = json.encode({
-    "game_id": "8141080a-792a-4b17-ace3-5b5b7927277f",
-    "question_id": 1,
+    "game_id": "2745e04c-4e5c-4d52-a25a-ff8a48055e1a",
+    "question_id": "1",
     "result": true
   });
   http.Response response = await http.post(url, headers: headers, body: body);
@@ -69,4 +71,5 @@ void API_Init() async {
 
 void GAME_ID_INIT() async {
   getGameId();
+  setQuestion();
 }
