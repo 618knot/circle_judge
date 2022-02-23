@@ -5,7 +5,7 @@ class Question{
   int question_number;
   String question_sentence;
   String question_image;
-  String? Answer;
+  bool? answer;
   Question(this.question_number,this.question_sentence,this.question_image){}
 }
 
@@ -13,7 +13,7 @@ class Question{
 class QuestionData{
   static final Map<int, Question> _item = <int, Question>{};
   static final QuestionData _cache=QuestionData._internal();
-  static int? gameId;
+  static String? gameId;
 
   factory QuestionData() {
     return _cache;
@@ -35,20 +35,14 @@ class QuestionData{
     //String tmp=Q.question_sentence;
     return question.question_image;
   }
-  //answer 1:Yes 0:Even -1:No
-  SetAnswer(int answer,int num){
+  //回答を保存する
+  SetAnswer(bool answer,int num){
     Question question=QuestionData().get(num);
-    if(answer==1){
-      question.Answer="Yes";
-    }
-    else if(answer==-1){
-      question.Answer="No";
-    }
-    else if(answer==0){
-      question.Answer="Even";
-    }
-    else{
-      print("回答が不正です");
-    }
+    question.answer=answer;
+  }
+  //指定された問題番号の回答を返す
+  GetAnswer(int num){
+    Question question=QuestionData().get(num);
+    return question.answer;
   }
 }
