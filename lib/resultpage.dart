@@ -69,12 +69,13 @@ class ResultPage extends StatelessWidget {
                         Flexible(
                           child: Container(
                             child: const Text(
-                              'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+                              '全角八十文字あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ',
                               style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 15,
                               ),
                             ),
                             color: Colors.lightBlue,
+                            height: 110,
                           ),
                         )
                       ],
@@ -112,12 +113,13 @@ class ResultPage extends StatelessWidget {
                     ),
                     Container(
                       child: const Text(
-                        'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+                        '全角八十文字あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ',
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 15,
                         ),
                       ),
                       color: Colors.lightBlue,
+                      height: 88,
                     )
                   ],
                 )),
@@ -150,19 +152,20 @@ class ResultPage extends StatelessWidget {
                     ),
                     Container(
                       child: const Text(
-                        'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+                        '全角八十文字あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ',
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 15,
                         ),
                       ),
                       color: Colors.lightBlue,
+                      height: 88,
                     )
                   ],
                 )),
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
-                margin: const EdgeInsets.only(top: 60),
+                margin: const EdgeInsets.only(top: 40),
                 color: Colors.orange,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
