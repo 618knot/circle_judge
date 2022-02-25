@@ -32,136 +32,151 @@ class ResultPage extends StatelessWidget {
                 ],
               ),
             ),
-            Card(
-              color: Colors.yellow,
-              child: Column(
-                children: [
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Stack(
-                      children: [
-                        Container(
-                          color: Colors.teal,
-                          height: 43,
-                          width: MediaQuery.of(context).size.width *
-                              matchingRate[0],
-                        ), //メーター
+            GestureDetector(
+              onTap: () {
+                print('タップされました');
+              },
+              child: Card(
+                color: Colors.yellow,
+                child: Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Stack(
+                        children: [
+                          Container(
+                            color: Colors.teal,
+                            height: 43,
+                            width: MediaQuery.of(context).size.width *
+                                matchingRate[0],
+                          ), //メーター
 
-                        Container(
-                          margin: const EdgeInsets.only(left: 10),
-                          child: const Text(
-                            'xoサークル',
-                            style: TextStyle(
-                              fontSize: 30,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    color: Colors.lightGreen,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Image.network(
-                            'https://github.com/618knot/circle_judge/blob/main/images/panel001.png?raw=true'),
-                        Flexible(
-                          child: Container(
+                          Container(
+                            margin: const EdgeInsets.only(left: 10),
                             child: const Text(
-                              '全角八十文字あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ',
+                              'xoサークル',
                               style: TextStyle(
-                                fontSize: 15,
+                                fontSize: 30,
                               ),
                             ),
-                            color: Colors.lightBlue,
-                            height: 110,
                           ),
-                        )
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                    Container(
+                      color: Colors.lightGreen,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Image.network(
+                              'https://github.com/618knot/circle_judge/blob/main/images/panel001.png?raw=true'),
+                          Flexible(
+                            child: Container(
+                              child: const Text(
+                                '全角八十文字あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                ),
+                              ),
+                              color: Colors.lightBlue,
+                              height: 110,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-            Card(
-                color: Colors.yellow,
-                child: Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Stack(
-                        children: [
-                          Container(
-                            color: Colors.teal,
-                            height: 43,
-                            width: MediaQuery.of(context).size.width *
-                                matchingRate[1],
-                          ), //メーター
-
-                          Container(
-                            margin: const EdgeInsets.only(left: 10),
-                            child: const Text(
-                              'ooサークル',
-                              style: TextStyle(
-                                fontSize: 30,
+            GestureDetector(
+              onTap: () {
+                print('タップされました');
+              },
+              child: Card(
+                  color: Colors.yellow,
+                  child: Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Stack(
+                          children: [
+                            Container(
+                              color: Colors.teal,
+                              height: 43,
+                              width: MediaQuery.of(context).size.width *
+                                  matchingRate[1],
+                            ), //メーター
+            
+                            Container(
+                              margin: const EdgeInsets.only(left: 10),
+                              child: const Text(
+                                'ooサークル',
+                                style: TextStyle(
+                                  fontSize: 30,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      child: const Text(
-                        '全角八十文字あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ',
-                        style: TextStyle(
-                          fontSize: 15,
+                          ],
                         ),
                       ),
-                      color: Colors.lightBlue,
-                      height: 88,
-                    )
-                  ],
-                )),
-            Card(
-                color: Colors.yellow,
-                child: Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Stack(
-                        children: [
-                          Container(
-                            color: Colors.teal,
-                            height: 43,
-                            width: MediaQuery.of(context).size.width *
-                                matchingRate[2],
-                          ), //メーター
-
-                          Container(
-                            margin: const EdgeInsets.only(left: 10),
-                            child: const Text(
-                              'oxサークル',
-                              style: TextStyle(
-                                fontSize: 30,
+                      Container(
+                        child: const Text(
+                          '全角八十文字あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ',
+                          style: TextStyle(
+                            fontSize: 15,
+                          ),
+                        ),
+                        color: Colors.lightBlue,
+                        height: 88,
+                      )
+                    ],
+                  )),
+            ),
+            GestureDetector(
+              onTap: () {
+                print('タップされました');
+              },
+              child: Card(
+                  color: Colors.yellow,
+                  child: Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Stack(
+                          children: [
+                            Container(
+                              color: Colors.teal,
+                              height: 43,
+                              width: MediaQuery.of(context).size.width *
+                                  matchingRate[2],
+                            ), //メーター
+            
+                            Container(
+                              margin: const EdgeInsets.only(left: 10),
+                              child: const Text(
+                                'oxサークル',
+                                style: TextStyle(
+                                  fontSize: 30,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      child: const Text(
-                        '全角八十文字あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ',
-                        style: TextStyle(
-                          fontSize: 15,
+                          ],
                         ),
                       ),
-                      color: Colors.lightBlue,
-                      height: 88,
-                    )
-                  ],
-                )),
+                      Container(
+                        child: const Text(
+                          '全角八十文字あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ',
+                          style: TextStyle(
+                            fontSize: 15,
+                          ),
+                        ),
+                        color: Colors.lightBlue,
+                        height: 88,
+                      )
+                    ],
+                  )),
+            ),
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
