@@ -3,6 +3,22 @@ import 'package:flutter/material.dart';
 class ResultPage extends StatelessWidget {
   const ResultPage({Key? key}) : super(key: key);
 
+  detailDialog(context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+              title: const Text('ダイアログ'),
+              content: const Text('アラートダイアログだよ'),
+              actions: [
+                SimpleDialogOption(
+                  child: const Text('ok'),
+                  onPressed: () => Navigator.pop(context),
+                )
+              ],
+            )
+          );
+  }
+
   @override
   Widget build(BuildContext context) {
     List<double> matchingRate = [0.8, 0.5, 0.3];
@@ -35,6 +51,7 @@ class ResultPage extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 print('タップされました');
+                detailDialog(context);
               },
               child: Card(
                 color: Colors.yellow,
@@ -92,6 +109,7 @@ class ResultPage extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 print('タップされました');
+                detailDialog(context);
               },
               child: Card(
                   color: Colors.yellow,
@@ -107,7 +125,7 @@ class ResultPage extends StatelessWidget {
                               width: MediaQuery.of(context).size.width *
                                   matchingRate[1],
                             ), //メーター
-            
+
                             Container(
                               margin: const EdgeInsets.only(left: 10),
                               child: const Text(
@@ -136,6 +154,7 @@ class ResultPage extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 print('タップされました');
+                detailDialog(context);
               },
               child: Card(
                   color: Colors.yellow,
@@ -151,7 +170,7 @@ class ResultPage extends StatelessWidget {
                               width: MediaQuery.of(context).size.width *
                                   matchingRate[2],
                             ), //メーター
-            
+
                             Container(
                               margin: const EdgeInsets.only(left: 10),
                               child: const Text(
