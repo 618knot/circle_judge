@@ -32,8 +32,9 @@ class TitlePage extends StatelessWidget {
             children: [
               Spacer(flex: 1,),
               Title(),
+              Spacer(flex:1),
               ElevatedButton(onPressed:(){},child: Text("始める")),
-              Spacer(flex: 2,),
+              Spacer(flex:3),
             ],
           ),
         ),
