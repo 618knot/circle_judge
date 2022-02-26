@@ -59,6 +59,18 @@ class TinderCards extends StatelessWidget {
                 )
               ],
             ),
+        cardController: controller = CardController(),
+        swipeCompleteCallback:
+            (CardSwipeOrientation orientation, int index) {
+          print(orientation.name);
+          print(index);
+          if(orientation.name=="RIGHT"){
+            QuestionData().SetAnswer(true, index);
+          }
+          else if(orientation.name=="LEFT"){
+            QuestionData().SetAnswer(false, index);
+          }
+        },
         ),
       //),
     );
