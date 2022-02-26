@@ -7,16 +7,40 @@ class ResultPage extends StatelessWidget {
     showDialog(
         context: context,
         builder: (BuildContext context) => AlertDialog(
-              title: const Text('ダイアログ'),
+              title: Column(
+                children: [
+                  Image.network(
+                      'https://github.com/618knot/circle_judge/blob/main/images/panel001.png?raw=true'),
+                  const Text(
+                    'sampleサークル',
+                    style: TextStyle(fontSize: 25),
+                    )
+                ],
+              ),
               content: const Text('アラートダイアログだよ'),
               actions: [
-                SimpleDialogOption(
-                  child: const Text('ok'),
-                  onPressed: () => Navigator.pop(context),
+                Container(
+                  alignment: Alignment.bottomCenter,
+                  child: SizedBox(
+                    width: 150,
+                    height: 40,
+                    child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.blue,
+                      onPrimary: Colors.white,
+                      shape: const StadiumBorder(),
+                    ),  
+                    onPressed: () => {Navigator.pop(context)}, 
+                    child: const Text(
+                      '閉じる',
+                      style: TextStyle(fontSize: 20),
+                      ),
+                    ),
+                  ),
                 )
               ],
             )
-          );
+            );
   }
 
   @override
