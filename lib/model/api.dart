@@ -16,7 +16,7 @@ StreamController<bool> getController() {
 
 // スタート時にPOSTでゲームIDを取得する
 void getGameId() async {
-  var url = Uri.parse('https://circlejudgebackend.herokuapp.com/start');
+  var url = Uri.parse('https://quiet-eyrie-21766.herokuapp.com/start');
   final response = await http.post(url, headers: {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*'
@@ -50,7 +50,7 @@ Future getQuestion() async {
 // バックエンドにPOSTで回答を返却する
 Future setQuestion() async {
   var url =
-      Uri.parse('https://circlejudgebackend.herokuapp.com/question/answer');
+      Uri.parse('https://quiet-eyrie-21766.herokuapp.com/question/answer');
   Map<String, String> headers = {'content-type': 'application/json'};
   // TODO:ここでgame_idとquestion_idとresultはquestiondataのAnswerを参照したい
   String body = json.encode({
