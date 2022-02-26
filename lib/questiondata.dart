@@ -45,9 +45,9 @@ class QuestionData {
   GetAnswer(int num) {
     Question question = QuestionData().get(num);
     if (question.answer == true) {
-      return 3;
+      return 0;
     } else {
-      return 2;
+      return 1;
     }
   }
 }

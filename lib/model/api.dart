@@ -4,8 +4,6 @@ import 'dart:convert';
 import 'package:hello_world/questiondata.dart';
 import 'package:http/http.dart' as http;
 
-Map data = new Map();
-List userData = [];
 String startData = "0";
 
 final controller = StreamController<bool>.broadcast();
@@ -21,6 +19,7 @@ void getGameId() async {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*'
   });
+  Map data = new Map();
   data = json.decode(response.body);
   String gameId = data["game_id"];
   // print("gameId:");
@@ -33,8 +32,10 @@ void getGameId() async {
 Future getQuestion() async {
   var url = Uri.parse('https://reqres.in/api/users?page=1');
   http.Response response = await http.get(url);
-  data = json.decode(response.body); //json->Mapオブジェクトに格納
 
+  Map data = new Map();
+  List userData = [];
+  data = json.decode(response.body); //json->Mapオブジェクトに格納
   userData = data["data"];
   for (var i = 0; i < userData.length; i++) {
     int id = userData[i]["id"];
@@ -58,7 +59,9 @@ Future setQuestion() async {
 
   String? gameId = QuestionData.gameId;
 
-  http.Response response;
+  http.Response response = await http.get(url);
+
+  Map data = new Map();
 
   for (int i = 0; i < QuestionData().getlength(); i++) {
     String body = json.encode({
@@ -81,14 +84,41 @@ Future getResult() async {
   Map<String, String> headers = {'content-type': 'application/json'};
 
   String? gameId = QuestionData.gameId;
-  http.Response response;
 
+  http.Response response = await http.get(url);
+
+  Map data = new Map();
+  for (int i = 0; i < QuestionData().getlength(); i++) {
+    String body = json.encode({
+      "game_id": gameId.toString(),
+    });
+    response = await http.post(url, headers: headers, body: body);
+
+    /* TODO: json.decodeで発生する下記のエラーの修正
+    E/flutter (11490): [ERROR:flutter/lib/ui/ui_dart_state.cc(209)] Unhandled Exception: FormatException: Unexpected character (at character 1)
+    E/flutter (11490): <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+    E/flutter (11490): ^
+     */
+    // data = json.decode(response.body);
+    // String circleName = data["name"];
+    // int ranking = i;
+    // ここでresultをQuestionDataに格納し
+    // ResultData().set(i, Result(ranking, circleName));
+  }
+
+  // endを呼ぶ
+  postGameEnd();
+}
+
+void postGameEnd() async {
+  var url = Uri.parse('https://quiet-eyrie-21766.herokuapp.com/end');
+  Map<String, String> headers = {'content-type': 'application/json'};
+
+  String? gameId = QuestionData.gameId;
+  http.Response response;
   String body = json.encode({"game_id": gameId});
   response = await http.post(url, headers: headers, body: body);
-  data = json.decode(response.body);
-  String circleName = data["name"];
-  // ここでresultをQuestionDataに格納し
-  // /endを呼ぶ
+  print(response);
 }
 
 //@override
