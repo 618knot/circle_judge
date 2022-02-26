@@ -1,18 +1,16 @@
-import 'package:flutter/material.dart';
-
 //Questionの情報を持つクラス
-class Question{
+class Question {
   int question_number;
   String question_sentence;
   String question_image;
   bool? answer;
-  Question(this.question_number,this.question_sentence,this.question_image){}
+  Question(this.question_number, this.question_sentence, this.question_image) {}
 }
 
 //Singletonでデータをキャッシュする
-class QuestionData{
+class QuestionData {
   static final Map<int, Question> _item = <int, Question>{};
-  static final QuestionData _cache=QuestionData._internal();
+  static final QuestionData _cache = QuestionData._internal();
   static String? gameId;
 
   factory QuestionData() {
@@ -22,27 +20,34 @@ class QuestionData{
   set(int key, Question value) => _item[key] = value;
   get(int key) => _item[key];
   //質問数を返す
-  getlength()=>_item.length;
+  getlength() => _item.length;
   //質問文を返す
-  GetQuestion(int num){
-    Question question=QuestionData().get(num);
+  GetQuestion(int num) {
+    Question question = QuestionData().get(num);
     //String tmp=Q.question_sentence;
     return question.question_sentence;
   }
+
   //質問画像を返す
-  GetImage(int num){
-    Question question=QuestionData().get(num);
+  GetImage(int num) {
+    Question question = QuestionData().get(num);
     //String tmp=Q.question_sentence;
     return question.question_image;
   }
+
   //回答を保存する
-  SetAnswer(bool answer,int num){
-    Question question=QuestionData().get(num);
-    question.answer=answer;
+  SetAnswer(bool answer, int num) {
+    Question question = QuestionData().get(num);
+    question.answer = answer;
   }
+
   //指定された問題番号の回答を返す
-  GetAnswer(int num){
-    Question question=QuestionData().get(num);
-    return question.answer;
+  GetAnswer(int num) {
+    Question question = QuestionData().get(num);
+    if (question.answer == true) {
+      return 3;
+    } else {
+      return 2;
+    }
   }
 }

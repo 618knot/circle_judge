@@ -23,9 +23,10 @@ void getGameId() async {
   });
   data = json.decode(response.body);
   String gameId = data["game_id"];
-  print("gameId:");
-  print(gameId);
+  // print("gameId:");
+  // print(gameId);
   // TODO:gameIdをreturnする
+  QuestionData.gameId = gameId;
 }
 
 // モックAPIからカードに描画する情報を取得する
@@ -40,8 +41,8 @@ Future getQuestion() async {
     String sentence = userData[i]["email"];
     String image = userData[i]["avatar"];
     QuestionData().set(i, Question(id, sentence, image));
-    print(id);
-    print(sentence + image);
+    // print(id);
+    // print(sentence + image);
   }
   //Map->Listに必要な情報だけ格納
   controller.sink.add(true);
@@ -52,16 +53,42 @@ Future setQuestion() async {
   var url =
       Uri.parse('https://quiet-eyrie-21766.herokuapp.com/question/answer');
   Map<String, String> headers = {'content-type': 'application/json'};
+
   // TODO:ここでgame_idとquestion_idとresultはquestiondataのAnswerを参照したい
-  String body = json.encode({
-    "game_id": "2745e04c-4e5c-4d52-a25a-ff8a48055e1a",
-    "question_id": "1",
-    "result": true
-  });
-  http.Response response = await http.post(url, headers: headers, body: body);
+
+  String? gameId = QuestionData.gameId;
+
+  http.Response response;
+
+  for (int i = 0; i < QuestionData().getlength(); i++) {
+    String body = json.encode({
+      "game_id": gameId,
+      "question_id": i.toString(),
+      "result": QuestionData().GetAnswer(i).toString(),
+    });
+    print(body);
+    response = await http.post(url, headers: headers, body: body);
+    data = json.decode(response.body);
+    String messageData = data["message"];
+    print(messageData);
+  }
+
+  getResult();
+}
+
+Future getResult() async {
+  var url = Uri.parse('https://quiet-eyrie-21766.herokuapp.com/result');
+  Map<String, String> headers = {'content-type': 'application/json'};
+
+  String? gameId = QuestionData.gameId;
+  http.Response response;
+
+  String body = json.encode({"game_id": gameId});
+  response = await http.post(url, headers: headers, body: body);
   data = json.decode(response.body);
-  String messageData = data["data"];
-  print(messageData);
+  String circleName = data["name"];
+  // ここでresultをQuestionDataに格納し
+  // /endを呼ぶ
 }
 
 //@override
@@ -71,5 +98,8 @@ void API_Init() async {
 
 void GAME_ID_INIT() async {
   getGameId();
+}
+
+void GAME_END() async {
   setQuestion();
 }
