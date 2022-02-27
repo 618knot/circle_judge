@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/questiondata.dart';
-import 'package:hello_world/tinderCards.dart';
 import 'package:hello_world/model/api.dart';
-import 'dart:async';
+import 'package:hello_world/tinderCards.dart';
 
 class JudgeProcessPage extends StatefulWidget {
-
-  judgeProcessPage(){
+  judgeProcessPage() {
     //getController().stream.listen((event) {print("イベント");});
   }
 
@@ -21,14 +18,19 @@ class _JudgeProcessPageState extends State<JudgeProcessPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          FloatingActionButton(onPressed: () {},
+          FloatingActionButton(
+            onPressed: () {},
             child: const Icon(Icons.thumb_down_alt_outlined),
-            backgroundColor: Colors.deepOrange,),
-          FloatingActionButton(onPressed: () {
-            API_Init();
-          },
+            backgroundColor: Colors.deepOrange,
+          ),
+          FloatingActionButton(
+            onPressed: () {
+              API_Init();
+              GAME_ID_INIT();
+            },
             child: const Icon(Icons.thumb_up_alt_outlined),
-            backgroundColor: Colors.lightGreen,),
+            backgroundColor: Colors.lightGreen,
+          ),
         ],
       ),
     );
@@ -36,9 +38,11 @@ class _JudgeProcessPageState extends State<JudgeProcessPage> {
 
   Widget _dummyCard() {
     //本命のwidgetが実装されるまでの措置
-    return Card(child: Padding(
+    return Card(
+        child: Padding(
       padding: const EdgeInsets.all(100.0),
-      child: Center(child: Column(
+      child: Center(
+          child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           const Text("Q1"),
@@ -51,16 +55,17 @@ class _JudgeProcessPageState extends State<JudgeProcessPage> {
   }
 
   @override
-  void initState(){
-    getController().stream.listen((event) {setState(() {});});
+  void initState() {
+    getController().stream.listen((event) {
+      setState(() {});
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("診断中")),
-      body:
-      Column(
+      body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -70,7 +75,6 @@ class _JudgeProcessPageState extends State<JudgeProcessPage> {
           buttonsMenu()
         ],
       ),
-
     );
   }
 }
