@@ -24,28 +24,44 @@ void getGameId() async {
   String gameId = data["game_id"];
   // print("gameId:");
   // print(gameId);
-  // TODO:gameIdをreturnする
   QuestionData.gameId = gameId;
 }
 
 // モックAPIからカードに描画する情報を取得する
 Future getQuestion() async {
-  var url = Uri.parse('https://reqres.in/api/users?page=1');
-  http.Response response = await http.get(url);
+  var url = Uri.parse('https://quiet-eyrie-21766.herokuapp.com/question');
+  Map<String, String> headers = {'content-type': 'application/json'};
 
-  Map data = new Map();
-  List userData = [];
-  data = json.decode(response.body); //json->Mapオブジェクトに格納
-  userData = data["data"];
-  for (var i = 0; i < userData.length; i++) {
-    int id = userData[i]["id"];
-    String sentence = userData[i]["email"];
-    String image = userData[i]["avatar"];
-    QuestionData().set(i, Question(id, sentence, image));
-    // print(id);
-    // print(sentence + image);
+  String? gameId = QuestionData.gameId;
+
+  http.Response response;
+
+  // Map data = new Map();
+  List questionData = [];
+
+  String body;
+  // TODO: 元の実装ではMAPが帰ってくる想定だったが、この時点ではすべてのデータをLISTで格納したjsonが返却される
+  for (int i = 1; i <= 5; i++) {
+    body = json.encode({
+      "game_id": "8141080a-792a-4b17-ace3-5b5b7927277f",
+      "question_id": i,
+    });
+    response = await http.post(url, headers: headers, body: body);
+    questionData.insert(i,(json.decode(response.body)));
+    // print(questionData);
+    print(questionData);
   }
-  //Map->Listに必要な情報だけ格納
+
+  // TODO: ここでListから取り出しrたい
+  // for (var i = 1; i < questionData.length; i++) {
+  //   print(questionData);
+  //   int id = i;
+  //   String sentence = questionData[i]["question"];
+  //   String image = questionData[i]["image_url"];
+  //   QuestionData().set(i, Question(id, sentence, image));
+  //   // print(id);
+  //   print(sentence + image);
+  // }
   controller.sink.add(true);
 }
 
@@ -66,8 +82,8 @@ Future setQuestion() async {
   for (int i = 0; i < QuestionData().getlength(); i++) {
     String body = json.encode({
       "game_id": gameId,
-      "question_id": i.toString(),
-      "result": QuestionData().GetAnswer(i).toString(),
+      "question_id": i,
+      "result": QuestionData().GetAnswer(i),
     });
     print(body);
     response = await http.post(url, headers: headers, body: body);
@@ -75,8 +91,6 @@ Future setQuestion() async {
     String messageData = data["message"];
     print(messageData);
   }
-
-  getResult();
 }
 
 Future getResult() async {
@@ -90,7 +104,7 @@ Future getResult() async {
   Map data = new Map();
   for (int i = 0; i < QuestionData().getlength(); i++) {
     String body = json.encode({
-      "game_id": gameId.toString(),
+      "game_id": gameId,
     });
     response = await http.post(url, headers: headers, body: body);
 
@@ -107,7 +121,7 @@ Future getResult() async {
   }
 
   // endを呼ぶ
-  postGameEnd();
+  // postGameEnd();
 }
 
 void postGameEnd() async {
@@ -131,5 +145,5 @@ void GAME_ID_INIT() async {
 }
 
 void GAME_END() async {
-  setQuestion();
+  // setQuestion();
 }
