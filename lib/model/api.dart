@@ -37,6 +37,7 @@ Future getQuestion() async {
   http.Response response;
 
   // Map data = new Map();
+  List dataList = [];
   List questionData = [];
 
   String body;
@@ -47,21 +48,29 @@ Future getQuestion() async {
       "question_id": i,
     });
     response = await http.post(url, headers: headers, body: body);
-    questionData.insert(i,(json.decode(response.body)));
-    // print(questionData);
-    print(questionData);
+    // response.bodyはList<dynamic>型が返ってくる
+    questionData.add(jsonDecode(response.body));
+    // print(dataList);
+    // questionData.add(json.decode(response.body).toString());
+    // questionData.add(json.decode(response.body));
+    
   }
 
   // TODO: ここでListから取り出しrたい
-  // for (var i = 1; i < questionData.length; i++) {
-  //   print(questionData);
-  //   int id = i;
-  //   String sentence = questionData[i]["question"];
-  //   String image = questionData[i]["image_url"];
-  //   QuestionData().set(i, Question(id, sentence, image));
-  //   // print(id);
-  //   print(sentence + image);
-  // }
+  for (var i = 0; i < questionData.length; i++) {
+    // TODO: まともな実装にする
+
+    dataList = questionData[i].toString().replaceAll(': ',',').toString().split(',');
+
+    String sentence = dataList[3];
+    String image = dataList[1];
+
+    // String sentence = questionData[i][1];
+    // String image = questionData[i][0];
+    QuestionData().set(i, Question(i+1, sentence, image));
+    // print(id);
+    // print(sentence + image);
+  }
   controller.sink.add(true);
 }
 
