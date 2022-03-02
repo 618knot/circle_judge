@@ -64,8 +64,6 @@ Future setQuestion() async {
       Uri.parse('https://quiet-eyrie-21766.herokuapp.com/question/answer');
   Map<String, String> headers = {'content-type': 'application/json'};
 
-  // TODO:ここでgame_idとquestion_idとresultはquestiondataのAnswerを参照したい
-
   String? gameId = QuestionData.gameId;
 
   http.Response response = await http.get(url);
@@ -101,16 +99,6 @@ Future getResult() async {
     });
     response = await http.post(url, headers: headers, body: body);
 
-    /* TODO: json.decodeで発生する下記のエラーの修正
-    E/flutter (11490): [ERROR:flutter/lib/ui/ui_dart_state.cc(209)] Unhandled Exception: FormatException: Unexpected character (at character 1)
-    E/flutter (11490): <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
-    E/flutter (11490): ^
-     */
-    // data = json.decode(response.body);
-    // String circleName = data["name"];
-    // int ranking = i;
-    // ここでresultをQuestionDataに格納し
-    // ResultData().set(i, Result(ranking, circleName));
   }
 
   // endを呼ぶ
