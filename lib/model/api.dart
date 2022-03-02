@@ -24,28 +24,37 @@ void getGameId() async {
   String gameId = data["game_id"];
   // print("gameId:");
   // print(gameId);
-  // TODO:gameIdをreturnする
   QuestionData.gameId = gameId;
 }
 
 // モックAPIからカードに描画する情報を取得する
 Future getQuestion() async {
-  var url = Uri.parse('https://reqres.in/api/users?page=1');
-  http.Response response = await http.get(url);
+  var url = Uri.parse('https://quiet-eyrie-21766.herokuapp.com/question');
+  Map<String, String> headers = {'content-type': 'application/json'};
 
-  Map data = new Map();
-  List userData = [];
-  data = json.decode(response.body); //json->Mapオブジェクトに格納
-  userData = data["data"];
-  for (var i = 0; i < userData.length; i++) {
-    int id = userData[i]["id"];
-    String sentence = userData[i]["email"];
-    String image = userData[i]["avatar"];
-    QuestionData().set(i, Question(id, sentence, image));
-    // print(id);
-    // print(sentence + image);
+  String? gameId = QuestionData.gameId;
+
+  http.Response response;
+
+  String body;
+  // TODO: 元の実装ではMAPが帰ってくる想定だったが、この時点ではすべてのデータをLISTで格納したjsonが返却される
+  for (int i = 1; i <= 5; i++) {
+    body = json.encode({
+      "game_id": "8141080a-792a-4b17-ace3-5b5b7927277f",
+      "question_id": i,
+    });
+    response = await http.post(url, headers: headers, body: body);
+    List data = json.decode(response.body);
+
+    String image=data[0]["image_url"];
+    String sentence =data[0]["question"];
+
+    //print("id"+i.toString());
+    //print(image);
+    //print(sentence);
+
+    QuestionData().set(i-1, Question(i, sentence, image));
   }
-  //Map->Listに必要な情報だけ格納
   controller.sink.add(true);
 }
 
@@ -54,8 +63,6 @@ Future setQuestion() async {
   var url =
       Uri.parse('https://quiet-eyrie-21766.herokuapp.com/question/answer');
   Map<String, String> headers = {'content-type': 'application/json'};
-
-  // TODO:ここでgame_idとquestion_idとresultはquestiondataのAnswerを参照したい
 
   String? gameId = QuestionData.gameId;
 
@@ -66,8 +73,8 @@ Future setQuestion() async {
   for (int i = 0; i < QuestionData().getlength(); i++) {
     String body = json.encode({
       "game_id": gameId,
-      "question_id": i.toString(),
-      "result": QuestionData().GetAnswer(i).toString(),
+      "question_id": i,
+      "result": QuestionData().GetAnswer(i),
     });
     print(body);
     response = await http.post(url, headers: headers, body: body);
@@ -75,8 +82,6 @@ Future setQuestion() async {
     String messageData = data["message"];
     print(messageData);
   }
-
-  getResult();
 }
 
 Future getResult() async {
@@ -90,24 +95,14 @@ Future getResult() async {
   Map data = new Map();
   for (int i = 0; i < QuestionData().getlength(); i++) {
     String body = json.encode({
-      "game_id": gameId.toString(),
+      "game_id": gameId,
     });
     response = await http.post(url, headers: headers, body: body);
 
-    /* TODO: json.decodeで発生する下記のエラーの修正
-    E/flutter (11490): [ERROR:flutter/lib/ui/ui_dart_state.cc(209)] Unhandled Exception: FormatException: Unexpected character (at character 1)
-    E/flutter (11490): <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
-    E/flutter (11490): ^
-     */
-    // data = json.decode(response.body);
-    // String circleName = data["name"];
-    // int ranking = i;
-    // ここでresultをQuestionDataに格納し
-    // ResultData().set(i, Result(ranking, circleName));
   }
 
   // endを呼ぶ
-  postGameEnd();
+  // postGameEnd();
 }
 
 void postGameEnd() async {
@@ -131,5 +126,5 @@ void GAME_ID_INIT() async {
 }
 
 void GAME_END() async {
-  setQuestion();
+  // setQuestion();
 }
