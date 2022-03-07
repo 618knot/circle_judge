@@ -25,8 +25,9 @@ class _JudgeProcessPageState extends State<JudgeProcessPage> {
           ),
           FloatingActionButton(
             onPressed: () {
-              API_Init();
+              print("bottunpushed");
               GAME_ID_INIT();
+              API_Init();
             },
             child: const Icon(Icons.thumb_up_alt_outlined),
             backgroundColor: Colors.lightGreen,
