@@ -31,29 +31,29 @@ void getGameId() async {
 Future getQuestion() async {
   var url = Uri.parse('https://quiet-eyrie-21766.herokuapp.com/question');
   Map<String, String> headers = {'content-type': 'application/json'};
-
+  while(QuestionData.gameId==null){
+    await Future.delayed(Duration(microseconds: 20));
+    print("wait");
+  }
   String? gameId = QuestionData.gameId;
 
   http.Response response;
 
   String body;
-  // TODO: 元の実装ではMAPが帰ってくる想定だったが、この時点ではすべてのデータをLISTで格納したjsonが返却される
+
   for (int i = 1; i <= 5; i++) {
     body = json.encode({
-      "game_id": "8141080a-792a-4b17-ace3-5b5b7927277f",
+      "game_id": gameId,
       "question_id": i,
     });
+    print(body);
     response = await http.post(url, headers: headers, body: body);
     List data = json.decode(response.body);
-
     String image=data[0]["image_url"];
-    String sentence =data[0]["question"];
-
-    //print("id"+i.toString());
-    //print(image);
-    //print(sentence);
-
-    QuestionData().set(i-1, Question(i, sentence, image));
+    String sentence=data[0]["question"];
+    var jsonsentence = json.encode(sentence);
+    var utf8sentence = utf8.decode(jsonsentence.runes.toList());
+    QuestionData().set(i-1, Question(i, utf8sentence.replaceAll('"', ''), image));
   }
   controller.sink.add(true);
 }
@@ -70,11 +70,11 @@ Future setQuestion() async {
 
   Map data = new Map();
 
-  for (int i = 0; i < QuestionData().getlength(); i++) {
+  for (int i = 1; i <= QuestionData().getlength(); i++) {
     String body = json.encode({
       "game_id": gameId,
       "question_id": i,
-      "result": QuestionData().GetAnswer(i),
+      "result": QuestionData().GetAnswer(i-1),
     });
     print(body);
     response = await http.post(url, headers: headers, body: body);
@@ -126,5 +126,5 @@ void GAME_ID_INIT() async {
 }
 
 void GAME_END() async {
-  // setQuestion();
+  setQuestion();
 }
