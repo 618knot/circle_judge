@@ -59,7 +59,9 @@ class TinderCards extends StatelessWidget {
           } else if (orientation.name == "LEFT") {
             QuestionData().SetAnswer(false, index);
           }
-          if (index + 1 == QuestionData().getlength()&&orientation.name!="RECOVER") {
+          if (index + 1 == QuestionData().getlength() &&
+              orientation.name != "RECOVER") {
+            Navigator.of(context).pushNamed("/result");
             GAME_END();
           }
         },
