@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/model/api.dart';
 
 class TitlePage extends StatelessWidget {
   Widget Title() {
@@ -13,10 +14,7 @@ class TitlePage extends StatelessWidget {
 
   Widget StartButton(BuildContext context) {
     return ElevatedButton(
-        onPressed: () {
-          // Navigator.of(context).pushNamed("/judge");
-          print("aaa");
-        },
+        onPressed: () {},
         child: Container(
           padding: EdgeInsets.symmetric(),
           child: Text("始める"),
@@ -43,7 +41,8 @@ class TitlePage extends StatelessWidget {
             Spacer(flex: 1),
             ElevatedButton(
                 onPressed: () {
-                  print("aaa");
+                  GAME_ID_INIT();
+                  API_Init();
                   Navigator.of(context).pushNamed("/judge");
                 },
                 child: Text("始める")),

@@ -26,10 +26,7 @@ class _JudgeProcessPageState extends State<JudgeProcessPage> {
           ),
           FloatingActionButton(
             heroTag: "bad",
-            onPressed: () {
-              GAME_ID_INIT();
-              API_Init();
-            },
+            onPressed: () {},
             child: const Icon(Icons.thumb_up_alt_outlined),
             backgroundColor: Colors.lightGreen,
           ),
