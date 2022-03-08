@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:hello_world/tinderCards.dart';
 
@@ -10,43 +12,95 @@ class ProgressDot extends StatefulWidget {
   _ProgressDotState createState() => _ProgressDotState();
 }
 
-class _ProgressDotState extends State<ProgressDot> {
+class _ProgressDotState extends State<ProgressDot>
+    with SingleTickerProviderStateMixin {
   double _size = 20;
-  Color _color = Colors.grey;
+
+  late AnimationController _controller;
+  late Animation _color;
 
   void updateDotsState(currentId) {
     if (currentId > widget.questionId) {
       setState(() {
         _size = 20;
-        _color = Colors.lightGreen;
+        // _color = Colors.lightGreen;
       });
     } else if (currentId == widget.questionId) {
       setState(() {
         _size = 40;
-        _color = Colors.lightGreen;
+        _animationChange();
+        // _color = Colors.lightGreen;
       });
     } else if (currentId < widget.questionId) {
       setState(() {
         _size = 20;
-        _color = Colors.grey;
+        _animationChange();
+        // _color = Colors.grey;
       });
     }
   }
 
-  Widget dot() {
-    return Container(
-      width: _size,
-      height: _size,
-      decoration: const BoxDecoration(
-        color: _color,
-        shape: BoxShape.circle,
-      ),
+  void _animationChange() {
+    if (_controller.status == AnimationStatus.completed) {
+      _controller.reverse();
+    } else {
+      _controller.forward();
+    }
+  }
+
+  // Widget dot() {
+  //   return Container(
+  //     width: _size,
+  //     height: _size,
+  //     decoration: const BoxDecoration(
+  //       color: ,
+  //       shape: BoxShape.circle,
+  //     ),
+  //   );
+  // }
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: Duration(seconds: 1),
+      vsync: this,
     );
+
+    _controller.addListener(() {
+      setState(() {});
+      print(_controller.value);
+    });
+
+    _color = ColorTween(
+      begin: Colors.grey,
+      end: Colors.lightGreen,
+    ).animate(_controller);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return dot();
+    return Container(
+      child: AnimatedBuilder(
+        animation: _controller,
+        builder: (BuildContext context, child) => child!,
+        child: Container(
+          color: _color.value,
+          width: _size,
+          height: _size,
+          decoration: const BoxDecoration(
+            // color: _color.value,
+            shape: BoxShape.circle,
+          ),
+        ),
+      ),
+    );
   }
 }
 
