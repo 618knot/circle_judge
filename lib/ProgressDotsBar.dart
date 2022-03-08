@@ -34,7 +34,6 @@ class _ProgressDotState extends State<ProgressDot>
     } else if (currentId < widget.questionId) {
       setState(() {
         _size = 20;
-        _animationChange();
         // _color = Colors.grey;
       });
     }
