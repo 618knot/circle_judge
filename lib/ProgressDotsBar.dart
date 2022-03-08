@@ -38,7 +38,7 @@ class _ProgressDotState extends State<ProgressDot> {
       width: _size,
       height: _size,
       decoration: const BoxDecoration(
-        color: _color,
+        color: Colors.grey,
         shape: BoxShape.circle,
       ),
     );
@@ -68,7 +68,6 @@ class _ProgressDotsBarState extends State<ProgressDotsBar> {
       ),
     );
   }
-
   @override
   void initState() {
     getQuestionIDController().stream.listen((event) {
