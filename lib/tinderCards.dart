@@ -19,6 +19,7 @@ class TinderCards extends StatelessWidget {
       //height: MediaQuery.of(context).size.height * 0.6,
 
       children:<Widget>[
+
         TinderSwapCard(
           swipeUp: true,
           swipeDown: true,
@@ -37,20 +38,25 @@ class TinderCards extends StatelessWidget {
             children: [
               Card(
                   color: Colors.grey,
-                  child: Column(
-                    children: [
-                      Text(
-                        QuestionData().GetQuestion(index),
-                        style: TextStyle(fontSize: 35),
-                      ),
+                  child: Stack(
+                    children: <Widget>[
                       Image.network(
                         QuestionData().GetImage(index),
                         fit: BoxFit.contain /*: 240, */,
                         height: 230,
                       ),
+                      Text(
+                        QuestionData().GetQuestion(index),
+                        style: TextStyle(fontSize: 35),
+                      ),
+                      Image.asset(
+                        'images/maru.png',
+                        height:230,
+                      )
                     ],
                   )
               )
+
             ],
           ),
           cardController: controller = CardController(),
@@ -67,7 +73,16 @@ class TinderCards extends StatelessWidget {
             }
           },
         ),
-        Image.asset('images/maru.png')
+        /*
+        Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("images/maru.png")
+            )
+          ),
+          alignment: Alignment.center
+        )
+        */
       ],
     );
   }

@@ -81,7 +81,6 @@ class _ExampleHomePageState extends State<ExampleHomePage>
               },
             ),
           ),
-          Image.asset('images/maru.png')
         ],
       ),
     );
