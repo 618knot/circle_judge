@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/tinderCards.dart';
 
 class ProgressDot extends StatefulWidget {
   const ProgressDot({Key? key}) : super(key: key);
@@ -44,11 +45,17 @@ class ProgressDotsBar extends StatefulWidget {
 
 class _ProgressDotsBarState extends State<ProgressDotsBar> {
   @override
+  void initState() {
+    getQuestionIDController().stream.listen((event) {
+      setState(() {});
+      print(event);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    
     return Container(
-      child: Row(
-      ),
+      child: Row(),
     );
   }
 }

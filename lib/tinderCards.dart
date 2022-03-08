@@ -1,9 +1,21 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:hello_world/model/api.dart';
 import 'package:hello_world/questiondata.dart';
 
+final controller = StreamController<int>.broadcast();
+
+StreamController<int> getQuestionIDController() {
+  return controller;
+}
+
 class TinderCards extends StatelessWidget {
+  void fn(x) {
+    controller.sink.add(x);
+  }
+
   /*TinderCards(){
     //api.dartとの連携部分。呼ぶだけにして処理そのものはQuestionDataに移植するかも
     print("データセット");
@@ -59,9 +71,11 @@ class TinderCards extends StatelessWidget {
           } else if (orientation.name == "LEFT") {
             QuestionData().SetAnswer(false, index);
           }
-          if (index + 1 == QuestionData().getlength()&&orientation.name!="RECOVER") {
+          if (index + 1 == QuestionData().getlength() &&
+              orientation.name != "RECOVER") {
             GAME_END();
           }
+          fn(index);
         },
       ),
       //),
