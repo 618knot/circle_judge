@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       },
     );
   }
-}r
+}
 
 class ExampleHomePage extends StatefulWidget {
   @override
