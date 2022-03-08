@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/DotsTestPage.dart';
 import 'package:hello_world/tinderCards.dart';
 
 class ProgressDot extends StatefulWidget {
@@ -47,6 +48,16 @@ class _ProgressDotState extends State<ProgressDot> {
   @override
   Widget build(BuildContext context) {
     return dot();
+  }
+
+  //初期化時にlistenを登録する
+  @override
+  void initState() {
+    getTestController().stream.listen((event) {
+      print(event);
+      //通知が来た時に更新の関数を実行
+      updateDotsState(event);
+    });
   }
 }
 
