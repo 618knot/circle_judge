@@ -47,25 +47,26 @@ class _ExampleHomePageState extends State<ExampleHomePage>
     CardController controller; //Use this to trigger swap.
 
     return  Scaffold(
-      body:  Center(
-        child: Container(
-          height: MediaQuery.of(context).size.height * 0.6,
-          child:  TinderSwapCard(
-            swipeUp: true,
-            swipeDown: true,
-            orientation: AmassOrientation.BOTTOM,
-            totalNum: welcomeImages.length,
-            stackNum: 3,
-            swipeEdge: 4.0,
-            maxWidth: MediaQuery.of(context).size.width * 0.9,
-            maxHeight: MediaQuery.of(context).size.width * 0.9,
-            minWidth: MediaQuery.of(context).size.width * 0.8,
-            minHeight: MediaQuery.of(context).size.width * 0.8,
-            cardBuilder: (context, index) => Card(child:Image.network(welcomeImages[index],)
-            //Card(child : Image.asset('${welcomeImages[index]}')
-            ),
-            cardController: controller = CardController(),
-            /*swipeUpdateCallback:
+      body:Stack(
+        children:<Widget>[
+          Container(
+            height: MediaQuery.of(context).size.height * 0.6,
+            child:  TinderSwapCard(
+              swipeUp: true,
+              swipeDown: true,
+              orientation: AmassOrientation.BOTTOM,
+              totalNum: welcomeImages.length,
+              stackNum: 3,
+              swipeEdge: 4.0,
+              maxWidth: MediaQuery.of(context).size.width * 0.9,
+              maxHeight: MediaQuery.of(context).size.width * 0.9,
+              minWidth: MediaQuery.of(context).size.width * 0.8,
+              minHeight: MediaQuery.of(context).size.width * 0.8,
+              cardBuilder: (context, index) => Card(child:Image.network(welcomeImages[index],)
+                //Card(child : Image.asset('${welcomeImages[index]}')
+              ),
+              cardController: controller = CardController(),
+              /*swipeUpdateCallback:
                 (DragUpdateDetails details, Alignment align) {
               /// Get swiping card's alignment
               if (align.x < 0) {
@@ -74,12 +75,14 @@ class _ExampleHomePageState extends State<ExampleHomePage>
                 //Card is RIGHT swiping
               }
             },*/
-            swipeCompleteCallback:
-                (CardSwipeOrientation orientation, int index) {
+              swipeCompleteCallback:
+                  (CardSwipeOrientation orientation, int index) {
 
-            },
+              },
+            ),
           ),
-        ),
+          Image.asset('images/maru.png')
+        ],
       ),
     );
   }
