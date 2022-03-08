@@ -178,7 +178,10 @@ class ResultPage extends StatelessWidget {
                       child: const Icon(Icons.share),
                     ),
                     ElevatedButton(
-                        onPressed: () {}, child: const Text('タイトルへ')),
+                        onPressed: () {
+                          Navigator.of(context).pushNamed("/title");
+                        },
+                        child: const Text('タイトルへ')),
                   ],
                 ),
               ),
