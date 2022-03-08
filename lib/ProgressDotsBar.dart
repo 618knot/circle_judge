@@ -2,19 +2,43 @@ import 'package:flutter/material.dart';
 import 'package:hello_world/tinderCards.dart';
 
 class ProgressDot extends StatefulWidget {
-  const ProgressDot({Key? key}) : super(key: key);
+  const ProgressDot({Key? key, required this.questionId}) : super(key: key);
+
+  final int? questionId;
 
   @override
   _ProgressDotState createState() => _ProgressDotState();
 }
 
 class _ProgressDotState extends State<ProgressDot> {
-  Widget Dot() {
+  double _size = 20;
+  Color _color = Colors.grey;
+
+  void updateDotsState(currentId) {
+    if (currentId > widget.questionId) {
+      setState(() {
+        _size = 20;
+        _color = Colors.lightGreen;
+      });
+    } else if (currentId == widget.questionId) {
+      setState(() {
+        _size = 40;
+        _color = Colors.lightGreen;
+      });
+    } else if (currentId < widget.questionId) {
+      setState(() {
+        _size = 20;
+        _color = Colors.grey;
+      });
+    }
+  }
+
+  Widget dot() {
     return Container(
-      width: 20,
-      height: 20,
+      width: _size,
+      height: _size,
       decoration: const BoxDecoration(
-        color: Colors.grey,
+        color: _color,
         shape: BoxShape.circle,
       ),
     );
@@ -22,7 +46,7 @@ class _ProgressDotState extends State<ProgressDot> {
 
   @override
   Widget build(BuildContext context) {
-    return Dot();
+    return dot();
   }
 }
 
@@ -31,19 +55,20 @@ class ProgressDotsBar extends StatefulWidget {
 
   @override
   _ProgressDotsBarState createState() => _ProgressDotsBarState();
-  Widget Line() {
+}
+
+class _ProgressDotsBarState extends State<ProgressDotsBar> {
+  Widget line() {
     return Container(
       height: 3,
       width: 10,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         shape: BoxShape.rectangle,
         color: Colors.grey,
       ),
     );
   }
-}
 
-class _ProgressDotsBarState extends State<ProgressDotsBar> {
   @override
   void initState() {
     getQuestionIDController().stream.listen((event) {
@@ -55,7 +80,18 @@ class _ProgressDotsBarState extends State<ProgressDotsBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Row(),
+      child: Row(
+        children: [
+          ProgressDot(questionId: 0),
+          line(),
+          ProgressDot(questionId: 1),
+          line(),
+          ProgressDot(questionId: 2),
+          line(),
+          ProgressDot(questionId: 3),
+          line(),
+        ],
+      ),
     );
   }
 }
