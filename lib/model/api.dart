@@ -83,9 +83,12 @@ Future setQuestion() async {
     String messageData = data["message"];
     print(messageData);
   }
+  // Future.delayed(Duration(microseconds: 300));
+  getResult();
 }
 
 Future getResult() async {
+  print("aaaaaaa");
   var url = Uri.parse('https://quiet-eyrie-21766.herokuapp.com/result');
   Map<String, String> headers = {'content-type': 'application/json'};
 
@@ -93,12 +96,12 @@ Future getResult() async {
 
   http.Response response = await http.get(url);
 
-  Map data = Map();
   for (int i = 0; i < QuestionData().getlength(); i++) {
     String body = json.encode({
       "game_id": gameId,
     });
     response = await http.post(url, headers: headers, body: body);
+    print(response);
   }
 
   // endを呼ぶ
