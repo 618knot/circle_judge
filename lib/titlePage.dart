@@ -68,8 +68,14 @@ class _State extends State<TitlePage> {
             ),
             Title(),
             Spacer(flex: 1),
-            circleProgressIndicator(visible: isLoading),
-            ElevatedButton(onPressed: onPressedButton, child: Text("始める")),
+            Stack(
+              alignment: AlignmentDirectional.center, // 子要素を中央に配置する
+              children: <Widget>[
+                ElevatedButton(onPressed: onPressedButton, child: Text("始める")),
+                circleProgressIndicator(visible: isLoading),
+            ]
+            ),
+
             Spacer(flex: 3),
           ],
         ),

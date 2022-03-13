@@ -10,13 +10,13 @@ class circleProgressIndicator extends StatelessWidget {
     return visible
         ? Container(
             decoration: BoxDecoration(
-              color: Color.fromRGBO(0, 0, 0, 0.6),
+              color: Color.fromRGBO(0, 0, 0, 0),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white))
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.lightBlueAccent))
               ],
             ),
           )
