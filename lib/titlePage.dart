@@ -8,6 +8,7 @@ class TitlePage extends StatefulWidget {
 }
 
 class _State extends State<TitlePage> {
+  final _assetImage = 'assets/wallpaper.jpeg';
   bool isLoading = false;
   @override
   void initState() {
@@ -56,7 +57,7 @@ class _State extends State<TitlePage> {
         body: Container(
       decoration: BoxDecoration(
           image: DecorationImage(
-        image: AssetImage('wallpaper.jpeg'),
+        image: AssetImage(_assetImage),
         fit: BoxFit.cover,
       )),
       child: Center(
@@ -68,14 +69,12 @@ class _State extends State<TitlePage> {
             ),
             Title(),
             Spacer(flex: 1),
-            Stack(
-              alignment: AlignmentDirectional.center, // 子要素を中央に配置する
-              children: <Widget>[
-                ElevatedButton(onPressed: onPressedButton, child: Text("始める")),
-                circleProgressIndicator(visible: isLoading),
-            ]
-            ),
-
+            Stack(alignment: AlignmentDirectional.center, // 子要素を中央に配置する
+                children: <Widget>[
+                  ElevatedButton(
+                      onPressed: onPressedButton, child: Text("始める")),
+                  circleProgressIndicator(visible: isLoading),
+                ]),
             Spacer(flex: 3),
           ],
         ),
