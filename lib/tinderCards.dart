@@ -44,7 +44,7 @@ class TinderCards extends StatelessWidget {
                     Image.network(
                       QuestionData().GetImage(index),
                       fit: BoxFit.contain /*: 240, */,
-                      height: 230,
+                      height: 170,
                     ),
                   ],
                 ))
