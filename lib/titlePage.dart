@@ -43,7 +43,7 @@ class TitlePage extends StatelessWidget {
                 onPressed: () {
                   GAME_ID_INIT();
                   API_Init();
-                  // CircularProgressIndicator();
+                  CircularProgressIndicator();
                   Navigator.of(context).pushNamed("/judge");
                 },
                 child: Text("始める")),
