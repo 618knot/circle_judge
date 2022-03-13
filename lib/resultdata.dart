@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 //Questionの情報を持つクラス
-class Result{
+class Result {
   int circlerank;
   String circlename;
-  Result(this.circlerank,this.circlename){}
+  Result(this.circlerank, this.circlename) {}
 }
 
 //Singletonでデータをキャッシュする
-class ResultData{
+class ResultData {
   static final Map<int, Result> _item = <int, Result>{};
-  static final ResultData _cache=ResultData._internal();
+  static final ResultData _cache = ResultData._internal();
   static int? gameId;
 
   factory ResultData() {

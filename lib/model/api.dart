@@ -19,7 +19,7 @@ void getGameId() async {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*'
   });
-  Map data = new Map();
+  Map data = Map();
   data = json.decode(response.body);
   String gameId = data["game_id"];
   // print("gameId:");
@@ -31,7 +31,7 @@ void getGameId() async {
 Future getQuestion() async {
   var url = Uri.parse('https://quiet-eyrie-21766.herokuapp.com/question');
   Map<String, String> headers = {'content-type': 'application/json'};
-  while(QuestionData.gameId==null){
+  while (QuestionData.gameId == null) {
     await Future.delayed(Duration(microseconds: 20));
     print("wait");
   }
@@ -49,11 +49,12 @@ Future getQuestion() async {
     print(body);
     response = await http.post(url, headers: headers, body: body);
     List data = json.decode(response.body);
-    String image=data[0]["image_url"];
-    String sentence=data[0]["question"];
+    String image = data[0]["image_url"];
+    String sentence = data[0]["question"];
     var jsonsentence = json.encode(sentence);
     var utf8sentence = utf8.decode(jsonsentence.runes.toList());
-    QuestionData().set(i-1, Question(i, utf8sentence.replaceAll('"', ''), image));
+    QuestionData()
+        .set(i - 1, Question(i, utf8sentence.replaceAll('"', ''), image));
   }
   controller.sink.add(true);
 }
@@ -68,13 +69,13 @@ Future setQuestion() async {
 
   http.Response response = await http.get(url);
 
-  Map data = new Map();
+  Map data = Map();
 
   for (int i = 1; i <= QuestionData().getlength(); i++) {
     String body = json.encode({
       "game_id": gameId,
       "question_id": i,
-      "result": QuestionData().GetAnswer(i-1),
+      "result": QuestionData().GetAnswer(i - 1),
     });
     print(body);
     response = await http.post(url, headers: headers, body: body);
@@ -92,13 +93,12 @@ Future getResult() async {
 
   http.Response response = await http.get(url);
 
-  Map data = new Map();
+  Map data = Map();
   for (int i = 0; i < QuestionData().getlength(); i++) {
     String body = json.encode({
       "game_id": gameId,
     });
     response = await http.post(url, headers: headers, body: body);
-
   }
 
   // endを呼ぶ

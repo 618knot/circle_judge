@@ -1,7 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/circlarProgressIndicator.dart';
 import 'package:hello_world/model/api.dart';
 
-class TitlePage extends StatelessWidget {
+class TitlePage extends StatefulWidget {
+  @override
+  _State createState() => _State();
+}
+
+class _State extends State<TitlePage> {
+  bool isLoading = false;
+  @override
+  void initState() {
+    super.initState();
+    getController().stream.listen((event) {
+      isLoading = false;
+      Navigator.of(context).pushNamed("/judge");
+    });
+  }
+
+  void onPressedButton() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    GAME_ID_INIT();
+    API_Init();
+
+    // 完了通知か問題番号を受け取りたい
+    // TODO: 問題番号を受け取る処理にリファクタ
+    // await Future.delayed(const Duration(milliseconds: 2000), () {});
+  }
+
   Widget Title() {
     return Container(
       padding: EdgeInsets.all(10),
@@ -39,14 +68,14 @@ class TitlePage extends StatelessWidget {
             ),
             Title(),
             Spacer(flex: 1),
-            ElevatedButton(
-                onPressed: () {
-                  GAME_ID_INIT();
-                  API_Init();
-                  // CircularProgressIndicator();
-                  Navigator.of(context).pushNamed("/judge");
-                },
-                child: Text("始める")),
+            Stack(
+              alignment: AlignmentDirectional.center, // 子要素を中央に配置する
+              children: <Widget>[
+                ElevatedButton(onPressed: onPressedButton, child: Text("始める")),
+                circleProgressIndicator(visible: isLoading),
+            ]
+            ),
+
             Spacer(flex: 3),
           ],
         ),

@@ -18,9 +18,9 @@ class MyApp extends StatelessWidget {
       // home: JudgeProcessPage(),//ExampleHomePage(),
       home: TitlePage(),
       routes: <String, WidgetBuilder>{
-        '/title': (BuildContext context) => new TitlePage(),
-        '/judge': (BuildContext context) => new JudgeProcessPage(),
-        '/result': (BuildContext context) => new ResultPage(),
+        '/title': (BuildContext context) => TitlePage(),
+        '/judge': (BuildContext context) => JudgeProcessPage(),
+        '/result': (BuildContext context) => ResultPage(),
       },
     );
   }
