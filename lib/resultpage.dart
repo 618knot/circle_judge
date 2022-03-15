@@ -64,8 +64,8 @@ class _ResultPage extends State<ResultPage> {
 
                         Container(
                           margin: const EdgeInsets.only(left: 10),
-                          child: const Text(
-                            'xoサークル',
+                          child: Text(
+                            ResultData().GetCircle(1).circlename,
                             style: TextStyle(
                               fontSize: 30,
                             ),
@@ -80,11 +80,11 @@ class _ResultPage extends State<ResultPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Image.network(
-                            ResultData().GetCircle(1).circlerank),
+                            ResultData().GetCircle(1).circle_image_url,width: 100,height: 100,),
                         Flexible(
                           child: Container(
-                            child: const Text(
-                              '全角八十文字あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ',
+                            child: Text(
+                              ResultData().GetCircle(1).circle_description,
                               style: TextStyle(
                                 fontSize: 15,
                               ),

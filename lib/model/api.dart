@@ -117,7 +117,7 @@ Future getResult() async {
     String circlename = "cistLT";
     double percent = 0.3333333333333333;
     String circle_image_url =
-        "https://cist-lt-group.web.app/static/media/logo.436cc4cb.svg";
+        "http://www.itagaki.net/pc/imagefile/memo_0043/photo008.jpg";
     String circle_description =
         "IT技術系の勉強をしています！初心者大歓迎です！所属メンバーはバイオ系、電子工学系、情報工学系と様々なメンバーで構成されています！！みんなで興味のあることを勉強し、アウトプットすることを目標にしています！一人で悩まないで！一緒に技術力を高めませんか？？";
     ResultData().set(
