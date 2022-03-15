@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:share_extend/share_extend.dart';
+
+import 'dart:ui' as ui;
+import 'dart:io';
 
 class ResultPage extends StatefulWidget {
   @override
@@ -6,7 +13,6 @@ class ResultPage extends StatefulWidget {
 }
 
 class _ResultPage extends State<ResultPage> {
-
   detailDialog(context) {
     showDialog(
         context: context,
@@ -132,7 +138,7 @@ class _ResultPage extends State<ResultPage> {
 
   Widget secondThirdCard(
       context, String circleName, double matchingRate, String introduction) {
-   return GestureDetector(
+    return GestureDetector(
       onTap: () {
         print('タップされました');
         detailDialog(context);
@@ -179,7 +185,7 @@ class _ResultPage extends State<ResultPage> {
   }
 
   Widget buttons(context) {
-   return Align(
+    return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
         margin: const EdgeInsets.only(top: 40),
@@ -191,7 +197,7 @@ class _ResultPage extends State<ResultPage> {
               style: ElevatedButton.styleFrom(
                 shape: const CircleBorder(),
               ),
-              onPressed: () {},
+              onPressed: () => shareImageAndText('result', shareKey),
               child: const Icon(Icons.share),
             ),
             ElevatedButton(
@@ -205,26 +211,73 @@ class _ResultPage extends State<ResultPage> {
     );
   }
 
+  final GlobalKey shareKey = GlobalKey();
+
+  Future<ByteData> exportToImage(GlobalKey globalKey) async {
+    final boundary =
+        globalKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+    final image = await boundary.toImage(
+      pixelRatio: 3,
+    );
+    final byteData = await image.toByteData(
+      format: ui.ImageByteFormat.png,
+    );
+    return byteData!;
+  }
+
+  Future<File> getApplicationDocumentsFile(
+      String text, List<int> imageData) async {
+    final directory = await getApplicationDocumentsDirectory();
+
+    final exportFile = File('${directory.path}/$text.png');
+    if (!await exportFile.exists()) {
+      await exportFile.create(recursive: true);
+    }
+    final file = await exportFile.writeAsBytes(imageData);
+    return file;
+  }
+
+  void shareImageAndText(String text, GlobalKey globalKey) async {
+    //shareする際のテキスト
+    try {
+      final bytes = await exportToImage(globalKey);
+      //byte data→Uint8List
+      final widgetImageBytes =
+          bytes.buffer.asUint8List(bytes.offsetInBytes, bytes.lengthInBytes);
+      //App directoryファイルに保存
+      final applicationDocumentsFile =
+          await getApplicationDocumentsFile(text, widgetImageBytes);
+
+      final path = applicationDocumentsFile.path;
+      await ShareExtend.share(path, "image");
+      print(path);
+      // applicationDocumentsFile.delete();
+    } catch (error) {
+      print(error);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-
-    return Scaffold(
-        body: SafeArea(
-      child: Center(
-        child: Column(
-          children: [
-            header(),
-
-            firstCard(context, "xoサークル", 0.8,
-                "全角八十文字あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ"),
-            secondThirdCard(context, 'ooサークル', 0.5,
-                "全角八十文字あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ"),
-            secondThirdCard(context, 'oxサークル', 0.3,
-                "全角八十文字あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ"),
-            buttons(context),
-          ],
+    return RepaintBoundary(
+      key: shareKey,
+      child: Scaffold(
+          body: SafeArea(
+        child: Center( 
+            child: Column(
+              children: [
+                header(),
+                firstCard(context, "xoサークル", 0.8,
+                    "全角八十文字あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ"),
+                secondThirdCard(context, 'ooサークル', 0.5,
+                    "全角八十文字あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ"),
+                secondThirdCard(context, 'oxサークル', 0.3,
+                    "全角八十文字あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ"),
+                buttons(context),
+              ],
+            ),
         ),
-      ),
-    ));
+      )),
+    );
   }
 }
