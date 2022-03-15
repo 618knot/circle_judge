@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:hello_world/questiondata.dart';
+import 'package:hello_world/resultdata.dart';
 import 'package:http/http.dart' as http;
 
 String startData = "0";
@@ -41,7 +42,7 @@ Future getQuestion() async {
 
   String body;
 
-  for (int i = 1; i <= 5; i++) {
+  for (int i = 1; i <= 6; i++) {
     body = json.encode({
       "game_id": gameId,
       "question_id": i,
@@ -100,12 +101,29 @@ Future getResult() async {
     String body = json.encode({
       "game_id": gameId,
     });
+    print(body);
     response = await http.post(url, headers: headers, body: body);
-    print(response);
+    var data = json.decode(response.body);
+    List rankingData = data["ranking"];
+    var jsonsentence = json.encode(rankingData);
+    var utf8sentence = utf8.decode(jsonsentence.runes.toList());
+    print(utf8sentence);
+
+    int circlerank = 1;
+    String circlename = "cistLT";
+    double percent = 0.3333333333333333;
+    String circle_image_url =
+        "https://cist-lt-group.web.app/static/media/logo.436cc4cb.svg";
+    String circle_description =
+        "IT技術系の勉強をしています！初心者大歓迎です！所属メンバーはバイオ系、電子工学系、情報工学系と様々なメンバーで構成されています！！みんなで興味のあることを勉強し、アウトプットすることを目標にしています！一人で悩まないで！一緒に技術力を高めませんか？？";
+    ResultData().set(
+        i - 1,
+        Result(circlerank, circlename, percent, circle_image_url,
+            circle_description));
   }
 
   // endを呼ぶ
-  // postGameEnd();
+  postGameEnd();
 }
 
 void postGameEnd() async {
