@@ -12,14 +12,14 @@ class TinderCards extends StatelessWidget {
     QuestionData().set(2,Question(2,"最終問題","https://github.com/618knot/circle_judge/blob/main/images/panel003.png?raw=true"));
     QuestionData().set(3,Question(3,"質問おわり","https://github.com/618knot/circle_judge/blob/main/images/panel000.png?raw=true"));
   }*/
+  //static final controller = StreamController<int>();
   @override
   Widget build(BuildContext context) {
     CardController controller;
+
     return Stack(
       //height: MediaQuery.of(context).size.height * 0.6,
-
       children:<Widget>[
-
         TinderSwapCard(
           swipeUp: true,
           swipeDown: true,
@@ -37,24 +37,25 @@ class TinderCards extends StatelessWidget {
           Column(
             children: [
               Card(
-                  color: Colors.grey,
+                color: Colors.grey,
                   child: Stack(
-                    children: <Widget>[
-                      Image.network(
-                        QuestionData().GetImage(index),
-                        fit: BoxFit.contain /*: 240, */,
-                        height: 230,
-                      ),
-                      Text(
-                        QuestionData().GetQuestion(index),
-                        style: TextStyle(fontSize: 35),
-                      ),
-                      Image.asset(
-                        'images/maru.png',
-                        height:230,
-                      )
-                    ],
-                  )
+                      children: <Widget>[
+                        Image.network(
+                          QuestionData().GetImage(index),
+                          fit: BoxFit.contain /*: 240, */,
+                          height: 230,
+                        ),
+                        Text(
+                          QuestionData().GetQuestion(index),
+                          style: TextStyle(fontSize: 35),
+                        ),
+                        Image.asset(
+                          'images/maru.png',
+                          height:230,
+                        ),
+                      ],
+                  ),
+
               )
 
             ],
@@ -72,6 +73,8 @@ class TinderCards extends StatelessWidget {
               GAME_END();
             }
           },
+            swipeUpdateCallback:(DragUpdateDetails details, Alignment align) {
+              print(align.x);}
         ),
         /*
         Container(
