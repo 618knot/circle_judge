@@ -1,7 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/resultdata.dart';
+import 'package:hello_world/model/api.dart';
 
-class ResultPage extends StatelessWidget {
-  const ResultPage({Key? key}) : super(key: key);
+class ResultPage extends StatefulWidget {
+  @override
+  _ResultPage createState() => _ResultPage();
+}
+
+class _ResultPage extends State<ResultPage> {
+  //const ResultPage({Key? key}) : super(key: key);
+
+  @override
+  void initState() {
+    getresultController().stream.listen((event) {
+      setState(() {});
+      print("finish_load");
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +80,7 @@ class ResultPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Image.network(
-                            'https://github.com/618knot/circle_judge/blob/main/images/panel001.png?raw=true'),
+                            ResultData().GetCircle(1).circlerank),
                         Flexible(
                           child: Container(
                             child: const Text(

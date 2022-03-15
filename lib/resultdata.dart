@@ -21,21 +21,31 @@ class ResultData {
   ResultData._internal();
   set(int key, Result value) => _item[key] = value;
   get(int key) => _item[key];
+  //サークルを返す
+  GetCircle(int num){
+    return ResultData().get(num);
+  }
+  //サークル名を返す
+  GetName(int num){
+    return ResultData().get(num).circlename;
+  }
+  //画像を返す
+  GetImage(int num){
+    return ResultData().get(num).circle_image_url;
+  }
+  //説明文を返す
+  GetDC(int num){
+    return ResultData().get(num).percent;
+  }
+  //説明文を返す
+  Getper(int num){
+    return ResultData().get(num).circle_description;
+  }
 /*
   //質問数を返す
   getlength()=>_item.length;
-  //質問文を返す
-  GetQuestion(int num){
-    Question question=QuestionData().get(num);
-    //String tmp=Q.question_sentence;
-    return question.question_sentence;
-  }
-  //質問画像を返す
-  GetImage(int num){
-    Question question=QuestionData().get(num);
-    //String tmp=Q.question_sentence;
-    return question.question_image;
-  }
+
+
   //answer 1:Yes 0:Even -1:No
   SetAnswer(int answer,int num){
     Question question=QuestionData().get(num);

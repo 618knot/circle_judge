@@ -6,11 +6,15 @@ import 'package:hello_world/resultdata.dart';
 import 'package:http/http.dart' as http;
 
 String startData = "0";
-
+//質問のロード完了通知
 final controller = StreamController<bool>.broadcast();
-
 StreamController<bool> getController() {
   return controller;
+}
+//結果のロード完了通知
+final Resultcontroller = StreamController<bool>.broadcast();
+StreamController<bool> getresultController() {
+  return Resultcontroller;
 }
 
 // スタート時にPOSTでゲームIDを取得する
@@ -124,6 +128,7 @@ Future getResult() async {
 
   // endを呼ぶ
   postGameEnd();
+  Resultcontroller.sink.add(true);
 }
 
 void postGameEnd() async {
