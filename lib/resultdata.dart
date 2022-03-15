@@ -1,10 +1,12 @@
-import 'package:flutter/material.dart';
-
 //Questionの情報を持つクラス
 class Result {
   int circlerank;
   String circlename;
-  Result(this.circlerank, this.circlename) {}
+  double percent;
+  String circle_image_url;
+  String circle_description;
+  Result(this.circlerank, this.circlename, this.percent, this.circle_image_url,
+      this.circle_description) {}
 }
 
 //Singletonでデータをキャッシュする
