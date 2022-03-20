@@ -54,23 +54,13 @@ Future<bool> questionPost(int num) async{
 
 // モックAPIからカードに描画する情報を取得する
 Future getQuestion() async {
-  var url = Uri.parse('https://quiet-eyrie-21766.herokuapp.com/question');
-  Map<String, String> headers = {'content-type': 'application/json'};
   while (QuestionData.gameId == null) {
     await Future.delayed(Duration(microseconds: 20));
     print("wait");
   }
-  String? gameId = QuestionData.gameId;
-
-  http.Response response;
-
-  String body;
-  List<http.Response> responses;
   List<Future<bool>> future=[];
   for (int i = 1; i <= 6; i++) {
-    var tmp =questionPost(i);
     future.add(questionPost(i));
-    print("add");
   }
   var futureAll =Future.wait(future);
   futureAll.then((results) => controller.sink.add(true));
