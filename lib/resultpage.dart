@@ -85,7 +85,7 @@ class _ResultPage extends State<ResultPage> {
   }
 
   Widget firstCard(
-      context, String circleName, double matchingRate, String introduction) {
+      context, String circleName, double matchingRate, String introduction,String ImageUrl) {
     return GestureDetector(
       onTap: () {
         print('タップされました');
@@ -123,7 +123,7 @@ class _ResultPage extends State<ResultPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Image.network(
-                      'https://github.com/618knot/circle_judge/blob/main/images/panel001.png?raw=true'),
+                    ImageUrl,width: 100,height: 100,),
                   Flexible(
                     child: Container(
                       child: Text(
@@ -277,7 +277,7 @@ class _ResultPage extends State<ResultPage> {
               children: [
                 header(),
                 firstCard(context, resultLoad(0).circlename, resultLoad(0).percent,
-                    resultLoad(0).circle_description),
+                    resultLoad(0).circle_description,resultLoad(0).circle_image_url),
                 secondThirdCard(context, resultLoad(1).circlename, resultLoad(1).percent,
                     resultLoad(1).circle_description),
                 secondThirdCard(context, resultLoad(2).circlename, resultLoad(2).percent,
@@ -292,7 +292,7 @@ class _ResultPage extends State<ResultPage> {
 
   Result resultLoad(int num){
     if(ResultData().GetCircle(num)==null){
-      return Result(0, "読み込み中", 0, "", "読み込み中");
+      return Result(0, "読み込み中", 0, 'https://github.com/618knot/circle_judge/blob/main/images/panel001.png?raw=true', "読み込み中");
     }
     return ResultData().GetCircle(num);
   }
