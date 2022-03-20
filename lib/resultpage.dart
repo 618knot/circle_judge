@@ -59,13 +59,13 @@ class _ResultPage extends State<ResultPage> {
                           color: Colors.teal,
                           height: 43,
                           width: MediaQuery.of(context).size.width *
-                              matchingRate[0],
+                              ResultData().GetCircle(0).percent,
                         ), //メーター
 
                         Container(
                           margin: const EdgeInsets.only(left: 10),
                           child: Text(
-                            ResultData().GetCircle(1).circlename,
+                            ResultData().GetCircle(0).circlename,
                             style: TextStyle(
                               fontSize: 30,
                             ),
@@ -80,14 +80,14 @@ class _ResultPage extends State<ResultPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Image.network(
-                          ResultData().GetCircle(1).circle_image_url,
+                          ResultData().GetCircle(0).circle_image_url,
                           width: 100,
                           height: 100,
                         ),
                         Flexible(
                           child: Container(
                             child: Text(
-                              ResultData().GetCircle(1).circle_description,
+                              ResultData().GetCircle(0).circle_description,
                               style: TextStyle(
                                 fontSize: 15,
                               ),
@@ -114,13 +114,13 @@ class _ResultPage extends State<ResultPage> {
                             color: Colors.teal,
                             height: 43,
                             width: MediaQuery.of(context).size.width *
-                                matchingRate[1],
+                                ResultData().GetCircle(1).percent,
                           ), //メーター
 
                           Container(
                             margin: const EdgeInsets.only(left: 10),
-                            child: const Text(
-                              'ooサークル',
+                            child: Text(
+                              ResultData().GetCircle(1).circlename,
                               style: TextStyle(
                                 fontSize: 30,
                               ),
@@ -130,8 +130,8 @@ class _ResultPage extends State<ResultPage> {
                       ),
                     ),
                     Container(
-                      child: const Text(
-                        '全角八十文字あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ',
+                      child: Text(
+                        ResultData().GetCircle(0).circle_description,
                         style: TextStyle(
                           fontSize: 15,
                         ),
@@ -153,13 +153,13 @@ class _ResultPage extends State<ResultPage> {
                             color: Colors.teal,
                             height: 43,
                             width: MediaQuery.of(context).size.width *
-                                matchingRate[2],
+                                ResultData().GetCircle(2).percent,
                           ), //メーター
 
                           Container(
                             margin: const EdgeInsets.only(left: 10),
-                            child: const Text(
-                              'oxサークル',
+                            child: Text(
+                              ResultData().GetCircle(1).circlename,
                               style: TextStyle(
                                 fontSize: 30,
                               ),
@@ -169,8 +169,8 @@ class _ResultPage extends State<ResultPage> {
                       ),
                     ),
                     Container(
-                      child: const Text(
-                        '全角八十文字あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ',
+                      child: Text(
+                        ResultData().GetCircle(0).circle_description,
                         style: TextStyle(
                           fontSize: 15,
                         ),

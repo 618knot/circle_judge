@@ -112,6 +112,7 @@ Future getResult() async {
   http.Response response = await http.get(url);
 
   for (int i = 0; i < QuestionData().getlength(); i++) {
+    print(i);
     String body = json.encode({
       "game_id": gameId,
     });
@@ -124,6 +125,7 @@ Future getResult() async {
     int circlerank = rankingData[0]["circlerank"];
     String circle_name = jsonDecode(rankingData[0]["circle_name"]);
     double percent = rankingData[0]["percent"];
+    print(percent);
     String circle_image_url = jsonDecode(rankingData[0]["circle_image_url"]);
     String circle_description =
         jsonDecode(rankingData[0]["circle_description"]);
@@ -150,7 +152,7 @@ Future getResult() async {
     // String circle_description =
     //     "IT技術系の勉強をしています！初心者大歓迎です！所属メンバーはバイオ系、電子工学系、情報工学系と様々なメンバーで構成されています！！みんなで興味のあることを勉強し、アウトプットすることを目標にしています！一人で悩まないで！一緒に技術力を高めませんか？？";
     ResultData().set(
-        i - 1,
+        i,
         Result(circlerank, circle_name, percent, circle_image_url,
             circle_description));
   }
