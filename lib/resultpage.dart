@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/resultdata.dart';
 import 'package:hello_world/model/api.dart';
+import 'package:hello_world/resultdata.dart';
 
 class ResultPage extends StatefulWidget {
   @override
@@ -80,7 +80,10 @@ class _ResultPage extends State<ResultPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Image.network(
-                            ResultData().GetCircle(1).circle_image_url,width: 100,height: 100,),
+                          ResultData().GetCircle(1).circle_image_url,
+                          width: 100,
+                          height: 100,
+                        ),
                         Flexible(
                           child: Container(
                             child: Text(

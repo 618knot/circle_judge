@@ -11,6 +11,7 @@ final controller = StreamController<bool>.broadcast();
 StreamController<bool> getController() {
   return controller;
 }
+
 //結果のロード完了通知
 final Resultcontroller = StreamController<bool>.broadcast();
 StreamController<bool> getresultController() {
@@ -92,8 +93,17 @@ Future setQuestion() async {
   getResult();
 }
 
+// decode関数
+String jsonDecode(String shiftjisSentence) {
+  var jsonsentence = json.encode(shiftjisSentence);
+  var utf8sentence = utf8.decode(jsonsentence.runes.toList());
+  utf8sentence = utf8sentence.replaceAll('"', '');
+  print(utf8sentence);
+  return utf8sentence;
+}
+
 Future getResult() async {
-  print("aaaaaaa");
+  print("aaaaaaaaaaaaaaaaaaaaaaaaaaa");
   var url = Uri.parse('https://quiet-eyrie-21766.herokuapp.com/result');
   Map<String, String> headers = {'content-type': 'application/json'};
 
@@ -105,24 +115,43 @@ Future getResult() async {
     String body = json.encode({
       "game_id": gameId,
     });
-    print(body);
+    // print(body);
     response = await http.post(url, headers: headers, body: body);
     var data = json.decode(response.body);
-    List rankingData = data["ranking"];
-    var jsonsentence = json.encode(rankingData);
-    var utf8sentence = utf8.decode(jsonsentence.runes.toList());
-    print(utf8sentence);
+    var rankingData = data["ranking"];
+    // 要素分割してリストにする
 
-    int circlerank = 1;
-    String circlename = "cistLT";
-    double percent = 0.3333333333333333;
-    String circle_image_url =
-        "http://www.itagaki.net/pc/imagefile/memo_0043/photo008.jpg";
+    int circlerank = rankingData[0]["circlerank"];
+    String circle_name = jsonDecode(rankingData[0]["circle_name"]);
+    double percent = rankingData[0]["percent"];
+    String circle_image_url = jsonDecode(rankingData[0]["circle_image_url"]);
     String circle_description =
-        "IT技術系の勉強をしています！初心者大歓迎です！所属メンバーはバイオ系、電子工学系、情報工学系と様々なメンバーで構成されています！！みんなで興味のあることを勉強し、アウトプットすることを目標にしています！一人で悩まないで！一緒に技術力を高めませんか？？";
+        jsonDecode(rankingData[0]["circle_description"]);
+
+    // var jsonsentence = json.encode(rankingData);
+    // var utf8sentence = utf8.decode(jsonsentence.runes.toList());
+    // print(utf8sentence);
+    // print(rankingData);
+
+    // String image = rankingData[0]["circle_image_url"];
+    // print(image);
+
+    // int circlerank = utf8sentence[0]["circlerank"];
+    // String circlename = rankingData[0]["circlename"];
+    // double percent = rankingData[0]["percent"];
+    // String circle_image_url = rankingData[0]["circle_image_url"];
+    // String circle_description = rankingData[0]["circle_description"];
+
+    // int circlerank = 1;
+    // String circlename = "cistLT";
+    // double percent = 0.3333333333333333;
+    // String circle_image_url =
+    //     "http://www.itagaki.net/pc/imagefile/memo_0043/photo008.jpg";
+    // String circle_description =
+    //     "IT技術系の勉強をしています！初心者大歓迎です！所属メンバーはバイオ系、電子工学系、情報工学系と様々なメンバーで構成されています！！みんなで興味のあることを勉強し、アウトプットすることを目標にしています！一人で悩まないで！一緒に技術力を高めませんか？？";
     ResultData().set(
         i - 1,
-        Result(circlerank, circlename, percent, circle_image_url,
+        Result(circlerank, circle_name, percent, circle_image_url,
             circle_description));
   }
 
