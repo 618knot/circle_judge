@@ -18,11 +18,22 @@ class ResultData {
   factory ResultData() {
     return _cache;
   }
+  // @override
+  // initstate(){
+  //   print("initstatecall");
+  //   ResultData().set(
+  //       -1,
+  //       Result(0, "読み込み中", 0, "",
+  //           "読み込み中"));
+  // }
   ResultData._internal();
   set(int key, Result value) => _item[key] = value;
   get(int key) => _item[key];
   //サークルを返す
   GetCircle(int num){
+    if(ResultData().get(num)==null){
+      return ResultData().get(-1);
+    }
     return ResultData().get(num);
   }
   //サークル名を返す
