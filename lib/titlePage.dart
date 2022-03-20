@@ -17,6 +17,7 @@ class _State extends State<TitlePage> {
       isLoading = false;
       Navigator.of(context).pushNamed("/judge");
     });
+    GAME_ID_INIT();
   }
 
   void onPressedButton() async {
@@ -24,7 +25,7 @@ class _State extends State<TitlePage> {
       isLoading = true;
     });
 
-    GAME_ID_INIT();
+    //GAME_ID_INIT();
     API_Init();
 
     // 完了通知か問題番号を受け取りたい

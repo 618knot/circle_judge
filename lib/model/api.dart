@@ -32,37 +32,38 @@ void getGameId() async {
   // print(gameId);
   QuestionData.gameId = gameId;
 }
+Future<bool> questionPost(int num) async{
+  http.Response response;
+  var url = Uri.parse('https://quiet-eyrie-21766.herokuapp.com/question');
+  Map<String, String> headers = {'content-type': 'application/json'};
+  String body = json.encode({
+    "game_id": QuestionData.gameId,
+    "question_id": num,
+  });
+  response = await http.post(url, headers: headers, body: body);
+  List data = json.decode(response.body);
+  String image = data[0]["image_url"];
+  String sentence = data[0]["question"];
+  var jsonsentence = json.encode(sentence);
+  var utf8sentence = utf8.decode(jsonsentence.runes.toList());
+  QuestionData()
+      .set(num - 1, Question(num, utf8sentence.replaceAll('"', ''), image));
+  print("loaded");
+  return true;
+}
 
 // モックAPIからカードに描画する情報を取得する
 Future getQuestion() async {
-  var url = Uri.parse('https://quiet-eyrie-21766.herokuapp.com/question');
-  Map<String, String> headers = {'content-type': 'application/json'};
   while (QuestionData.gameId == null) {
     await Future.delayed(Duration(microseconds: 20));
     print("wait");
   }
-  String? gameId = QuestionData.gameId;
-
-  http.Response response;
-
-  String body;
-
+  List<Future<bool>> future=[];
   for (int i = 1; i <= 6; i++) {
-    body = json.encode({
-      "game_id": gameId,
-      "question_id": i,
-    });
-    print(body);
-    response = await http.post(url, headers: headers, body: body);
-    List data = json.decode(response.body);
-    String image = data[0]["image_url"];
-    String sentence = data[0]["question"];
-    var jsonsentence = json.encode(sentence);
-    var utf8sentence = utf8.decode(jsonsentence.runes.toList());
-    QuestionData()
-        .set(i - 1, Question(i, utf8sentence.replaceAll('"', ''), image));
+    future.add(questionPost(i));
   }
-  controller.sink.add(true);
+  var futureAll =Future.wait(future);
+  futureAll.then((results) => controller.sink.add(true));
 }
 
 // バックエンドにPOSTで回答を返却する
@@ -155,11 +156,11 @@ Future getResult() async {
         i,
         Result(circlerank, circle_name, percent, circle_image_url,
             circle_description));
+    Resultcontroller.sink.add(true);
   }
 
   // endを呼ぶ
   postGameEnd();
-  Resultcontroller.sink.add(true);
 }
 
 void postGameEnd() async {
