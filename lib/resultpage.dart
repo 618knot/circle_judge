@@ -1,18 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:hello_world/resultdata.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_extend/share_extend.dart';
-
+import 'package:hello_world/model/api.dart';
 import 'dart:ui' as ui;
 import 'dart:io';
 
 class ResultPage extends StatefulWidget {
   @override
   _ResultPage createState() => _ResultPage();
+
 }
 
 class _ResultPage extends State<ResultPage> {
+  @override
+  void initState() {
+    getresultController().stream.listen((event) {
+      setState(() {});
+      print("finish_load");
+    });
+  }
   detailDialog(context) {
     showDialog(
         context: context,
@@ -267,17 +276,24 @@ class _ResultPage extends State<ResultPage> {
             child: Column(
               children: [
                 header(),
-                firstCard(context, "xoサークル", 0.8,
-                    "全角八十文字あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ"),
-                secondThirdCard(context, 'ooサークル', 0.5,
-                    "全角八十文字あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ"),
-                secondThirdCard(context, 'oxサークル', 0.3,
-                    "全角八十文字あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ"),
+                firstCard(context, resultLoad(0).circlename, resultLoad(0).percent,
+                    resultLoad(0).circle_description),
+                secondThirdCard(context, resultLoad(1).circlename, resultLoad(1).percent,
+                    resultLoad(1).circle_description),
+                secondThirdCard(context, resultLoad(2).circlename, resultLoad(2).percent,
+                    resultLoad(2).circle_description),
                 buttons(context),
               ],
             ),
         ),
       )),
     );
+  }
+
+  Result resultLoad(int num){
+    if(ResultData().GetCircle(num)==null){
+      return Result(0, "読み込み中", 0, "", "読み込み中");
+    }
+    return ResultData().GetCircle(num);
   }
 }
