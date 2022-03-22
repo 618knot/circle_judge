@@ -75,6 +75,7 @@ class _ProgressDotState extends State<ProgressDot>
       end: Colors.lightGreen,
     ).animate(_controller);
 
+    updateDotsState(0);
     getTestController().stream.listen((event) {
       print(event);
       //通知が来た時に更新の関数を実行
@@ -149,6 +150,7 @@ class _ProgressDotsBarState extends State<ProgressDotsBar> {
           line(),
           ProgressDot(questionId: 3),
           line(),
+          ProgressDot(questionId: 4)
         ],
       ),
     );
