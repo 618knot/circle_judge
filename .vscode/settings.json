@@ -1,0 +1,10 @@
+{
+    "editor.formatOnSave": true,
+    "editor.fontFamily": "HackGenNerd",
+    "errorLens.enabledDiagnosticLevels": [
+        "error",
+        "warning",
+        "info",
+        "hint"
+    ]
+}

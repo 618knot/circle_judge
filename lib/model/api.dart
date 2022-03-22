@@ -2,14 +2,20 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:hello_world/questiondata.dart';
+import 'package:hello_world/resultdata.dart';
 import 'package:http/http.dart' as http;
 
 String startData = "0";
-
+//質問のロード完了通知
 final controller = StreamController<bool>.broadcast();
-
 StreamController<bool> getController() {
   return controller;
+}
+
+//結果のロード完了通知
+final Resultcontroller = StreamController<bool>.broadcast();
+StreamController<bool> getresultController() {
+  return Resultcontroller;
 }
 
 // スタート時にPOSTでゲームIDを取得する
@@ -19,43 +25,45 @@ void getGameId() async {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*'
   });
-  Map data = new Map();
+  Map data = Map();
   data = json.decode(response.body);
   String gameId = data["game_id"];
   // print("gameId:");
   // print(gameId);
   QuestionData.gameId = gameId;
 }
+Future<bool> questionPost(int num) async{
+  http.Response response;
+  var url = Uri.parse('https://quiet-eyrie-21766.herokuapp.com/question');
+  Map<String, String> headers = {'content-type': 'application/json'};
+  String body = json.encode({
+    "game_id": QuestionData.gameId,
+    "question_id": num,
+  });
+  response = await http.post(url, headers: headers, body: body);
+  List data = json.decode(response.body);
+  String image = data[0]["image_url"];
+  String sentence = data[0]["question"];
+  var jsonsentence = json.encode(sentence);
+  var utf8sentence = utf8.decode(jsonsentence.runes.toList());
+  QuestionData()
+      .set(num - 1, Question(num, utf8sentence.replaceAll('"', ''), image));
+  print("loaded");
+  return true;
+}
 
 // モックAPIからカードに描画する情報を取得する
 Future getQuestion() async {
-  var url = Uri.parse('https://quiet-eyrie-21766.herokuapp.com/question');
-  Map<String, String> headers = {'content-type': 'application/json'};
-  while(QuestionData.gameId==null){
+  while (QuestionData.gameId == null) {
     await Future.delayed(Duration(microseconds: 20));
     print("wait");
   }
-  String? gameId = QuestionData.gameId;
-
-  http.Response response;
-
-  String body;
-
-  for (int i = 1; i <= 5; i++) {
-    body = json.encode({
-      "game_id": gameId,
-      "question_id": i,
-    });
-    print(body);
-    response = await http.post(url, headers: headers, body: body);
-    List data = json.decode(response.body);
-    String image=data[0]["image_url"];
-    String sentence=data[0]["question"];
-    var jsonsentence = json.encode(sentence);
-    var utf8sentence = utf8.decode(jsonsentence.runes.toList());
-    QuestionData().set(i-1, Question(i, utf8sentence.replaceAll('"', ''), image));
+  List<Future<bool>> future=[];
+  for (int i = 1; i <= 6; i++) {
+    future.add(questionPost(i));
   }
-  controller.sink.add(true);
+  var futureAll =Future.wait(future);
+  futureAll.then((results) => controller.sink.add(true));
 }
 
 // バックエンドにPOSTで回答を返却する
@@ -68,13 +76,13 @@ Future setQuestion() async {
 
   http.Response response = await http.get(url);
 
-  Map data = new Map();
+  Map data = Map();
 
   for (int i = 1; i <= QuestionData().getlength(); i++) {
     String body = json.encode({
       "game_id": gameId,
       "question_id": i,
-      "result": QuestionData().GetAnswer(i-1),
+      "result": QuestionData().GetAnswer(i - 1),
     });
     print(body);
     response = await http.post(url, headers: headers, body: body);
@@ -82,9 +90,21 @@ Future setQuestion() async {
     String messageData = data["message"];
     print(messageData);
   }
+  // Future.delayed(Duration(microseconds: 300));
+  getResult();
+}
+
+// decode関数
+String jsonDecode(String shiftjisSentence) {
+  var jsonsentence = json.encode(shiftjisSentence);
+  var utf8sentence = utf8.decode(jsonsentence.runes.toList());
+  utf8sentence = utf8sentence.replaceAll('"', '');
+  print(utf8sentence);
+  return utf8sentence;
 }
 
 Future getResult() async {
+  print("aaaaaaaaaaaaaaaaaaaaaaaaaaa");
   var url = Uri.parse('https://quiet-eyrie-21766.herokuapp.com/result');
   Map<String, String> headers = {'content-type': 'application/json'};
 
@@ -92,17 +112,55 @@ Future getResult() async {
 
   http.Response response = await http.get(url);
 
-  Map data = new Map();
   for (int i = 0; i < QuestionData().getlength(); i++) {
+    print(i);
     String body = json.encode({
       "game_id": gameId,
     });
+    // print(body);
     response = await http.post(url, headers: headers, body: body);
+    var data = json.decode(response.body);
+    var rankingData = data["ranking"];
+    // 要素分割してリストにする
 
+    int circlerank = rankingData[0]["circlerank"];
+    String circle_name = jsonDecode(rankingData[0]["circle_name"]);
+    double percent = rankingData[0]["percent"];
+    print(percent);
+    String circle_image_url = jsonDecode(rankingData[0]["circle_image_url"]);
+    String circle_description =
+        jsonDecode(rankingData[0]["circle_description"]);
+
+    // var jsonsentence = json.encode(rankingData);
+    // var utf8sentence = utf8.decode(jsonsentence.runes.toList());
+    // print(utf8sentence);
+    // print(rankingData);
+
+    // String image = rankingData[0]["circle_image_url"];
+    // print(image);
+
+    // int circlerank = utf8sentence[0]["circlerank"];
+    // String circlename = rankingData[0]["circlename"];
+    // double percent = rankingData[0]["percent"];
+    // String circle_image_url = rankingData[0]["circle_image_url"];
+    // String circle_description = rankingData[0]["circle_description"];
+
+    // int circlerank = 1;
+    // String circlename = "cistLT";
+    // double percent = 0.3333333333333333;
+    // String circle_image_url =
+    //     "http://www.itagaki.net/pc/imagefile/memo_0043/photo008.jpg";
+    // String circle_description =
+    //     "IT技術系の勉強をしています！初心者大歓迎です！所属メンバーはバイオ系、電子工学系、情報工学系と様々なメンバーで構成されています！！みんなで興味のあることを勉強し、アウトプットすることを目標にしています！一人で悩まないで！一緒に技術力を高めませんか？？";
+    ResultData().set(
+        i,
+        Result(circlerank, circle_name, percent, circle_image_url,
+            circle_description));
+    Resultcontroller.sink.add(true);
   }
 
   // endを呼ぶ
-  // postGameEnd();
+  postGameEnd();
 }
 
 void postGameEnd() async {

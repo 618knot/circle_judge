@@ -1,9 +1,8 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:hello_world/judgeProcessPage.dart';
-// jfkashfsakdfhsakjfhsadkfhsdjkfhsdfdfhk
+import 'package:hello_world/resultPage.dart';
+import 'package:hello_world/titlePage.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,11 +11,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'HelloCircle',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: JudgeProcessPage(),//ExampleHomePage(),
+      // home: JudgeProcessPage(),//ExampleHomePage(),
+      home: TitlePage(),
+      routes: <String, WidgetBuilder>{
+        '/title': (BuildContext context) => TitlePage(),
+        '/judge': (BuildContext context) => JudgeProcessPage(),
+        '/result': (BuildContext context) => ResultPage(),
+      },
     );
   }
 }
@@ -40,18 +45,17 @@ class _ExampleHomePageState extends State<ExampleHomePage>
     "assets/sample2.png",
     "assets/sample3.png",
     */
-
   ];
 
   @override
   Widget build(BuildContext context) {
     CardController controller; //Use this to trigger swap.
 
-    return  Scaffold(
-      body:  Center(
+    return Scaffold(
+      body: Center(
         child: Container(
           height: MediaQuery.of(context).size.height * 0.6,
-          child:  TinderSwapCard(
+          child: TinderSwapCard(
             swipeUp: true,
             swipeDown: true,
             orientation: AmassOrientation.BOTTOM,
@@ -62,9 +66,12 @@ class _ExampleHomePageState extends State<ExampleHomePage>
             maxHeight: MediaQuery.of(context).size.width * 0.9,
             minWidth: MediaQuery.of(context).size.width * 0.8,
             minHeight: MediaQuery.of(context).size.width * 0.8,
-            cardBuilder: (context, index) => Card(child:Image.network(welcomeImages[index],)
-            //Card(child : Image.asset('${welcomeImages[index]}')
-            ),
+            cardBuilder: (context, index) => Card(
+                child: Image.network(
+              welcomeImages[index],
+            )
+                //Card(child : Image.asset('${welcomeImages[index]}')
+                ),
             cardController: controller = CardController(),
             /*swipeUpdateCallback:
                 (DragUpdateDetails details, Alignment align) {
@@ -76,13 +83,10 @@ class _ExampleHomePageState extends State<ExampleHomePage>
               }
             },*/
             swipeCompleteCallback:
-                (CardSwipeOrientation orientation, int index) {
-
-            },
+                (CardSwipeOrientation orientation, int index) {},
           ),
         ),
       ),
     );
   }
 }
-

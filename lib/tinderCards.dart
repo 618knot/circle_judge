@@ -56,7 +56,7 @@ class TinderCards extends StatelessWidget {
                     Image.network(
                       QuestionData().GetImage(index),
                       fit: BoxFit.contain /*: 240, */,
-                      height: 230,
+                      height: 170,
                     ),
                   ],
                 ))
@@ -73,6 +73,9 @@ class TinderCards extends StatelessWidget {
           }
           if (index + 1 == QuestionData().getlength() &&
               orientation.name != "RECOVER") {
+
+            Navigator.of(context).pushNamed("/result");
+
             GAME_END();
           }
           fn(index);
