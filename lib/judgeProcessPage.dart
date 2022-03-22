@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/model/api.dart';
 import 'package:hello_world/tinderCards.dart';
+import 'package:hello_world/ProgressDotsBar.dart';
 
 class JudgeProcessPage extends StatefulWidget {
   judgeProcessPage() {
@@ -68,6 +69,7 @@ class _JudgeProcessPageState extends State<JudgeProcessPage> {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          ProgressDotsBar(),
           //Expanded(child: _dummyCard()),//本命のwidgetが実装されるまでの措置
           Expanded(child: TinderCards()),
           //Expanded(child:buttonsMenu()),
