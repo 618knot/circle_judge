@@ -1,8 +1,8 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:hello_world/judgeProcessPage.dart';
+import 'package:hello_world/resultPage.dart';
+import 'package:hello_world/titlePage.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,11 +11,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'HelloCircle',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: JudgeProcessPage(),//ExampleHomePage(),
+      // home: JudgeProcessPage(),//ExampleHomePage(),
+      home: TitlePage(),
+      routes: <String, WidgetBuilder>{
+        '/title': (BuildContext context) => TitlePage(),
+        '/judge': (BuildContext context) => JudgeProcessPage(),
+        '/result': (BuildContext context) => ResultPage(),
+      },
     );
   }
 }
@@ -39,7 +45,6 @@ class _ExampleHomePageState extends State<ExampleHomePage>
     "assets/sample2.png",
     "assets/sample3.png",
     */
-
   ];
 
   @override
@@ -86,4 +91,3 @@ class _ExampleHomePageState extends State<ExampleHomePage>
     );
   }
 }
-
