@@ -8,6 +8,7 @@ import 'package:hello_world/model/api.dart';
 import 'dart:ui' as ui;
 import 'dart:io';
 
+
 class ResultPage extends StatefulWidget {
   @override
   _ResultPage createState() => _ResultPage();
