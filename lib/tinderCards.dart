@@ -12,9 +12,10 @@ StreamController<int> getQuestionIDController() {
 }
 
 class TinderCards extends StatelessWidget {
-  void fn(x) {
-    controller.sink.add(x);
+  void fn(int x) {
+    controller.sink.add(x + 1);
   }
+
 
   /*TinderCards(){
     //api.dartとの連携部分。呼ぶだけにして処理そのものはQuestionDataに移植するかも

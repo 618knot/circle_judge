@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/tinderCards.dart';
-import 'package:hello_world/DotTestPage.dart';
+import 'package:hello_world/tinderCards.dart';
 
 class ProgressDot extends StatefulWidget {
   const ProgressDot({Key? key, required this.questionId}) : super(key: key);
@@ -76,7 +76,7 @@ class _ProgressDotState extends State<ProgressDot>
     ).animate(_controller);
 
     updateDotsState(0);
-    getTestController().stream.listen((event) {
+    getQuestionIDController().stream.listen((event) {
       print(event);
       //通知が来た時に更新の関数を実行
       updateDotsState(event);
@@ -150,7 +150,9 @@ class _ProgressDotsBarState extends State<ProgressDotsBar> {
           line(),
           ProgressDot(questionId: 3),
           line(),
-          ProgressDot(questionId: 4)
+          ProgressDot(questionId: 4),
+          line(),
+          ProgressDot(questionId: 5)
         ],
       ),
     );
