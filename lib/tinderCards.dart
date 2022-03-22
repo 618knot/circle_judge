@@ -79,7 +79,9 @@ class TinderCards extends StatelessWidget {
 
             GAME_END();
           }
+          if(orientation.name!="RECOVER"){
           fn(index);
+          }
         },
       ),
       //),
