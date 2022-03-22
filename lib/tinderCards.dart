@@ -74,12 +74,12 @@ class TinderCards extends StatelessWidget {
                           style: TextStyle(fontSize: 35),
                         ),
                         Image.asset(
-                          'images/maru.png',
+                          'maru.png',
                           height:170,
                           color:Colors.red.withOpacity(First(index,clear_maru))
                         ),
                         Image.asset(
-                          'images/batsu.png',
+                          'batsu.png',
                           height:170,
                           color: Colors.blue.withOpacity(First(index,clear_batsu))
                         )
