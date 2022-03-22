@@ -17,6 +17,14 @@ class TinderCards extends StatelessWidget {
   double clear_maru=0.0;
   double clear_batsu=0.0;
 
+  double First(index,clear){
+    if(index==0){
+      return clear;
+    }else{
+      return 0.0;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     CardController controller;
@@ -55,12 +63,12 @@ class TinderCards extends StatelessWidget {
                         Image.asset(
                           'images/maru.png',
                           height:230,
-                          color:Colors.red.withOpacity(clear_maru)
+                          color:Colors.red.withOpacity(First(index,clear_maru))
                         ),
                         Image.asset(
                           'images/batsu.png',
                           height:230,
-                          color: Colors.blue.withOpacity(clear_batsu)
+                          color: Colors.blue.withOpacity(First(index,clear_batsu))
                         )
                       ],
                   ),
@@ -69,6 +77,7 @@ class TinderCards extends StatelessWidget {
 
             ],
           ),
+
           cardController: controller = CardController(),
           swipeCompleteCallback: (CardSwipeOrientation orientation, int index) {
             print(orientation.name);
@@ -78,12 +87,14 @@ class TinderCards extends StatelessWidget {
               clear_maru=0.0;
             } else if (orientation.name == "LEFT") {
               QuestionData().SetAnswer(false, index);
+              clear_batsu=0.0;
             }
             if (index + 1 == QuestionData().getlength()&&orientation.name!="RECOVER") {
               GAME_END();
             }
           },
             swipeUpdateCallback:(DragUpdateDetails details, Alignment align) {
+
             if(align.x>10){
               clear_maru=1.0;
             }else if(align.x<0){
