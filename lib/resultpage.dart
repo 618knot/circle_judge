@@ -23,21 +23,21 @@ class _ResultPage extends State<ResultPage> {
       print("finish_load");
     });
   }
-  detailDialog(context) {
+  detailDialog(context,String imageUrl,String circleName,String introduction) {
     showDialog(
         context: context,
         builder: (BuildContext context) => AlertDialog(
               title: Column(
                 children: [
                   Image.network(
-                      'https://github.com/618knot/circle_judge/blob/main/images/panel001.png?raw=true'),
-                  const Text(
-                    'sampleサークル',
+                     imageUrl ),
+                  Text(
+                    circleName,
                     style: TextStyle(fontSize: 25),
                   )
                 ],
               ),
-              content: const Text('アラートダイアログだよ'),
+              content: Text(introduction),
               actions: [
                 Container(
                   alignment: Alignment.bottomCenter,
@@ -86,11 +86,11 @@ class _ResultPage extends State<ResultPage> {
   }
 
   Widget firstCard(
-      context, String circleName, double matchingRate, String introduction,String ImageUrl) {
+      context, String circleName, double matchingRate, String introduction,String imageUrl) {
     return GestureDetector(
       onTap: () {
         print('タップされました');
-        detailDialog(context);
+        detailDialog(context,imageUrl,circleName,introduction);
       },
       child: Card(
         color: Colors.yellow,
@@ -124,7 +124,7 @@ class _ResultPage extends State<ResultPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Image.network(
-                    ImageUrl,width: 100,height: 100,),
+                    imageUrl,width: 100,height: 100,),
                   Flexible(
                     child: Container(
                       child: Text(
@@ -147,11 +147,11 @@ class _ResultPage extends State<ResultPage> {
   }
 
   Widget secondThirdCard(
-      context, String circleName, double matchingRate, String introduction) {
+      context, String circleName, double matchingRate, String introduction,String imageUrl) {
     return GestureDetector(
       onTap: () {
         print('タップされました');
-        detailDialog(context);
+        detailDialog(context,imageUrl,circleName,introduction);
       },
       child: Card(
           color: Colors.yellow,
@@ -280,9 +280,9 @@ class _ResultPage extends State<ResultPage> {
                 firstCard(context, resultLoad(0).circlename, resultLoad(0).percent,
                     resultLoad(0).circle_description,resultLoad(0).circle_image_url),
                 secondThirdCard(context, resultLoad(1).circlename, resultLoad(1).percent,
-                    resultLoad(1).circle_description),
+                    resultLoad(1).circle_description,resultLoad(1).circle_image_url),
                 secondThirdCard(context, resultLoad(2).circlename, resultLoad(2).percent,
-                    resultLoad(2).circle_description),
+                    resultLoad(2).circle_description,resultLoad(2).circle_image_url),
                 buttons(context),
               ],
             ),
