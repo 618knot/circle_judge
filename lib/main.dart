@@ -51,7 +51,6 @@ class _ExampleHomePageState extends State<ExampleHomePage>
   Widget build(BuildContext context) {
     CardController controller; //Use this to trigger swap.
 
-
     return Scaffold(
       body: Center(
         child: Container(
@@ -69,10 +68,10 @@ class _ExampleHomePageState extends State<ExampleHomePage>
             minHeight: MediaQuery.of(context).size.width * 0.8,
             cardBuilder: (context, index) => Card(
                 child: Image.network(
-              welcomeImages[index],
-            )
-                //Card(child : Image.asset('${welcomeImages[index]}')
-                ),
+                  welcomeImages[index],
+                )
+              //Card(child : Image.asset('${welcomeImages[index]}')
+            ),
             cardController: controller = CardController(),
             /*swipeUpdateCallback:
                 (DragUpdateDetails details, Alignment align) {
@@ -83,12 +82,10 @@ class _ExampleHomePageState extends State<ExampleHomePage>
                 //Card is RIGHT swiping
               }
             },*/
-
             swipeCompleteCallback:
                 (CardSwipeOrientation orientation, int index) {},
-
           ),
-        ],
+        ),
       ),
     );
   }

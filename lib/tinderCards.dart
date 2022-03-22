@@ -91,53 +91,56 @@ class TinderCards extends StatelessWidget {
           ),
 
           cardController: controller = CardController(),
-          swipeCompleteCallback: (CardSwipeOrientation orientation, int index) {
+          swipeCompleteCallback: (CardSwipeOrientation orientation,int index) {
+            print(orientation.name);
+            print(index);
+
+            if (orientation.name == "RIGHT") {
+              QuestionData().SetAnswer(true, index);
+              clear_maru = 0.0;
+            } else if (orientation.name == "LEFT") {
+              QuestionData().SetAnswer(false, index);
+              clear_batsu = 0.0;
+            }
+
+            if (index + 1 == QuestionData().getlength() &&
+                orientation.name != "RECOVER") {
+              GAME_END();
+            }
+
             print(orientation.name);
             print(index);
             if (orientation.name == "RIGHT") {
               QuestionData().SetAnswer(true, index);
-              clear_maru=0.0;
             } else if (orientation.name == "LEFT") {
               QuestionData().SetAnswer(false, index);
-              clear_batsu=0.0;
             }
-            if (index + 1 == QuestionData().getlength()&&orientation.name!="RECOVER") {
+            if (index + 1 == QuestionData().getlength() &&
+                orientation.name != "RECOVER") {
+
+              Navigator.of(context).pushNamed("/result");
+
               GAME_END();
             }
+            fn(index);
           },
-            swipeUpdateCallback:(DragUpdateDetails details, Alignment align) {
+          swipeUpdateCallback:(DragUpdateDetails details, Alignment align) {
+    if(align.x>10){
+    clear_maru=1.0;
+    }else if(align.x<0){
+    clear_maru=0.0;
+    }else{
+    clear_maru=align.x/10;
+    }
 
-            if(align.x>10){
-              clear_maru=1.0;
-            }else if(align.x<0){
-              clear_maru=0.0;
-            }else{
-              clear_maru=align.x/10;
-            }
-            if(align.x<-10){
-              clear_batsu=1.0;
-            }else if(align.x>0){
-              clear_batsu=0.0;
-            }else{
-              clear_batsu=-(align.x/10);
-            }
-              print(align.x);
-            }
-          print(orientation.name);
-          print(index);
-          if (orientation.name == "RIGHT") {
-            QuestionData().SetAnswer(true, index);
-          } else if (orientation.name == "LEFT") {
-            QuestionData().SetAnswer(false, index);
-          }
-          if (index + 1 == QuestionData().getlength() &&
-              orientation.name != "RECOVER") {
+    if(align.x<-10){
+    clear_batsu=1.0;
+    }else if(align.x>0){
+    clear_batsu=0.0;
+    }else{
+    clear_batsu=-(align.x/10);
+    }
 
-            Navigator.of(context).pushNamed("/result");
-
-            GAME_END();
-          }
-          fn(index);
         },
         ),
         /*
