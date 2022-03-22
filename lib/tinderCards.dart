@@ -67,32 +67,29 @@ class TinderCards extends StatelessWidget {
             children: [
               Card(
                 color: Colors.grey,
-                child: Column(
-                  children: [
-                    Text(
-                      QuestionData().GetQuestion(index),
-                      style: TextStyle(fontSize: 35),
-                    ),
-                    Image.network(
-                      QuestionData().GetImage(index),
-                      fit: BoxFit.contain /*: 240, */,
-                      height: 170,
-                    ),
-                  ],
-                ))
-          ],
-        ),
-        cardController: cardController,
-        swipeCompleteCallback: (CardSwipeOrientation orientation, int index) {
-          print(orientation.name);
-          print(index);
-          if (orientation.name == "RIGHT") {
-            QuestionData().SetAnswer(true, index);
-          } else if (orientation.name == "LEFT") {
-            QuestionData().SetAnswer(false, index);
-          }
-          if (index + 1 == QuestionData().getlength() &&
-              orientation.name != "RECOVER") {
+                  child: Stack(
+                      children: <Widget>[
+                        Image.network(
+                          QuestionData().GetImage(index),
+                          fit: BoxFit.contain /*: 240, */,
+                          height: 170,
+                        ),
+                        Text(
+                          QuestionData().GetQuestion(index),
+                          style: TextStyle(fontSize: 35),
+                        ),
+                        Image.asset(
+                          'maru.png',
+                          height:170,
+                          color:Colors.red.withOpacity(First(index,clear_maru))
+                        ),
+                        Image.asset(
+                          'batsu.png',
+                          height:170,
+                          color: Colors.blue.withOpacity(First(index,clear_batsu))
+                        )
+                      ],
+                  ),
 
               )
 
@@ -150,11 +147,6 @@ class TinderCards extends StatelessWidget {
     clear_batsu=-(align.x/10);
     }
 
-            GAME_END();
-          }
-          if(orientation.name!="RECOVER"){
-          fn(index);
-          }
         },
         ),
         /*
