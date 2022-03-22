@@ -13,10 +13,13 @@ class TinderCards extends StatelessWidget {
     QuestionData().set(3,Question(3,"質問おわり","https://github.com/618knot/circle_judge/blob/main/images/panel000.png?raw=true"));
   }*/
   //static final controller = StreamController<int>();
+
+  double clear_maru=0.0;
+  double clear_batsu=0.0;
+
   @override
   Widget build(BuildContext context) {
     CardController controller;
-
     return Stack(
       //height: MediaQuery.of(context).size.height * 0.6,
       children:<Widget>[
@@ -52,7 +55,13 @@ class TinderCards extends StatelessWidget {
                         Image.asset(
                           'images/maru.png',
                           height:230,
+                          color:Colors.red.withOpacity(clear_maru)
                         ),
+                        Image.asset(
+                          'images/batsu.png',
+                          height:230,
+                          color: Colors.blue.withOpacity(clear_batsu)
+                        )
                       ],
                   ),
 
@@ -66,6 +75,7 @@ class TinderCards extends StatelessWidget {
             print(index);
             if (orientation.name == "RIGHT") {
               QuestionData().SetAnswer(true, index);
+              clear_maru=0.0;
             } else if (orientation.name == "LEFT") {
               QuestionData().SetAnswer(false, index);
             }
@@ -74,7 +84,22 @@ class TinderCards extends StatelessWidget {
             }
           },
             swipeUpdateCallback:(DragUpdateDetails details, Alignment align) {
-              print(align.x);}
+            if(align.x>10){
+              clear_maru=1.0;
+            }else if(align.x<0){
+              clear_maru=0.0;
+            }else{
+              clear_maru=align.x/10;
+            }
+            if(align.x<-10){
+              clear_batsu=1.0;
+            }else if(align.x>0){
+              clear_batsu=0.0;
+            }else{
+              clear_batsu=-(align.x/10);
+            }
+              print(align.x);
+            }
         ),
         /*
         Container(
