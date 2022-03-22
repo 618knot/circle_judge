@@ -62,41 +62,100 @@ class TinderCards extends StatelessWidget {
             children: [
               Card(
                 color: Colors.grey,
-                child: Column(
-                  children: [
-                    Text(
-                      QuestionData().GetQuestion(index),
-                      style: TextStyle(fontSize: 35),
-                    ),
-                    Image.network(
-                      QuestionData().GetImage(index),
-                      fit: BoxFit.contain /*: 240, */,
-                      height: 170,
-                    ),
-                  ],
-                ))
-          ],
-        ),
-        cardController: controller = CardController(),
-        swipeCompleteCallback: (CardSwipeOrientation orientation, int index) {
-          print(orientation.name);
-          print(index);
-          if (orientation.name == "RIGHT") {
-            QuestionData().SetAnswer(true, index);
-          } else if (orientation.name == "LEFT") {
-            QuestionData().SetAnswer(false, index);
-          }
-          if (index + 1 == QuestionData().getlength() &&
-              orientation.name != "RECOVER") {
+                  child: Stack(
+                      children: <Widget>[
+                        Image.network(
+                          QuestionData().GetImage(index),
+                          fit: BoxFit.contain /*: 240, */,
+                          height: 170,
+                        ),
+                        Text(
+                          QuestionData().GetQuestion(index),
+                          style: TextStyle(fontSize: 35),
+                        ),
+                        Image.asset(
+                          'images/maru.png',
+                          height:170,
+                          color:Colors.red.withOpacity(First(index,clear_maru))
+                        ),
+                        Image.asset(
+                          'images/batsu.png',
+                          height:170,
+                          color: Colors.blue.withOpacity(First(index,clear_batsu))
+                        )
+                      ],
+                  ),
 
-            Navigator.of(context).pushNamed("/result");
+              )
 
-            GAME_END();
-          }
-          fn(index);
+            ],
+          ),
+
+          cardController: controller = CardController(),
+          swipeCompleteCallback: (CardSwipeOrientation orientation,int index) {
+            print(orientation.name);
+            print(index);
+
+            if (orientation.name == "RIGHT") {
+              QuestionData().SetAnswer(true, index);
+              clear_maru = 0.0;
+            } else if (orientation.name == "LEFT") {
+              QuestionData().SetAnswer(false, index);
+              clear_batsu = 0.0;
+            }
+
+            if (index + 1 == QuestionData().getlength() &&
+                orientation.name != "RECOVER") {
+              GAME_END();
+            }
+
+            print(orientation.name);
+            print(index);
+            if (orientation.name == "RIGHT") {
+              QuestionData().SetAnswer(true, index);
+            } else if (orientation.name == "LEFT") {
+              QuestionData().SetAnswer(false, index);
+            }
+            if (index + 1 == QuestionData().getlength() &&
+                orientation.name != "RECOVER") {
+
+              Navigator.of(context).pushNamed("/result");
+
+              GAME_END();
+            }
+            fn(index);
+          },
+          swipeUpdateCallback:(DragUpdateDetails details, Alignment align) {
+    if(align.x>10){
+    clear_maru=1.0;
+    }else if(align.x<0){
+    clear_maru=0.0;
+    }else{
+    clear_maru=align.x/10;
+    }
+
+    if(align.x<-10){
+    clear_batsu=1.0;
+    }else if(align.x>0){
+    clear_batsu=0.0;
+    }else{
+    clear_batsu=-(align.x/10);
+    }
+
         },
-      ),
-      //),
+        ),
+        /*
+        Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("images/maru.png")
+            )
+          ),
+          alignment: Alignment.center
+        )
+        */
+      ],
+
     );
   }
 }
