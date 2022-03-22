@@ -8,7 +8,7 @@ import 'package:hello_world/questiondata.dart';
 final controller = StreamController<int>.broadcast();
 final cardController = CardController();
 
-CardController getCardController(){
+CardController getCardController() {
   return cardController;
 }
 
@@ -21,7 +21,6 @@ class TinderCards extends StatelessWidget {
     controller.sink.add(x + 1);
   }
 
-
   /*TinderCards(){
     //api.dartとの連携部分。呼ぶだけにして処理そのものはQuestionDataに移植するかも
     print("データセット");
@@ -32,13 +31,13 @@ class TinderCards extends StatelessWidget {
   }*/
   //static final controller = StreamController<int>();
 
-  double clear_maru=0.0;
-  double clear_batsu=0.0;
+  double clear_maru = 0.0;
+  double clear_batsu = 0.0;
 
-  double First(index,clear){
-    if(index==0){
+  double First(index, clear) {
+    if (index == 0) {
       return clear;
-    }else{
+    } else {
       return 0.0;
     }
   }
@@ -48,7 +47,7 @@ class TinderCards extends StatelessWidget {
     CardController controller;
     return Stack(
       //height: MediaQuery.of(context).size.height * 0.6,
-      children:<Widget>[
+      children: <Widget>[
         TinderSwapCard(
           swipeUp: true,
           swipeDown: true,
@@ -61,43 +60,38 @@ class TinderCards extends StatelessWidget {
           minWidth: MediaQuery.of(context).size.width * 0.8,
           minHeight: MediaQuery.of(context).size.width * 0.8,
           cardBuilder: (context, index) =>
-          //StreamBuilder<bool>(
-          //stream:controller.st
-          Column(
+              //StreamBuilder<bool>(
+              //stream:controller.st
+              Column(
             children: [
               Card(
                 color: Colors.grey,
-                  child: Stack(
-                      children: <Widget>[
-                        Image.network(
-                          QuestionData().GetImage(index),
-                          fit: BoxFit.contain /*: 240, */,
-                          height: 170,
-                        ),
-                        Text(
-                          QuestionData().GetQuestion(index),
-                          style: TextStyle(fontSize: 35),
-                        ),
-                        Image.asset(
-                          'maru.png',
-                          height:170,
-                          color:Colors.red.withOpacity(First(index,clear_maru))
-                        ),
-                        Image.asset(
-                          'batsu.png',
-                          height:170,
-                          color: Colors.blue.withOpacity(First(index,clear_batsu))
-                        )
-                      ],
-                  ),
-
+                child: Stack(
+                  children: <Widget>[
+                    Image.network(
+                      QuestionData().GetImage(index),
+                      fit: BoxFit.contain /*: 240, */,
+                      height: 170,
+                    ),
+                    Text(
+                      QuestionData().GetQuestion(index),
+                      style: TextStyle(fontSize: 35),
+                    ),
+                    Image.asset('images/maru.png',
+                        height: 170,
+                        color:
+                            Colors.red.withOpacity(First(index, clear_maru))),
+                    Image.asset('images/batsu.png',
+                        height: 170,
+                        color:
+                            Colors.blue.withOpacity(First(index, clear_batsu)))
+                  ],
+                ),
               )
-
             ],
           ),
-
           cardController: cardController,
-          swipeCompleteCallback: (CardSwipeOrientation orientation,int index) {
+          swipeCompleteCallback: (CardSwipeOrientation orientation, int index) {
             print(orientation.name);
             print(index);
 
@@ -123,31 +117,29 @@ class TinderCards extends StatelessWidget {
             }
             if (index + 1 == QuestionData().getlength() &&
                 orientation.name != "RECOVER") {
-
               Navigator.of(context).pushNamed("/result");
 
               GAME_END();
             }
             fn(index);
           },
-          swipeUpdateCallback:(DragUpdateDetails details, Alignment align) {
-    if(align.x>10){
-    clear_maru=1.0;
-    }else if(align.x<0){
-    clear_maru=0.0;
-    }else{
-    clear_maru=align.x/10;
-    }
+          swipeUpdateCallback: (DragUpdateDetails details, Alignment align) {
+            if (align.x > 10) {
+              clear_maru = 1.0;
+            } else if (align.x < 0) {
+              clear_maru = 0.0;
+            } else {
+              clear_maru = align.x / 10;
+            }
 
-    if(align.x<-10){
-    clear_batsu=1.0;
-    }else if(align.x>0){
-    clear_batsu=0.0;
-    }else{
-    clear_batsu=-(align.x/10);
-    }
-
-        },
+            if (align.x < -10) {
+              clear_batsu = 1.0;
+            } else if (align.x > 0) {
+              clear_batsu = 0.0;
+            } else {
+              clear_batsu = -(align.x / 10);
+            }
+          },
         ),
         /*
         Container(
@@ -160,7 +152,6 @@ class TinderCards extends StatelessWidget {
         )
         */
       ],
-
     );
   }
 }
