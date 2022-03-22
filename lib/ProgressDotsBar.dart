@@ -1,7 +1,6 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:hello_world/tinderCards.dart';
+import 'package:hello_world/DotTestPage.dart';
 
 class ProgressDot extends StatefulWidget {
   const ProgressDot({Key? key, required this.questionId}) : super(key: key);
@@ -75,6 +74,12 @@ class _ProgressDotState extends State<ProgressDot>
       begin: Colors.grey,
       end: Colors.lightGreen,
     ).animate(_controller);
+
+    getTestController().stream.listen((event) {
+      print(event);
+      //通知が来た時に更新の関数を実行
+      updateDotsState(event);
+    });
   }
 
   @override
@@ -90,11 +95,12 @@ class _ProgressDotState extends State<ProgressDot>
         animation: _controller,
         builder: (BuildContext context, child) => child!,
         child: Container(
-          color: _color.value,
+          // color: _color.value,
           width: _size,
           height: _size,
           decoration: const BoxDecoration(
             // color: _color.value,
+            color: Colors.grey,
             shape: BoxShape.circle,
           ),
         ),
