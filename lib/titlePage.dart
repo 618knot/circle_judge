@@ -55,29 +55,34 @@ class _State extends State<TitlePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      decoration: BoxDecoration(
-          image: DecorationImage(
-        image: AssetImage(_assetImage),
-        fit: BoxFit.cover,
-      )),
-      child: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Spacer(
-              flex: 1,
-            ),
-            Title(),
-            Spacer(flex: 1),
-            Stack(alignment: AlignmentDirectional.center, // 子要素を中央に配置する
-                children: <Widget>[
-                  ElevatedButton(
-                      onPressed: onPressedButton, child: Text("始める")),
-                  circleProgressIndicator(visible: isLoading),
-                ]),
-            Spacer(flex: 3),
-          ],
+        body: GestureDetector(
+      onTap: () {
+        onPressedButton();
+        
+      },
+      child: Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+          image: AssetImage(_assetImage),
+          fit: BoxFit.cover,
+        )),
+        child: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Spacer(
+                flex: 1,
+              ),
+              Title(),
+              Spacer(flex: 2),
+              Text(
+                "TAP TO START",
+                style: TextStyle(fontSize: 25),
+              ),
+              circleProgressIndicator(visible: isLoading),
+              Spacer(flex: 3),
+            ],
+          ),
         ),
       ),
     ));
