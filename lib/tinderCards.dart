@@ -6,6 +6,11 @@ import 'package:hello_world/model/api.dart';
 import 'package:hello_world/questiondata.dart';
 
 final controller = StreamController<int>.broadcast();
+final cardController = CardController();
+
+CardController getCardController(){
+  return cardController;
+}
 
 StreamController<int> getQuestionIDController() {
   return controller;
@@ -91,7 +96,7 @@ class TinderCards extends StatelessWidget {
             ],
           ),
 
-          cardController: controller = CardController(),
+          cardController: cardController,
           swipeCompleteCallback: (CardSwipeOrientation orientation,int index) {
             print(orientation.name);
             print(index);
