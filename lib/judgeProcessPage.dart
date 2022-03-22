@@ -13,6 +13,7 @@ class JudgeProcessPage extends StatefulWidget {
 }
 
 class _JudgeProcessPageState extends State<JudgeProcessPage> {
+  var cardController = getCardController();
   Widget buttonsMenu() {
     return Padding(
       padding: const EdgeInsets.all(80.0),
@@ -21,13 +22,13 @@ class _JudgeProcessPageState extends State<JudgeProcessPage> {
         children: [
           FloatingActionButton(
             heroTag: "good",
-            onPressed: () {},
+            onPressed: () {cardController.triggerLeft();},
             child: const Icon(Icons.thumb_down_alt_outlined),
             backgroundColor: Colors.deepOrange,
           ),
           FloatingActionButton(
             heroTag: "bad",
-            onPressed: () {},
+            onPressed: () {cardController.triggerRight();},
             child: const Icon(Icons.thumb_up_alt_outlined),
             backgroundColor: Colors.lightGreen,
           ),
