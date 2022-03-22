@@ -19,16 +19,14 @@ class _JudgeProcessPageState extends State<JudgeProcessPage> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           FloatingActionButton(
+            heroTag: "good",
             onPressed: () {},
             child: const Icon(Icons.thumb_down_alt_outlined),
             backgroundColor: Colors.deepOrange,
           ),
           FloatingActionButton(
-            onPressed: () {
-              print("bottunpushed");
-              GAME_ID_INIT();
-              API_Init();
-            },
+            heroTag: "bad",
+            onPressed: () {},
             child: const Icon(Icons.thumb_up_alt_outlined),
             backgroundColor: Colors.lightGreen,
           ),

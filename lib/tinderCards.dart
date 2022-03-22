@@ -1,9 +1,21 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:hello_world/model/api.dart';
 import 'package:hello_world/questiondata.dart';
 
+final controller = StreamController<int>.broadcast();
+
+StreamController<int> getQuestionIDController() {
+  return controller;
+}
+
 class TinderCards extends StatelessWidget {
+  void fn(x) {
+    controller.sink.add(x);
+  }
+
   /*TinderCards(){
     //api.dartとの連携部分。呼ぶだけにして処理そのものはQuestionDataに移植するかも
     print("データセット");
@@ -54,7 +66,7 @@ class TinderCards extends StatelessWidget {
                         Image.network(
                           QuestionData().GetImage(index),
                           fit: BoxFit.contain /*: 240, */,
-                          height: 230,
+                          height: 170,
                         ),
                         Text(
                           QuestionData().GetQuestion(index),
@@ -62,12 +74,12 @@ class TinderCards extends StatelessWidget {
                         ),
                         Image.asset(
                           'images/maru.png',
-                          height:230,
+                          height:170,
                           color:Colors.red.withOpacity(First(index,clear_maru))
                         ),
                         Image.asset(
                           'images/batsu.png',
-                          height:230,
+                          height:170,
                           color: Colors.blue.withOpacity(First(index,clear_batsu))
                         )
                       ],
@@ -111,6 +123,22 @@ class TinderCards extends StatelessWidget {
             }
               print(align.x);
             }
+          print(orientation.name);
+          print(index);
+          if (orientation.name == "RIGHT") {
+            QuestionData().SetAnswer(true, index);
+          } else if (orientation.name == "LEFT") {
+            QuestionData().SetAnswer(false, index);
+          }
+          if (index + 1 == QuestionData().getlength() &&
+              orientation.name != "RECOVER") {
+
+            Navigator.of(context).pushNamed("/result");
+
+            GAME_END();
+          }
+          fn(index);
+        },
         ),
         /*
         Container(
@@ -123,6 +151,7 @@ class TinderCards extends StatelessWidget {
         )
         */
       ],
+
     );
   }
 }

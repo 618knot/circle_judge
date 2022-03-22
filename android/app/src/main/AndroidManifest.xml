@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.hello_world">
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="hello_world"
+        android:label="HelloCircle"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
