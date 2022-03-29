@@ -41,26 +41,44 @@ class _State extends State<TitlePage> {
     // TODO: 問題番号を受け取る処理にリファクタ
     // await Future.delayed(const Duration(milliseconds: 2000), () {});
   }
-
+  Widget CistLogo(){
+    return Container(
+      margin: EdgeInsets.only(right: 8.95),
+      width: 120,
+      height: 137,
+      child: Image.asset(cistLogoImage,fit: BoxFit.contain,color: Colors.white,),
+    );
+  }
   Widget HelloCircleText(){
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children:[
-        Text('''
-        Hello
-        Circle
-        ''',
-            style: TextStyle(fontSize: 40)),
-      ],
+    return Container(
+      padding: EdgeInsets.only(left: 0,),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children:[
+          Text('Hello\nCircle',
+              style: TextStyle(fontSize: 40,color: Colors.white)),
+        ],
+      ),
     );
   }
   Widget Title() {
     return Container(
+      height: 180,
+      width: 286,
       padding: EdgeInsets.all(10),
-      child: Row(
+      child: Column(
         children: [
-          Image.asset(cistLogoImage),
-          HelloCircleText(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CistLogo(),
+              HelloCircleText(),
+            ],
+          ),
+          Divider(
+            color:Colors.white,
+            thickness: 5,
+          ),
         ],
       ),
     );
@@ -81,7 +99,6 @@ class _State extends State<TitlePage> {
         body: GestureDetector(
       onTap: () {
         onPressedButton();
-        
       },
       child: Container(
         decoration: BoxDecoration(
@@ -97,6 +114,7 @@ class _State extends State<TitlePage> {
                 flex: 3,
               ),
               Title(),
+
               Text(
                 "TAP TO START",
                 style: TextStyle(fontSize: 25),
