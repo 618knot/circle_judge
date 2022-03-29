@@ -93,6 +93,16 @@ class _State extends State<TitlePage> {
         ));
   }
 
+  Widget PresentedByCistLT(){
+    return Container(
+      margin: EdgeInsets.only(bottom: 16),
+      child: Text(
+        'presented by cistLT',
+        style: TextStyle(fontSize: 10,color: Colors.white),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,13 +121,17 @@ class _State extends State<TitlePage> {
                 flex: 3,
               ),
               Title(),
-
+              Spacer(
+                flex: 1,
+              ),
               Text(
-                "TAP TO START",
-                style: TextStyle(fontSize: 25),
+                "~ TAP TO START ~",
+                style: TextStyle(fontSize: 20,color: Colors.white),
               ),
               circleProgressIndicator(visible: isLoading==true&&isTaped==true),
               Spacer(flex: 3),
+              Expanded(child: Container()),//画面下にテキスト配置するため
+              PresentedByCistLT()
             ],
           ),
         ),
