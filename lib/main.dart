@@ -6,6 +6,18 @@ import 'package:hello_world/titlePage.dart';
 
 void main() => runApp(MyApp());
 
+class HexColor extends Color {
+  static int _getColorFromHex(String hexColor) {
+    hexColor = hexColor.toUpperCase().replaceAll('#', '');
+    if (hexColor.length == 6) {
+      hexColor = 'FF' + hexColor;
+    }
+    return int.parse(hexColor, radix: 16);
+  }
+
+  HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
+}
+
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -14,6 +26,7 @@ class MyApp extends StatelessWidget {
       title: 'HelloCircle',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        primaryColor: HexColor('220f60')
       ),
       // home: JudgeProcessPage(),//ExampleHomePage(),
       home: TitlePage(),
