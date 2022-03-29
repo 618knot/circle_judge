@@ -24,13 +24,13 @@ class _JudgeProcessPageState extends State<JudgeProcessPage> {
             heroTag: "good",
             onPressed: () {cardController.triggerLeft();},
             child: const Icon(Icons.thumb_down_alt_outlined),
-            backgroundColor: Colors.deepOrange,
+            backgroundColor: Theme.of(context).primaryColor
           ),
           FloatingActionButton(
             heroTag: "bad",
             onPressed: () {cardController.triggerRight();},
             child: const Icon(Icons.thumb_up_alt_outlined),
-            backgroundColor: Colors.lightGreen,
+            backgroundColor: Theme.of(context).primaryColor
           ),
         ],
       ),
