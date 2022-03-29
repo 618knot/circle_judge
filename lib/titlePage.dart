@@ -9,24 +9,32 @@ class TitlePage extends StatefulWidget {
 
 class _State extends State<TitlePage> {
   final _assetImage = 'assets/wallpaper.jpeg';
-  bool isLoading = false;
+  bool isLoading = true;
+  bool isTaped = false;
   @override
   void initState() {
     super.initState();
     getController().stream.listen((event) {
       isLoading = false;
-      Navigator.of(context).pushNamed("/judge");
+      if(isTaped==true){
+        Navigator.of(context).pushNamed("/judge");
+      }
     });
     GAME_ID_INIT();
+    API_Init();
+    isLoading = true;
   }
 
   void onPressedButton() async {
     setState(() {
-      isLoading = true;
+      isTaped=true;
     });
+    if(isLoading==false){
+      Navigator.of(context).pushNamed("/judge");
+    }
 
     //GAME_ID_INIT();
-    API_Init();
+
 
     // 完了通知か問題番号を受け取りたい
     // TODO: 問題番号を受け取る処理にリファクタ
@@ -79,7 +87,7 @@ class _State extends State<TitlePage> {
                 "TAP TO START",
                 style: TextStyle(fontSize: 25),
               ),
-              circleProgressIndicator(visible: isLoading),
+              circleProgressIndicator(visible: isLoading==true&&isTaped==true),
               Spacer(flex: 3),
             ],
           ),
