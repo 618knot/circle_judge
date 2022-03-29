@@ -111,71 +111,66 @@ class _ResultPage extends State<ResultPage> {
         print('タップされました');
         detailDialog(context, imageUrl, circleName, introduction);
       },
+      // child: Card(
+      //   color: Colors.yellow,
+      //   child: Column(
+      //     children: [
+      //       Align(
+      //         alignment: Alignment.topLeft,
+      //         child: Stack(
+      //           children: [
+      //             Container(
+      //               color: Colors.teal,
+      //               height: 43,
+      //               width: MediaQuery.of(context).size.width * matchingRate,
+      //             ), //メーター
+      //
+      //             Container(
+      //               margin: const EdgeInsets.only(left: 10),
+      //               child: Text(
+      //                 '$circleName',
+      //                 style: TextStyle(
+      //                   fontSize: 30,
+      //                 ),
+      //               ),
+      //             ),
+      //           ],
+      //         ),
+      //       ),
+      //       Container(
+      //         color: Colors.lightGreen,
+      //         child: Row(
+      //           crossAxisAlignment: CrossAxisAlignment.start,
+      //           children: [
+      //             Image.network(
+      //               imageUrl,
+      //               width: 100,
+      //               height: 100,
+      //             ),
+      //             Flexible(
+      //               child: Container(
+      //                 child: Text(
+      //                   '$introduction',
+      //                   style: TextStyle(
+      //                     fontSize: 15,
+      //                   ),
+      //                 ),
+      //                 color: Colors.lightBlue,
+      //                 height: 110,
+      //               ),
+      //             )
+      //           ],
+      //         ),
+      //       ),
+      //     ],
+      //   ),
+      // ),
       child: Card(
-        color: Colors.yellow,
-        child: Column(
-          children: [
-            Align(
-              alignment: Alignment.topLeft,
-              child: Stack(
-                children: [
-                  Container(
-                    color: Colors.teal,
-                    height: 43,
-                    width: MediaQuery.of(context).size.width * matchingRate,
-                  ), //メーター
-
-                  Container(
-                    margin: const EdgeInsets.only(left: 10),
-                    child: Text(
-                      '$circleName',
-                      style: TextStyle(
-                        fontSize: 30,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              color: Colors.lightGreen,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Image.network(
-                    imageUrl,
-                    width: 100,
-                    height: 100,
-                  ),
-                  Flexible(
-                    child: Container(
-                      child: Text(
-                        '$introduction',
-                        style: TextStyle(
-                          fontSize: 15,
-                        ),
-                      ),
-                      color: Colors.lightBlue,
-                      height: 110,
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget secondThirdCard(context, String circleName, double matchingRate,
-      String introduction, String imageUrl) {
-    return GestureDetector(
-      onTap: () {
-        print('タップされました');
-        detailDialog(context, imageUrl, circleName, introduction);
-      },
-      child: Card(
+          margin: EdgeInsets.only(
+            top: 20,
+            right: 20,
+            left: 20,
+          ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5),
           ),
@@ -205,7 +200,7 @@ class _ResultPage extends State<ResultPage> {
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: 18,
+                          fontSize: 12,
                         ),
                       ),
                     ),
@@ -220,7 +215,7 @@ class _ResultPage extends State<ResultPage> {
                         '1位',
                         style: TextStyle(
                           color: Theme.of(context).primaryColor,
-                          fontSize: 18,
+                          fontSize: 12,
                         ),
                       ),
                     ),
@@ -235,7 +230,7 @@ class _ResultPage extends State<ResultPage> {
                         'おすすめ度' + (matchingRate.round() * 100).toString() + '%',
                         style: TextStyle(
                           color: Theme.of(context).primaryColor,
-                          fontSize: 18,
+                          fontSize: 12,
                         ),
                       ),
                     ),
@@ -274,12 +269,124 @@ class _ResultPage extends State<ResultPage> {
     );
   }
 
+  Widget secondThirdCard(context, String circleName, double matchingRate,
+      String introduction, String imageUrl) {
+    return GestureDetector(
+      onTap: () {
+        print('タップされました');
+        detailDialog(context, imageUrl, circleName, introduction);
+      },
+      child: Card(
+          margin: EdgeInsets.only(
+            top: 20,
+            right: 20,
+            left: 20,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5),
+          ),
+          color: Theme.of(context).primaryColor,
+          child: Column(
+            children: [
+              Align(
+                alignment: Alignment.topLeft,
+                child: Stack(
+                  children: [
+                    // TODO:メーターをタイトルボックスの真下に移植させたい
+                    // CSSパラメータ参考:
+                    // background: linear-gradient(90deg, #7BD4F1 38.55%, rgba(34, 15, 96, 0) 97.06%), #220F60;
+                    // border-radius: 0px;
+
+                    // Container(
+                    // color: Colors.teal,
+                    // height: 43,
+                    // width: MediaQuery.of(context).size.width * matchingRate,
+                    // ), //メーター
+                    // TODO: グラデーション
+                    Container(
+                      padding: const EdgeInsets.all(3.0),
+                      margin: const EdgeInsets.only(left: 80, top: 1),
+                      child: Text(
+                        '$circleName',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(3.0),
+                      margin: const EdgeInsets.only(left: 10, top: 1),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: Colors.white,
+                      ),
+                      child: Text(
+                        '1位',
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(3.0),
+                      margin: const EdgeInsets.only(left: 240, top: 1),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: Colors.white,
+                      ),
+                      child: Text(
+                        'おすすめ度' + (matchingRate.round() * 100).toString() + '%',
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.all(3.0),
+                color: Colors.white,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Image.network(
+                      imageUrl,
+                      width: 100,
+                      height: 100,
+                    ),
+                    Flexible(
+                      child: Container(
+                        child: Text(
+                          '$introduction',
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Theme.of(context).primaryColor,
+                          ),
+                        ),
+                        color: Colors.white,
+                        height: 110,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          )),
+    );
+  }
+
+  // TODO: margin調整
   Widget buttons(context) {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
         height: 90,
-        margin: const EdgeInsets.only(top: 40),
+        margin: const EdgeInsets.only(top: 33),
         color: Theme.of(context).primaryColor,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
