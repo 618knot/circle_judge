@@ -9,6 +9,7 @@ class TitlePage extends StatefulWidget {
 
 class _State extends State<TitlePage> {
   final _assetImage = 'assets/wallpaper.jpeg';
+  final cistLogoImage = 'images/cistLogo.png';
   bool isLoading = true;
   bool isTaped = false;
   @override
@@ -40,13 +41,45 @@ class _State extends State<TitlePage> {
     // TODO: 問題番号を受け取る処理にリファクタ
     // await Future.delayed(const Duration(milliseconds: 2000), () {});
   }
-
+  Widget CistLogo(){
+    return Container(
+      margin: EdgeInsets.only(right: 8.95),
+      width: 120,
+      height: 137,
+      child: Image.asset(cistLogoImage,fit: BoxFit.contain,color: Colors.white,),
+    );
+  }
+  Widget HelloCircleText(){
+    return Container(
+      padding: EdgeInsets.only(left: 0,),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children:[
+          Text('Hello\nCircle',
+              style: TextStyle(fontSize: 40,color: Colors.white)),
+        ],
+      ),
+    );
+  }
   Widget Title() {
     return Container(
+      height: 180,
+      width: 286,
       padding: EdgeInsets.all(10),
-      child: Text(
-        "サークル診断アプリ",
-        style: TextStyle(fontSize: 40),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CistLogo(),
+              HelloCircleText(),
+            ],
+          ),
+          Divider(
+            color:Colors.white,
+            thickness: 5,
+          ),
+        ],
       ),
     );
   }
@@ -60,35 +93,45 @@ class _State extends State<TitlePage> {
         ));
   }
 
+  Widget PresentedByCistLT(){
+    return Container(
+      margin: EdgeInsets.only(bottom: 16),
+      child: Text(
+        'presented by cistLT',
+        style: TextStyle(fontSize: 10,color: Colors.white),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
         body: GestureDetector(
       onTap: () {
         onPressedButton();
-        
       },
       child: Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-          image: AssetImage(_assetImage),
-          fit: BoxFit.cover,
-        )),
+
         child: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Spacer(
-                flex: 1,
+                flex: 3,
               ),
               Title(),
-              Spacer(flex: 2),
+              Spacer(
+                flex: 1,
+              ),
               Text(
-                "TAP TO START",
-                style: TextStyle(fontSize: 25),
+                "~ TAP TO START ~",
+                style: TextStyle(fontSize: 20,color: Colors.white),
               ),
               circleProgressIndicator(visible: isLoading==true&&isTaped==true),
               Spacer(flex: 3),
+              Expanded(child: Container()),//画面下にテキスト配置するため
+              PresentedByCistLT()
             ],
           ),
         ),
