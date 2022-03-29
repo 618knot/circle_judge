@@ -9,6 +9,7 @@ class TitlePage extends StatefulWidget {
 
 class _State extends State<TitlePage> {
   final _assetImage = 'assets/wallpaper.jpeg';
+  final cistLogoImage = 'images/cistLogo.png';
   bool isLoading = true;
   bool isTaped = false;
   @override
@@ -41,12 +42,26 @@ class _State extends State<TitlePage> {
     // await Future.delayed(const Duration(milliseconds: 2000), () {});
   }
 
+  Widget HelloCircleText(){
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children:[
+        Text('''
+        Hello
+        Circle
+        ''',
+            style: TextStyle(fontSize: 40)),
+      ],
+    );
+  }
   Widget Title() {
     return Container(
       padding: EdgeInsets.all(10),
-      child: Text(
-        "サークル診断アプリ",
-        style: TextStyle(fontSize: 40),
+      child: Row(
+        children: [
+          Image.asset(cistLogoImage),
+          HelloCircleText(),
+        ],
       ),
     );
   }
@@ -79,10 +94,9 @@ class _State extends State<TitlePage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Spacer(
-                flex: 1,
+                flex: 3,
               ),
               Title(),
-              Spacer(flex: 2),
               Text(
                 "TAP TO START",
                 style: TextStyle(fontSize: 25),
