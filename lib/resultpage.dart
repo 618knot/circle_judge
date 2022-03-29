@@ -6,6 +6,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:hello_world/model/api.dart';
 import 'package:hello_world/resultdata.dart';
+import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_extend/share_extend.dart';
 
@@ -66,24 +67,38 @@ class _ResultPage extends State<ResultPage> {
 
   Widget header() {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10),
-      color: Theme.of(context).primaryColor,
+      alignment: Alignment.centerLeft,
+      padding: const EdgeInsets.all(12),
+      width: double.infinity,
+      height: 90,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: FractionalOffset.topLeft,
+          end: FractionalOffset.bottomRight,
+          colors: [
+            const Color(0xff7BD4F1).withOpacity(0.65),
+            const Color(0xff220f60).withOpacity(1.0),
+          ],
+          stops: const [
+            0.0,
+            1.0,
+          ],
+        ),
+      ),
       child: Column(
         children: [
-          const Text(
-            '診断結果',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 35,
-            ),
-          ),
-          const Text(
-            'あなたにおすすめのサークルは....',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 25,
-            ),
-          ),
+          const Text('診断結果',
+              style: TextStyle(
+                  fontSize: 30,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold)),
+          // const Text(
+          //   'あなたにおすすめのサークルは....',
+          //   style: TextStyle(
+          //     fontSize: 20,
+          //     color: Colors.white,
+          //   ),
+          // ),
         ],
       ),
     );
@@ -184,18 +199,19 @@ class _ResultPage extends State<ResultPage> {
                     // TODO: グラデーション
                     Container(
                       padding: const EdgeInsets.all(3.0),
-                      margin: const EdgeInsets.only(left: 80, top: 2),
+                      margin: const EdgeInsets.only(left: 80, top: 1),
                       child: Text(
                         '$circleName',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
                         ),
                       ),
                     ),
                     Container(
                       padding: const EdgeInsets.all(3.0),
-                      margin: const EdgeInsets.only(left: 10, top: 2),
+                      margin: const EdgeInsets.only(left: 10, top: 1),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         color: Colors.white,
@@ -203,14 +219,14 @@ class _ResultPage extends State<ResultPage> {
                       child: Text(
                         '1位',
                         style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20,
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 18,
                         ),
                       ),
                     ),
                     Container(
                       padding: const EdgeInsets.all(3.0),
-                      margin: const EdgeInsets.only(left: 240, top: 2),
+                      margin: const EdgeInsets.only(left: 240, top: 1),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         color: Colors.white,
@@ -218,8 +234,8 @@ class _ResultPage extends State<ResultPage> {
                       child: Text(
                         'おすすめ度' + (matchingRate.round() * 100).toString() + '%',
                         style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20,
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 18,
                         ),
                       ),
                     ),
@@ -243,6 +259,7 @@ class _ResultPage extends State<ResultPage> {
                           '$introduction',
                           style: TextStyle(
                             fontSize: 15,
+                            color: Theme.of(context).primaryColor,
                           ),
                         ),
                         color: Colors.white,
@@ -350,34 +367,47 @@ class _ResultPage extends State<ResultPage> {
     return RepaintBoundary(
       key: shareKey,
       child: Scaffold(
-          body: SafeArea(
-        child: Center(
-          child: Column(
-            children: [
-              header(),
-              firstCard(
-                  context,
-                  resultLoad(0).circlename,
-                  resultLoad(0).percent,
-                  resultLoad(0).circle_description,
-                  resultLoad(0).circle_image_url),
-              secondThirdCard(
-                  context,
-                  resultLoad(1).circlename,
-                  resultLoad(1).percent,
-                  resultLoad(1).circle_description,
-                  resultLoad(1).circle_image_url),
-              secondThirdCard(
-                  context,
-                  resultLoad(2).circlename,
-                  resultLoad(2).percent,
-                  resultLoad(2).circle_description,
-                  resultLoad(2).circle_image_url),
-              buttons(context),
-            ],
+          appBar: NewGradientAppBar(
+            title: const Text('診断結果',
+                style: TextStyle(
+                    fontSize: 24,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold)),
+            gradient: LinearGradient(
+              colors: [
+                Color(0xff7BD4F1).withOpacity(0.65),
+                Color(0xff220f60).withOpacity(1.0)
+              ],
+            ),
           ),
-        ),
-      )),
+          body: SafeArea(
+            child: Center(
+              child: Column(
+                children: [
+                  // header(),
+                  firstCard(
+                      context,
+                      resultLoad(0).circlename,
+                      resultLoad(0).percent,
+                      resultLoad(0).circle_description,
+                      resultLoad(0).circle_image_url),
+                  secondThirdCard(
+                      context,
+                      resultLoad(1).circlename,
+                      resultLoad(1).percent,
+                      resultLoad(1).circle_description,
+                      resultLoad(1).circle_image_url),
+                  secondThirdCard(
+                      context,
+                      resultLoad(2).circlename,
+                      resultLoad(2).percent,
+                      resultLoad(2).circle_description,
+                      resultLoad(2).circle_image_url),
+                  buttons(context),
+                ],
+              ),
+            ),
+          )),
     );
   }
 
