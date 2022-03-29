@@ -96,16 +96,13 @@ class _State extends State<TitlePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
         body: GestureDetector(
       onTap: () {
         onPressedButton();
       },
       child: Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-          image: AssetImage(_assetImage),
-          fit: BoxFit.cover,
-        )),
+
         child: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
