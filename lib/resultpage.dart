@@ -65,45 +65,6 @@ class _ResultPage extends State<ResultPage> {
             ));
   }
 
-  Widget header() {
-    return Container(
-      alignment: Alignment.centerLeft,
-      padding: const EdgeInsets.all(12),
-      width: double.infinity,
-      height: 90,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: FractionalOffset.topLeft,
-          end: FractionalOffset.bottomRight,
-          colors: [
-            const Color(0xff7BD4F1).withOpacity(0.65),
-            const Color(0xff220f60).withOpacity(1.0),
-          ],
-          stops: const [
-            0.0,
-            1.0,
-          ],
-        ),
-      ),
-      child: Column(
-        children: [
-          const Text('診断結果',
-              style: TextStyle(
-                  fontSize: 30,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold)),
-          // const Text(
-          //   'あなたにおすすめのサークルは....',
-          //   style: TextStyle(
-          //     fontSize: 20,
-          //     color: Colors.white,
-          //   ),
-          // ),
-        ],
-      ),
-    );
-  }
-
   Widget firstCard(context, String circleName, double matchingRate,
       String introduction, String imageUrl) {
     return GestureDetector(
