@@ -237,7 +237,6 @@ class _ResultPage extends State<ResultPage> {
                                   color: Theme.of(context).primaryColor,
                                 ),
                               ),
-                              color: Colors.white,
                               height: 110,
                             ),
                           )
