@@ -402,8 +402,7 @@ class PercentageBar extends StatelessWidget {
         )
       ),
       height: 5,
-      width: MediaQuery.of(context).size.width *
-          matchingRate,
+      width: MediaQuery.of(context).size.width//* matchingRate
     );
   }
 }
