@@ -170,107 +170,6 @@ class _ResultPage extends State<ResultPage> {
           ],
         ),
       ),
-      // child: Card(
-      //     margin: EdgeInsets.only(
-      //       top: 20,
-      //       right: 20,
-      //       left: 20,
-      //     ),
-      //     shape: RoundedRectangleBorder(
-      //       borderRadius: BorderRadius.circular(5),
-      //     ),
-      //     color: Theme.of(context).primaryColor,
-      //     child: Column(
-      //       children: [
-      //         Align(
-      //           alignment: Alignment.topLeft,
-      //           child: Stack(
-      //             children: [
-      //               // TODO:メーターをタイトルボックスの真下に移植させたい
-      //               // CSSパラメータ参考:
-      //               // background: linear-gradient(90deg, #7BD4F1 38.55%, rgba(34, 15, 96, 0) 97.06%), #220F60;
-      //               // border-radius: 0px;
-      //
-      //               // Container(
-      //               // color: Colors.teal,
-      //               // height: 43,
-      //               // width: MediaQuery.of(context).size.width * matchingRate,
-      //               // ), //メーター
-      //               // TODO: グラデーション
-      //               Container(
-      //                 padding: const EdgeInsets.all(3.0),
-      //                 margin: const EdgeInsets.only(left: 80, top: 1),
-      //                 child: Text(
-      //                   '$circleName',
-      //                   style: TextStyle(
-      //                     color: Colors.white,
-      //                     fontWeight: FontWeight.bold,
-      //                     fontSize: 12,
-      //                   ),
-      //                 ),
-      //               ),
-      //               Container(
-      //                 padding: const EdgeInsets.all(3.0),
-      //                 margin: const EdgeInsets.only(left: 10, top: 1),
-      //                 decoration: BoxDecoration(
-      //                   borderRadius: BorderRadius.circular(30),
-      //                   color: Colors.white,
-      //                 ),
-      //                 child: Text(
-      //                   '1位',
-      //                   style: TextStyle(
-      //                     color: Theme.of(context).primaryColor,
-      //                     fontSize: 12,
-      //                   ),
-      //                 ),
-      //               ),
-      //               Container(
-      //                 padding: const EdgeInsets.all(3.0),
-      //                 margin: const EdgeInsets.only(left: 240, top: 1),
-      //                 decoration: BoxDecoration(
-      //                   borderRadius: BorderRadius.circular(30),
-      //                   color: Colors.white,
-      //                 ),
-      //                 child: Text(
-      //                   'おすすめ度' + (matchingRate.round() * 100).toString() + '%',
-      //                   style: TextStyle(
-      //                     color: Theme.of(context).primaryColor,
-      //                     fontSize: 12,
-      //                   ),
-      //                 ),
-      //               ),
-      //             ],
-      //           ),
-      //         ),
-      //             Container(
-      //               padding: const EdgeInsets.all(3.0),
-      //               color: Colors.white,
-      //               child: Row(
-      //                 crossAxisAlignment: CrossAxisAlignment.start,
-      //                 children: [
-      //                   Image.network(
-      //                     imageUrl,
-      //                     width: 100,
-      //                     height: 100,
-      //                   ),
-      //                   Flexible(
-      //                     child: Container(
-      //                       child: Text(
-      //                         '$introduction',
-      //                         style: TextStyle(
-      //                           fontSize: 15,
-      //                           color: Theme.of(context).primaryColor,
-      //                         ),
-      //                       ),
-      //                       color: Colors.white,
-      //                       height: 110,
-      //                     ),
-      //                   )
-      //                 ],
-      //               ),
-      //             ),
-      //           ],
-      //         )),
     );
   }
 
@@ -297,17 +196,6 @@ class _ResultPage extends State<ResultPage> {
                 alignment: Alignment.topLeft,
                 child: Stack(
                   children: [
-                    // TODO:メーターをタイトルボックスの真下に移植させたい
-                    // CSSパラメータ参考:
-                    // background: linear-gradient(90deg, #7BD4F1 38.55%, rgba(34, 15, 96, 0) 97.06%), #220F60;
-                    // border-radius: 0px;
-
-                    // Container(
-                    // color: Colors.teal,
-                    // height: 43,
-                    // width: MediaQuery.of(context).size.width * matchingRate,
-                    // ), //メーター
-                    // TODO: グラデーション
                     Container(
                       padding: const EdgeInsets.all(3.0),
                       margin: const EdgeInsets.only(left: 80, top: 1),
@@ -354,15 +242,44 @@ class _ResultPage extends State<ResultPage> {
                 ),
               ),
               Container(
+                padding: const EdgeInsets.only(top: 3.0),
+                color: Colors.white,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Stack(
+                        children: [
+                          Container(
+                            color: Colors.teal,
+                            height: 5,
+                            width: MediaQuery.of(context).size.width *
+                                matchingRate,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
                 padding: const EdgeInsets.all(3.0),
                 color: Colors.white,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Image.network(
-                      imageUrl,
-                      width: 100,
-                      height: 100,
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Stack(
+                        children: [
+                          Image.network(
+                            imageUrl,
+                            width: 100,
+                            height: 100,
+                          ),
+                        ],
+                      ),
                     ),
                     Flexible(
                       child: Container(
