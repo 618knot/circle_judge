@@ -205,19 +205,7 @@ class _ResultPage extends State<ResultPage> {
               Container(
                 padding: const EdgeInsets.only(top: 3.0),
                 color: Colors.white,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Stack(
-                        children: [
-                          PercentageBar(matchingRate: matchingRate,),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                child: PercentageBar(matchingRate: matchingRate,)
               ),
               Container(
                 padding: const EdgeInsets.all(3.0),
