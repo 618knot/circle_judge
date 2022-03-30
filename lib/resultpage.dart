@@ -208,7 +208,7 @@ class _ResultPage extends State<ResultPage> {
                 child: Column(//パーセントバーと「画像と説明Row」
                   children: [
                     Padding(
-                      padding: EdgeInsets.all(3.0),
+                      padding: EdgeInsets.only(top: 3.0,bottom: 3.0),
                       child: PercentageBar(matchingRate: matchingRate,),
 
                     ),
