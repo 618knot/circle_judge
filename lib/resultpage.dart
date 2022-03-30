@@ -389,7 +389,14 @@ class PercentageBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.green,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Color(0xff220f60),
+            Color(0xff7BD4F1),
+          ]
+        )
+      ),
       height: 5,
       width: MediaQuery.of(context).size.width *
           matchingRate,
