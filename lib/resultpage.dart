@@ -203,41 +203,45 @@ class _ResultPage extends State<ResultPage> {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.only(top: 3.0),
-                color: Colors.white,
-                child: PercentageBar(matchingRate: matchingRate,)
-              ),
-              Container(
                 padding: const EdgeInsets.all(3.0),
                 color: Colors.white,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Column(//パーセントバーと「画像と説明Row」
                   children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Stack(
-                        children: [
-                          Image.network(
-                            imageUrl,
-                            width: 100,
-                            height: 100,
-                          ),
-                        ],
-                      ),
+                    Padding(
+                      padding: EdgeInsets.all(3.0),
+                      child: PercentageBar(matchingRate: matchingRate,),
+
                     ),
-                    Flexible(
-                      child: Container(
-                        child: Text(
-                          '$introduction',
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Theme.of(context).primaryColor,
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Stack(
+                            children: [
+                              Image.network(
+                                imageUrl,
+                                width: 100,
+                                height: 100,
+                              ),
+                            ],
                           ),
                         ),
-                        color: Colors.white,
-                        height: 110,
-                      ),
-                    )
+                        Flexible(
+                          child: Container(
+                            child: Text(
+                              '$introduction',
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Theme.of(context).primaryColor,
+                              ),
+                            ),
+                            color: Colors.white,
+                            height: 110,
+                          ),
+                        )
+                      ],
+                    ),
                   ],
                 ),
               ),
