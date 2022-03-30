@@ -203,7 +203,6 @@ class _ResultPage extends State<ResultPage> {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.all(3.0),
                 color: Colors.white,
                 child: Column(//パーセントバーと「画像と説明Row」
                   children: [
@@ -212,35 +211,38 @@ class _ResultPage extends State<ResultPage> {
                       child: PercentageBar(matchingRate: matchingRate,),
 
                     ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: Stack(
-                            children: [
-                              Image.network(
-                                imageUrl,
-                                width: 100,
-                                height: 100,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Flexible(
-                          child: Container(
-                            child: Text(
-                              '$introduction',
-                              style: TextStyle(
-                                fontSize: 15,
-                                color: Theme.of(context).primaryColor,
-                              ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Stack(
+                              children: [
+                                Image.network(
+                                  imageUrl,
+                                  width: 100,
+                                  height: 100,
+                                ),
+                              ],
                             ),
-                            color: Colors.white,
-                            height: 110,
                           ),
-                        )
-                      ],
+                          Flexible(
+                            child: Container(
+                              child: Text(
+                                '$introduction',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                              ),
+                              color: Colors.white,
+                              height: 110,
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ],
                 ),
