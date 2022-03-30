@@ -352,7 +352,7 @@ class _ResultPage extends State<ResultPage> {
     return RepaintBoundary(
       key: shareKey,
       child: Scaffold(
-        appBar: Header(),
+        appBar: Header('診断結果'),
         body: SafeArea(
           child: Center(
             child: Column(
