@@ -212,12 +212,7 @@ class _ResultPage extends State<ResultPage> {
                       alignment: Alignment.topLeft,
                       child: Stack(
                         children: [
-                          Container(
-                            color: Colors.teal,
-                            height: 5,
-                            width: MediaQuery.of(context).size.width *
-                                matchingRate,
-                          ),
+                          PercentageBar(matchingRate: matchingRate,),
                         ],
                       ),
                     ),
@@ -394,5 +389,22 @@ class _ResultPage extends State<ResultPage> {
           "読み込み中");
     }
     return ResultData().GetCircle(num);
+  }
+}
+
+class PercentageBar extends StatelessWidget {
+  PercentageBar({
+    Key? key,
+    required this.matchingRate,
+  }) : super(key: key);
+  final double matchingRate;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.green,
+      height: 5,
+      width: MediaQuery.of(context).size.width *
+          matchingRate,
+    );
   }
 }
