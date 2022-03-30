@@ -388,44 +388,33 @@ class _ResultPage extends State<ResultPage> {
 
 class PercentageBar extends StatelessWidget {
   static const double height = 10;
+  static const int graduationMargin = 50;
   PercentageBar({
     Key? key,
     required this.matchingRate,
   }) : super(key: key);
   final double matchingRate;
-  final double testRate = 0.4;
   int toPercent(double rate){//0~1の少数を0~100の整数に変換
     return  (rate * 100).toInt();//切り捨て
   }
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        children: [
-          Expanded(
-            flex: toPercent(testRate),
-            child: Container(
-              height: height,
-              color: Color(0xff7BD4F1),//Color(0xff7BD4F1),
-
-            ),
-          ),
-          Expanded(
-            flex: 100 - toPercent(testRate),
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    Color(0xff7BD4F1),
-                    Color(0xff220f60),
-                  ]
-                )
-              ),
-              height: height,
-            ),
-          ),
-        ],
+    return Stack(
+      children: [
+        Container(color:Color(0xff220f60),height: height),
+        Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                colors: [
+                  Color(0xff7BD4F1).withOpacity(matchingRate),
+                  Color(0xff7BD4F1).withOpacity(matchingRate),
+                  Color(0xff220f60),
+                ]
+            )
+        ),
+        height: height,
       ),
+      ],
     );
   }
 }
