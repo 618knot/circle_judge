@@ -1,18 +1,18 @@
+import 'dart:io';
+import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:hello_world/header.dart';
+import 'package:hello_world/model/api.dart';
 import 'package:hello_world/resultdata.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_extend/share_extend.dart';
-import 'package:hello_world/model/api.dart';
-import 'dart:ui' as ui;
-import 'dart:io';
-
 
 class ResultPage extends StatefulWidget {
   @override
   _ResultPage createState() => _ResultPage();
-
 }
 
 class _ResultPage extends State<ResultPage> {
@@ -23,17 +23,20 @@ class _ResultPage extends State<ResultPage> {
       print("finish_load");
     });
   }
-  detailDialog(context,String imageUrl,String circleName,String introduction) {
+
+  detailDialog(
+      context, String imageUrl, String circleName, String introduction) {
     showDialog(
         context: context,
         builder: (BuildContext context) => AlertDialog(
               title: Column(
                 children: [
-                  Image.network(
-                     imageUrl ),
+                  Image.network(imageUrl),
                   Text(
                     circleName,
-                    style: TextStyle(fontSize: 25),
+                    style: TextStyle(
+                      fontSize: 25,
+                    ),
                   )
                 ],
               ),
@@ -62,37 +65,19 @@ class _ResultPage extends State<ResultPage> {
             ));
   }
 
-  Widget header() {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10),
-      color: Colors.grey,
-      child: Column(
-        children: [
-          const Text(
-            '診断結果',
-            style: TextStyle(
-              fontSize: 35,
-            ),
-          ),
-          const Text(
-            'あなたにおすすめのサークルは....',
-            style: TextStyle(
-              fontSize: 25,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget firstCard(
-      context, String circleName, double matchingRate, String introduction,String imageUrl) {
+  Widget firstCard(context, String circleName, double matchingRate,
+      String introduction, String imageUrl) {
     return GestureDetector(
       onTap: () {
         print('タップされました');
-        detailDialog(context,imageUrl,circleName,introduction);
+        detailDialog(context, imageUrl, circleName, introduction);
       },
       child: Card(
+        margin: EdgeInsets.only(
+          top: 10,
+          right: 20,
+          left: 20,
+        ),
         color: Colors.yellow,
         child: Column(
           children: [
@@ -124,7 +109,10 @@ class _ResultPage extends State<ResultPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Image.network(
-                    imageUrl,width: 100,height: 100,),
+                    imageUrl,
+                    width: 100,
+                    height: 100,
+                  ),
                   Flexible(
                     child: Container(
                       child: Text(
@@ -146,15 +134,23 @@ class _ResultPage extends State<ResultPage> {
     );
   }
 
-  Widget secondThirdCard(
-      context, String circleName, double matchingRate, String introduction,String imageUrl) {
+  Widget secondThirdCard(context, String circleName, double matchingRate,
+      String introduction, String imageUrl) {
     return GestureDetector(
       onTap: () {
         print('タップされました');
-        detailDialog(context,imageUrl,circleName,introduction);
+        detailDialog(context, imageUrl, circleName, introduction);
       },
       child: Card(
-          color: Colors.yellow,
+          margin: EdgeInsets.only(
+            top: 10,
+            right: 20,
+            left: 20,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5),
+          ),
+          color: Theme.of(context).primaryColor,
           child: Column(
             children: [
               Align(
@@ -162,17 +158,44 @@ class _ResultPage extends State<ResultPage> {
                 child: Stack(
                   children: [
                     Container(
-                      color: Colors.teal,
-                      height: 43,
-                      width: MediaQuery.of(context).size.width * matchingRate,
-                    ), //メーター
-
-                    Container(
-                      margin: const EdgeInsets.only(left: 10),
+                      padding: const EdgeInsets.all(3.0),
+                      margin: const EdgeInsets.only(left: 80, top: 1),
                       child: Text(
                         '$circleName',
                         style: TextStyle(
-                          fontSize: 30,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(3.0),
+                      margin: const EdgeInsets.only(left: 10, top: 1),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: Colors.white,
+                      ),
+                      child: Text(
+                        '1位',
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(3.0),
+                      margin: const EdgeInsets.only(left: 240, top: 1),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: Colors.white,
+                      ),
+                      child: Text(
+                        'おすすめ度' + (matchingRate.round() * 100).toString() + '%',
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 12,
                         ),
                       ),
                     ),
@@ -180,43 +203,100 @@ class _ResultPage extends State<ResultPage> {
                 ),
               ),
               Container(
-                child: Text(
-                  '$introduction',
-                  style: TextStyle(
-                    fontSize: 15,
-                  ),
+                padding: const EdgeInsets.only(top: 3.0),
+                color: Colors.white,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Stack(
+                        children: [
+                          Container(
+                            color: Colors.teal,
+                            height: 5,
+                            width: MediaQuery.of(context).size.width *
+                                matchingRate,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-                color: Colors.lightBlue,
-                height: 88,
-              )
+              ),
+              Container(
+                padding: const EdgeInsets.all(3.0),
+                color: Colors.white,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Stack(
+                        children: [
+                          Image.network(
+                            imageUrl,
+                            width: 100,
+                            height: 100,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Flexible(
+                      child: Container(
+                        child: Text(
+                          '$introduction',
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Theme.of(context).primaryColor,
+                          ),
+                        ),
+                        color: Colors.white,
+                        height: 110,
+                      ),
+                    )
+                  ],
+                ),
+              ),
             ],
           )),
     );
   }
 
   Widget buttons(context) {
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: Container(
-        margin: const EdgeInsets.only(top: 40),
-        color: Colors.orange,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                shape: const CircleBorder(),
-              ),
-              onPressed: () => shareImageAndText('result', shareKey),
-              child: const Icon(Icons.share),
+    return Container(
+      height: 90,
+      color: Theme.of(context).primaryColor,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: Colors.white,
+              shape: const CircleBorder(),
             ),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed("/title");
-                },
-                child: const Text('タイトルへ')),
-          ],
-        ),
+            onPressed: () => shareImageAndText('result', shareKey),
+            child: const Icon(
+              Icons.share,
+              color: Colors.black,
+            ),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.of(context).pushNamed("/title");
+            },
+            child: const Text(
+              'タイトルへ',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 12,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -272,28 +352,46 @@ class _ResultPage extends State<ResultPage> {
     return RepaintBoundary(
       key: shareKey,
       child: Scaffold(
-          body: SafeArea(
-        child: Center( 
+        appBar: Header(),
+        body: SafeArea(
+          child: Center(
             child: Column(
               children: [
-                header(),
-                firstCard(context, resultLoad(0).circlename, resultLoad(0).percent,
-                    resultLoad(0).circle_description,resultLoad(0).circle_image_url),
-                secondThirdCard(context, resultLoad(1).circlename, resultLoad(1).percent,
-                    resultLoad(1).circle_description,resultLoad(1).circle_image_url),
-                secondThirdCard(context, resultLoad(2).circlename, resultLoad(2).percent,
-                    resultLoad(2).circle_description,resultLoad(2).circle_image_url),
-                buttons(context),
+                firstCard(
+                    context,
+                    resultLoad(0).circlename,
+                    resultLoad(0).percent,
+                    resultLoad(0).circle_description,
+                    resultLoad(0).circle_image_url),
+                secondThirdCard(
+                    context,
+                    resultLoad(1).circlename,
+                    resultLoad(1).percent,
+                    resultLoad(1).circle_description,
+                    resultLoad(1).circle_image_url),
+                secondThirdCard(
+                    context,
+                    resultLoad(2).circlename,
+                    resultLoad(2).percent,
+                    resultLoad(2).circle_description,
+                    resultLoad(2).circle_image_url)
               ],
             ),
+          ),
         ),
-      )),
+        bottomNavigationBar: buttons(context),
+      ),
     );
   }
 
-  Result resultLoad(int num){
-    if(ResultData().GetCircle(num)==null){
-      return Result(0, "読み込み中", 0, 'https://github.com/618knot/circle_judge/blob/main/images/panel001.png?raw=true', "読み込み中");
+  Result resultLoad(int num) {
+    if (ResultData().GetCircle(num) == null) {
+      return Result(
+          0,
+          "読み込み中",
+          0,
+          'https://github.com/618knot/circle_judge/blob/main/images/panel001.png?raw=true',
+          "読み込み中");
     }
     return ResultData().GetCircle(num);
   }

@@ -25,9 +25,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'HelloCircle',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        primaryColor: HexColor('220f60')
-      ),
+          primarySwatch: Colors.blue, primaryColor: HexColor('220f60')),
       // home: JudgeProcessPage(),//ExampleHomePage(),
       home: TitlePage(),
       routes: <String, WidgetBuilder>{

@@ -30,6 +30,7 @@ dependencies:
   flutter:
     sdk: flutter
   swipeable_stack: #
+  new_gradient_app_bar: ^0.2.0
 
 
   # The following adds the Cupertino Icons font to your application.
