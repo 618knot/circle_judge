@@ -119,12 +119,15 @@ class ProgressDotsBar extends StatefulWidget {
 
 class _ProgressDotsBarState extends State<ProgressDotsBar> {
   Widget line() {
-    return Container(
-      height: 3,
-      width: 10,
-      decoration: const BoxDecoration(
-        shape: BoxShape.rectangle,
-        color: Colors.grey,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        height: 3,
+        width: 10,
+        decoration: const BoxDecoration(
+          shape: BoxShape.rectangle,
+          color: Colors.grey,
+        ),
       ),
     );
   }
