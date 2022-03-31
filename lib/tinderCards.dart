@@ -79,8 +79,8 @@ class TinderCards extends StatelessWidget {
                       alignment: Alignment.bottomLeft,
                       child: Text(
                         QuestionData().GetQuestion(index),
-                        style: TextStyle(
-                          fontSize: 35,color: Colors.white,fontWeight: FontWeight.bold,
+                        style: const TextStyle(
+                          fontSize: 48,color: Colors.white,fontWeight: FontWeight.bold,
                           shadows: [
                             Shadow(
                               blurRadius: 5.0,
