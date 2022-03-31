@@ -44,7 +44,6 @@ class TinderCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CardController controller;
     return Stack(
       //height: MediaQuery.of(context).size.height * 0.6,
       children: <Widget>[
@@ -62,34 +61,47 @@ class TinderCards extends StatelessWidget {
           cardBuilder: (context, index) =>
               //StreamBuilder<bool>(
               //stream:controller.st
-              Column(
-            children: [
-              Card(
-                color: Colors.grey,
-                child: Stack(
-                  children: <Widget>[
-                    Image.network(
-                      QuestionData().GetImage(index),
-                      fit: BoxFit.contain /*: 240, */,
-                      height: 170,
-                    ),
-                    Text(
-                      QuestionData().GetQuestion(index),
-                      style: TextStyle(fontSize: 35),
-                    ),
-                    Image.asset('images/maru.png',
+          Card(
+              color: Colors.grey,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Stack(
+                    fit: StackFit.passthrough,
+                    alignment: Alignment.center,
+                    children: <Widget>[
+                      Image.network(
+                        QuestionData().GetImage(index),
+                        fit: BoxFit.contain /*: 240, */,
                         height: 170,
-                        color:
-                            Colors.red.withOpacity(First(index, clear_maru))),
-                    Image.asset('images/batsu.png',
-                        height: 170,
-                        color:
-                            Colors.blue.withOpacity(First(index, clear_batsu)))
-                  ],
+                      ),
+                      Align(
+                        alignment: Alignment.bottomLeft,
+                        child: Text(
+                          QuestionData().GetQuestion(index),
+                          style: const TextStyle(
+                            fontSize: 48,color: Colors.white,fontWeight: FontWeight.bold,
+                            shadows: [
+                              Shadow(
+                                blurRadius: 8.0,
+                                offset: Offset(-8.0,8.0),
+                                color: Colors.black12
+                              )
+                            ]
+                          ),
+                        ),
+                      ),
+                      Image.asset('images/maru.png',
+                          height: 170,
+                          color:
+                              Colors.red.withOpacity(First(index, clear_maru))),
+                      Image.asset('images/batsu.png',
+                          height: 170,
+                          color:
+                              Colors.blue.withOpacity(First(index, clear_batsu)))
+                    ],
+                  ),
                 ),
-              )
-            ],
-          ),
+            ),
           cardController: cardController,
           swipeCompleteCallback: (CardSwipeOrientation orientation, int index) {
             print(orientation.name);
