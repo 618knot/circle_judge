@@ -44,7 +44,6 @@ class TinderCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CardController controller;
     return Stack(
       //height: MediaQuery.of(context).size.height * 0.6,
       children: <Widget>[
