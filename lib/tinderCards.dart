@@ -62,28 +62,33 @@ class TinderCards extends StatelessWidget {
           cardBuilder: (context, index) =>
               //StreamBuilder<bool>(
               //stream:controller.st
-              Column(
-            children: [
-              Card(
-                color: Colors.grey,
+          Card(
+              color: Colors.grey,
+              child: Container(
+                color: Colors.red,
                 child: Stack(
+                  fit: StackFit.passthrough,
+                  alignment: Alignment.center,
                   children: <Widget>[
                     Image.network(
                       QuestionData().GetImage(index),
                       fit: BoxFit.contain /*: 240, */,
                       height: 170,
                     ),
-                    Text(
-                      QuestionData().GetQuestion(index),
-                      style: TextStyle(
-                        fontSize: 35,color: Colors.white,fontWeight: FontWeight.bold,
-                        shadows: [
-                          Shadow(
-                            blurRadius: 5.0,
-                            offset: Offset(5.0,5.0),
-                            color: Colors.black12
-                          )
-                        ]
+                    Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Text(
+                        QuestionData().GetQuestion(index),
+                        style: TextStyle(
+                          fontSize: 35,color: Colors.white,fontWeight: FontWeight.bold,
+                          shadows: [
+                            Shadow(
+                              blurRadius: 5.0,
+                              offset: Offset(5.0,5.0),
+                              color: Colors.black12
+                            )
+                          ]
+                        ),
                       ),
                     ),
                     Image.asset('images/maru.png',
@@ -96,9 +101,8 @@ class TinderCards extends StatelessWidget {
                             Colors.blue.withOpacity(First(index, clear_batsu)))
                   ],
                 ),
-              )
-            ],
-          ),
+              ),
+            ),
           cardController: cardController,
           swipeCompleteCallback: (CardSwipeOrientation orientation, int index) {
             print(orientation.name);
