@@ -139,7 +139,8 @@ class _ProgressDotsBarState extends State<ProgressDotsBar> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return  Padding(
+      padding: EdgeInsets.all(8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
