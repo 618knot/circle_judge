@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
 
 class Header extends StatelessWidget with PreferredSizeWidget {
+  String title = '';
+  Header(String title){
+    this.title = title;
+  }
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
 
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: NewGradientAppBar(
-            title: const Text('診断結果',
-                style: TextStyle(
+            title: Text(title,
+                style: const TextStyle(
                     fontSize: 24,
                     color: Colors.white,
                     fontWeight: FontWeight.bold)),

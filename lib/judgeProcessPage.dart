@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hello_world/model/api.dart';
 import 'package:hello_world/tinderCards.dart';
 import 'package:hello_world/ProgressDotsBar.dart';
-
+import 'package:hello_world/header.dart';
 class JudgeProcessPage extends StatefulWidget {
   judgeProcessPage() {
     //getController().stream.listen((event) {print("イベント");});
@@ -65,7 +65,7 @@ class _JudgeProcessPageState extends State<JudgeProcessPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("診断中")),
+      appBar: Header('診断中'),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.center,

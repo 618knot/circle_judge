@@ -203,58 +203,47 @@ class _ResultPage extends State<ResultPage> {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.only(top: 3.0),
                 color: Colors.white,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Column(//パーセントバーと「画像と説明Row」
                   children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Stack(
+                    Padding(
+                      padding: EdgeInsets.only(top: 3.0,bottom: 3.0),
+                      child: PercentageBar(matchingRate: matchingRate,),
+
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            color: Colors.teal,
-                            height: 5,
-                            width: MediaQuery.of(context).size.width *
-                                matchingRate,
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Stack(
+                              children: [
+                                Image.network(
+                                  imageUrl,
+                                  width: 100,
+                                  height: 100,
+                                ),
+                              ],
+                            ),
                           ),
+                          Flexible(
+                            child: Container(
+                              child: Text(
+                                '$introduction',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                              ),
+                              height: 110,
+                              margin: EdgeInsets.only(left: 8.0),
+                            ),
+                          )
                         ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.all(3.0),
-                color: Colors.white,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Stack(
-                        children: [
-                          Image.network(
-                            imageUrl,
-                            width: 100,
-                            height: 100,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Flexible(
-                      child: Container(
-                        child: Text(
-                          '$introduction',
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Theme.of(context).primaryColor,
-                          ),
-                        ),
-                        color: Colors.white,
-                        height: 110,
-                      ),
-                    )
                   ],
                 ),
               ),
@@ -352,7 +341,7 @@ class _ResultPage extends State<ResultPage> {
     return RepaintBoundary(
       key: shareKey,
       child: Scaffold(
-        appBar: Header(),
+        appBar: Header('診断結果'),
         body: SafeArea(
           child: Center(
             child: Column(
@@ -394,5 +383,38 @@ class _ResultPage extends State<ResultPage> {
           "読み込み中");
     }
     return ResultData().GetCircle(num);
+  }
+}
+
+class PercentageBar extends StatelessWidget {
+  static const double height = 10;
+  static const int graduationMargin = 50;
+  PercentageBar({
+    Key? key,
+    required this.matchingRate,
+  }) : super(key: key);
+  final double matchingRate;
+  int toPercent(double rate){//0~1の少数を0~100の整数に変換
+    return  (rate * 100).toInt();//切り捨て
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Container(color:Color(0xff220f60),height: height),
+        Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                colors: [
+                  Color(0xff7BD4F1).withOpacity(matchingRate),
+                  Color(0xff7BD4F1).withOpacity(matchingRate),
+                  Color(0xff220f60),
+                ]
+            )
+        ),
+        height: height,
+      ),
+      ],
+    );
   }
 }
