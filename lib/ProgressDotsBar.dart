@@ -21,18 +21,18 @@ class _ProgressDotState extends State<ProgressDot>
   void updateDotsState(currentId) {
     if (currentId > widget.questionId) {
       setState(() {
-        _size = 20;
+        _size = 32;
         // _color = Colors.lightGreen;
       });
     } else if (currentId == widget.questionId) {
       setState(() {
-        _size = 40;
+        _size = 56;
         _animationChange();
         // _color = Colors.lightGreen;
       });
     } else if (currentId < widget.questionId) {
       setState(() {
-        _size = 20;
+        _size = 32;
         // _color = Colors.grey;
       });
     }
