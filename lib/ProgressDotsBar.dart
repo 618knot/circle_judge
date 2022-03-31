@@ -141,6 +141,7 @@ class _ProgressDotsBarState extends State<ProgressDotsBar> {
   Widget build(BuildContext context) {
     return Container(
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ProgressDot(questionId: 0),
           line(),
