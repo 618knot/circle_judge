@@ -21,18 +21,18 @@ class _ProgressDotState extends State<ProgressDot>
   void updateDotsState(currentId) {
     if (currentId > widget.questionId) {
       setState(() {
-        _size = 20;
+        _size = 32;
         // _color = Colors.lightGreen;
       });
     } else if (currentId == widget.questionId) {
       setState(() {
-        _size = 40;
+        _size = 56;
         _animationChange();
         // _color = Colors.lightGreen;
       });
     } else if (currentId < widget.questionId) {
       setState(() {
-        _size = 20;
+        _size = 32;
         // _color = Colors.grey;
       });
     }
@@ -119,12 +119,15 @@ class ProgressDotsBar extends StatefulWidget {
 
 class _ProgressDotsBarState extends State<ProgressDotsBar> {
   Widget line() {
-    return Container(
-      height: 3,
-      width: 10,
-      decoration: const BoxDecoration(
-        shape: BoxShape.rectangle,
-        color: Colors.grey,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        height: 3,
+        width: 10,
+        decoration: const BoxDecoration(
+          shape: BoxShape.rectangle,
+          color: Color(0xff220f60),
+        ),
       ),
     );
   }
@@ -139,8 +142,10 @@ class _ProgressDotsBarState extends State<ProgressDotsBar> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return  Padding(
+      padding: EdgeInsets.all(24),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ProgressDot(questionId: 0),
           line(),
