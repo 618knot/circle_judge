@@ -64,8 +64,6 @@ class TinderCards extends StatelessWidget {
               //stream:controller.st
           Card(
               color: Colors.grey,
-              child: Container(
-                color: Colors.red,
                 child: Stack(
                   fit: StackFit.passthrough,
                   alignment: Alignment.center,
@@ -101,7 +99,6 @@ class TinderCards extends StatelessWidget {
                             Colors.blue.withOpacity(First(index, clear_batsu)))
                   ],
                 ),
-              ),
             ),
           cardController: cardController,
           swipeCompleteCallback: (CardSwipeOrientation orientation, int index) {
