@@ -63,40 +63,43 @@ class TinderCards extends StatelessWidget {
               //stream:controller.st
           Card(
               color: Colors.grey,
-                child: Stack(
-                  fit: StackFit.passthrough,
-                  alignment: Alignment.center,
-                  children: <Widget>[
-                    Image.network(
-                      QuestionData().GetImage(index),
-                      fit: BoxFit.contain /*: 240, */,
-                      height: 170,
-                    ),
-                    Align(
-                      alignment: Alignment.bottomLeft,
-                      child: Text(
-                        QuestionData().GetQuestion(index),
-                        style: const TextStyle(
-                          fontSize: 48,color: Colors.white,fontWeight: FontWeight.bold,
-                          shadows: [
-                            Shadow(
-                              blurRadius: 5.0,
-                              offset: Offset(5.0,5.0),
-                              color: Colors.black12
-                            )
-                          ]
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Stack(
+                    fit: StackFit.passthrough,
+                    alignment: Alignment.center,
+                    children: <Widget>[
+                      Image.network(
+                        QuestionData().GetImage(index),
+                        fit: BoxFit.contain /*: 240, */,
+                        height: 170,
+                      ),
+                      Align(
+                        alignment: Alignment.bottomLeft,
+                        child: Text(
+                          QuestionData().GetQuestion(index),
+                          style: const TextStyle(
+                            fontSize: 48,color: Colors.white,fontWeight: FontWeight.bold,
+                            shadows: [
+                              Shadow(
+                                blurRadius: 8.0,
+                                offset: Offset(-8.0,8.0),
+                                color: Colors.black12
+                              )
+                            ]
+                          ),
                         ),
                       ),
-                    ),
-                    Image.asset('images/maru.png',
-                        height: 170,
-                        color:
-                            Colors.red.withOpacity(First(index, clear_maru))),
-                    Image.asset('images/batsu.png',
-                        height: 170,
-                        color:
-                            Colors.blue.withOpacity(First(index, clear_batsu)))
-                  ],
+                      Image.asset('images/maru.png',
+                          height: 170,
+                          color:
+                              Colors.red.withOpacity(First(index, clear_maru))),
+                      Image.asset('images/batsu.png',
+                          height: 170,
+                          color:
+                              Colors.blue.withOpacity(First(index, clear_batsu)))
+                    ],
+                  ),
                 ),
             ),
           cardController: cardController,
