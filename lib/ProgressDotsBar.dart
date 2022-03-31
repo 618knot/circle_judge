@@ -126,7 +126,7 @@ class _ProgressDotsBarState extends State<ProgressDotsBar> {
         width: 10,
         decoration: const BoxDecoration(
           shape: BoxShape.rectangle,
-          color: Colors.grey,
+          color: Color(0xff220f60),
         ),
       ),
     );
