@@ -75,7 +75,16 @@ class TinderCards extends StatelessWidget {
                     ),
                     Text(
                       QuestionData().GetQuestion(index),
-                      style: TextStyle(fontSize: 35),
+                      style: TextStyle(
+                        fontSize: 35,color: Colors.white,fontWeight: FontWeight.bold,
+                        shadows: [
+                          Shadow(
+                            blurRadius: 5.0,
+                            offset: Offset(5.0,5.0),
+                            color: Colors.black12
+                          )
+                        ]
+                      ),
                     ),
                     Image.asset('images/maru.png',
                         height: 170,
