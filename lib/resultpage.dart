@@ -24,8 +24,8 @@ class _ResultPage extends State<ResultPage> {
     });
   }
 
-  detailDialog(
-      context, String imageUrl, String circleName, String introduction) {
+  detailDialog(context, String imageUrl, String circleName, String introduction,
+      int circleRanking) {
     showDialog(
         context: context,
         builder: (BuildContext context) => AlertDialog(
@@ -66,11 +66,12 @@ class _ResultPage extends State<ResultPage> {
   }
 
   Widget firstCard(context, String circleName, double matchingRate,
-      String introduction, String imageUrl) {
+      String introduction, String imageUrl, int circleRanking) {
     return GestureDetector(
       onTap: () {
         print('タップされました');
-        detailDialog(context, imageUrl, circleName, introduction);
+        detailDialog(
+            context, imageUrl, circleName, introduction, circleRanking);
       },
       child: Card(
           margin: EdgeInsets.only(
@@ -108,7 +109,7 @@ class _ResultPage extends State<ResultPage> {
                         color: Colors.white,
                       ),
                       child: Text(
-                        '1位',
+                        '$circleRanking' + "位",
                         style: TextStyle(
                           color: Theme.of(context).primaryColor,
                           fontSize: 12,
@@ -186,11 +187,12 @@ class _ResultPage extends State<ResultPage> {
   }
 
   Widget secondThirdCard(context, String circleName, double matchingRate,
-      String introduction, String imageUrl) {
+      String introduction, String imageUrl, int circleRanking) {
     return GestureDetector(
       onTap: () {
         print('タップされました');
-        detailDialog(context, imageUrl, circleName, introduction);
+        detailDialog(
+            context, imageUrl, circleName, introduction, circleRanking);
       },
       child: Card(
           margin: EdgeInsets.only(
@@ -228,7 +230,7 @@ class _ResultPage extends State<ResultPage> {
                         color: Colors.white,
                       ),
                       child: Text(
-                        '2位',
+                        '$circleRanking' + "位",
                         style: TextStyle(
                           color: Theme.of(context).primaryColor,
                           fontSize: 12,
@@ -400,23 +402,27 @@ class _ResultPage extends State<ResultPage> {
             child: Column(
               children: [
                 firstCard(
-                    context,
-                    resultLoad(0).circlename,
-                    resultLoad(0).percent,
-                    resultLoad(0).circle_description,
-                    resultLoad(0).circle_image_url),
+                  context,
+                  resultLoad(0).circle_name,
+                  resultLoad(0).percent,
+                  resultLoad(0).circle_description,
+                  resultLoad(0).circle_image_url,
+                  resultLoad(0).circle_ranking,
+                ),
                 secondThirdCard(
                     context,
-                    resultLoad(1).circlename,
+                    resultLoad(1).circle_name,
                     resultLoad(1).percent,
                     resultLoad(1).circle_description,
-                    resultLoad(1).circle_image_url),
+                    resultLoad(1).circle_image_url,
+                    resultLoad(1).circle_ranking),
                 secondThirdCard(
                     context,
-                    resultLoad(2).circlename,
+                    resultLoad(2).circle_name,
                     resultLoad(2).percent,
                     resultLoad(2).circle_description,
-                    resultLoad(2).circle_image_url)
+                    resultLoad(2).circle_image_url,
+                    resultLoad(2).circle_ranking)
               ],
             ),
           ),
