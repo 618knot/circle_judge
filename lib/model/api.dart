@@ -125,12 +125,12 @@ Future getResult() async {
     // 要素分割してリストにする
 
     int circle_ranking = i + 1;
-    String circle_name = jsonDecode(rankingData[0]["circle_name"]);
-    double percent = rankingData[0]["percent"];
+    String circle_name = jsonDecode(rankingData[i]["circle_name"]);
+    double percent = rankingData[i]["percent"];
     print(percent);
-    String circle_image_url = jsonDecode(rankingData[0]["circle_image_url"]);
+    String circle_image_url = jsonDecode(rankingData[i]["circle_image_url"]);
     String circle_description =
-        jsonDecode(rankingData[0]["circle_description"]);
+        jsonDecode(rankingData[i]["circle_description"]);
 
     ResultData().set(
         i,
