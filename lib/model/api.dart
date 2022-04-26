@@ -32,7 +32,8 @@ void getGameId() async {
   // print(gameId);
   QuestionData.gameId = gameId;
 }
-Future<bool> questionPost(int num) async{
+
+Future<bool> questionPost(int num) async {
   http.Response response;
   var url = Uri.parse('https://quiet-eyrie-21766.herokuapp.com/question');
   Map<String, String> headers = {'content-type': 'application/json'};
@@ -58,11 +59,11 @@ Future getQuestion() async {
     await Future.delayed(Duration(microseconds: 20));
     print("wait");
   }
-  List<Future<bool>> future=[];
+  List<Future<bool>> future = [];
   for (int i = 1; i <= 6; i++) {
     future.add(questionPost(i));
   }
-  var futureAll =Future.wait(future);
+  var futureAll = Future.wait(future);
   futureAll.then((results) => controller.sink.add(true));
 }
 
@@ -123,39 +124,23 @@ Future getResult() async {
     var rankingData = data["ranking"];
     // 要素分割してリストにする
 
-    int circlerank = rankingData[0]["circlerank"];
-    String circle_name = jsonDecode(rankingData[0]["circle_name"]);
-    double percent = rankingData[0]["percent"];
+    int circle_ranking = i + 1;
+    String circle_name = jsonDecode(rankingData[i]["circle_name"]);
+    double percent = rankingData[i]["percent"];
     print(percent);
-    String circle_image_url = jsonDecode(rankingData[0]["circle_image_url"]);
+    String circle_image_url = jsonDecode(rankingData[i]["circle_image_url"]);
     String circle_description =
-        jsonDecode(rankingData[0]["circle_description"]);
+        jsonDecode(rankingData[i]["circle_description"]);
 
-    // var jsonsentence = json.encode(rankingData);
-    // var utf8sentence = utf8.decode(jsonsentence.runes.toList());
-    // print(utf8sentence);
-    // print(rankingData);
-
-    // String image = rankingData[0]["circle_image_url"];
-    // print(image);
-
-    // int circlerank = utf8sentence[0]["circlerank"];
-    // String circlename = rankingData[0]["circlename"];
-    // double percent = rankingData[0]["percent"];
-    // String circle_image_url = rankingData[0]["circle_image_url"];
-    // String circle_description = rankingData[0]["circle_description"];
-
-    // int circlerank = 1;
-    // String circlename = "cistLT";
-    // double percent = 0.3333333333333333;
-    // String circle_image_url =
-    //     "http://www.itagaki.net/pc/imagefile/memo_0043/photo008.jpg";
-    // String circle_description =
-    //     "IT技術系の勉強をしています！初心者大歓迎です！所属メンバーはバイオ系、電子工学系、情報工学系と様々なメンバーで構成されています！！みんなで興味のあることを勉強し、アウトプットすることを目標にしています！一人で悩まないで！一緒に技術力を高めませんか？？";
     ResultData().set(
         i,
-        Result(circlerank, circle_name, percent, circle_image_url,
-            circle_description));
+        Result(
+          circle_ranking,
+          circle_name,
+          percent,
+          circle_image_url,
+          circle_description,
+        ));
     Resultcontroller.sink.add(true);
   }
 
